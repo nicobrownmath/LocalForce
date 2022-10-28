@@ -34,10 +34,6 @@ The option delimiter is `" "` - i.e. space.
 | `maxFirstCatalystInteractionGeneration`  | `n`                      | Maximum first catalyst interaction generation                                         |
 | `maxInteractionGeneration`  | `n`                      | Maximum interaction generation                                         |
 | `maxGeneration`             | `n`                      | Maximum generation                                                     |
-| `outputFile`                | `filename`               | Output filename                                                        |
-| `outputFile`                | `filename`               | Output filename                                                        |
-| `outputFile`                | `filename`               | Output filename                                                        |
-| `outputFile`                | `filename`               | Output filename                                                        |
 | `pattern`                   | `rle`                    | The active pattern                                                     |
 |                             | `dx dy`                  | Offset                                                                 |
 | `symmetry`                  |                          | Base symmetry                                                          |
