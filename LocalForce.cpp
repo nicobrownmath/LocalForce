@@ -1332,6 +1332,8 @@ class Searcher {
         //int dontCheckTransparentLastCatalyst = searchData.lastAddedWasCatalyst ? 1 : 0;
         //bool bonusCatalystFromTransparentWorking = false;
 
+        bool checkedRecovery = false;
+
         for (unsigned generation = searchData.generation; generation < maxGenerationAllowed; generation++) {
             int generationIndex = generation - searchData.generation;
 
@@ -1348,7 +1350,7 @@ class Searcher {
                     isValid = false;
                     //if we have the checkRecovery flag and this is the newest catalyst and generation count is low enough, totally invalid so return
                     if (catalysts[catalystsEvolution[generationIndex][catID][0]].checkRecoveryAlways || 
-                        (searchData.lastAddedWasCatalyst && catID == (int)catalystsEvolution[generationIndex].size() - 1 && 
+                        (!checkedRecovery && searchData.lastAddedWasCatalyst && catID == (int)catalystsEvolution[generationIndex].size() - 1 && 
                         catalysts[catalystsEvolution[generationIndex][catID][0]].checkRecovery &&
                         (unsigned)generationIndex <= searchData.lastCatGenOffset + catalysts[catalystsEvolution[generationIndex][catID][0]].recoveryTime
                     ) /*|| (catID < (int)catalystsEvolution[generationIndex].size() - dontCheckTransparentLastCatalyst)*/) {
@@ -1365,7 +1367,7 @@ class Searcher {
                         //if we have the checkRecovery flag and this is the newest catalyst and generation count is low enough, totally invalid so return
                         if (catalysts[catalystsEvolution[generationIndex][catID][0]].checkRecoveryAlways || 
                         (
-                            searchData.lastAddedWasCatalyst && catID == (int)catalystsEvolution[generationIndex].size() - 1 && 
+                            !checkedRecovery && searchData.lastAddedWasCatalyst && catID == (int)catalystsEvolution[generationIndex].size() - 1 && 
                             catalysts[catalystsEvolution[generationIndex][catID][0]].checkRecovery &&
                             (unsigned)generationIndex <= searchData.lastCatGenOffset + catalysts[catalystsEvolution[generationIndex][catID][0]].recoveryTime
                         ) /*|| (catID < (int)catalystsEvolution[generationIndex].size() - dontCheckTransparentLastCatalyst)*/) {
@@ -1380,6 +1382,8 @@ class Searcher {
                 else {
                     //catalyst restored
                     catalystsEvolution[generationIndex + 1][catID][3] = 0;
+
+                    if (!checkedRecovery && searchData.lastAddedWasCatalyst && catID == (int)catalystsEvolution[generationIndex].size() - 1 && catalysts[catalystsEvolution[generationIndex][catID][0]].checkRecovery) checkedRecovery = true;
 
                     //TODO: This may sometimes be checking too early?
                     /*if (catID >= (int)catalystsEvolution[generationIndex].size() - dontCheckTransparentLastCatalyst && !catalysts[catalystsEvolution[generationIndex][catID][0]].sacrificial) {
@@ -1542,12 +1546,13 @@ class Searcher {
                                 if (!catsRestored[catID] && !catalysts[searchData.catalysts[catID][0]].sacrificial) {
                                     //checkRecovery catalyst failure
                                     if (catalysts[searchData.catalysts[catID][0]].checkRecoveryAlways || 
-                                        (catID == (int)searchData.catalysts.size() - 1 && catalysts[searchData.catalysts[catID][0]].checkRecovery)
+                                        (!checkedRecovery && catID == (int)searchData.catalysts.size() - 1 && catalysts[searchData.catalysts[catID][0]].checkRecovery)
                                         /*|| (catID < (int)searchData.catalysts.size() - dontCheckTransparentLastCatalyst)*/) {
                                         iterativeSearchTime += ((std::chrono::duration<double>)(std::chrono::steady_clock::now() - methodStartTime)).count();
                                         return;
                                     }
                                     
+                                    //TODO: This currently fails on cases where the catalyst would only fail after params.maxGeneration, it probably shouldn't
                                     int gensUntilCatFailure = catalysts[searchData.catalysts[catID][0]].recoveryTime + 1 - catalystsEvolution[testGeneration][catID][3];
                                     int modelGeneration = testGeneration + gensUntilCatFailure % (generationIndex + 1 - testGeneration);
                                     //This could maybe be cached but I'm not sure that'd actually be faster
@@ -1614,7 +1619,7 @@ class Searcher {
         }
         //extra state-checking for checkRecovery catalysts if another catalyst fails first
         //don't do this for checkRecoveryAlways catalysts, those use the second type
-        if (searchData.lastAddedWasCatalyst && !isValid && 
+        if (searchData.lastAddedWasCatalyst && !isValid && !checkedRecovery && 
             !catalysts[searchData.catalysts[searchData.catalysts.size() - 1][0]].checkRecoveryAlways &&
             catalysts[searchData.catalysts[searchData.catalysts.size() - 1][0]].checkRecovery && 
             (unsigned)stateEvolution.size() - 1 <= searchData.lastCatGenOffset + (unsigned)catalysts[searchData.catalysts[searchData.catalysts.size() - 1][0]].recoveryTime
@@ -1818,9 +1823,7 @@ class Searcher {
                 unsigned nextUseGenerationIndex = useFilter ? std::min(generationIndex, std::max(generationIndex, 32U) - 32U) : generationIndex;
             
                 std::chrono::time_point<std::chrono::steady_clock> isolatedStartTime = std::chrono::steady_clock::now();
-                //TODO: This is currently by far the most time-consuming part of the search
-                //if I want to optimize it should be here (either directly or by calling it less often)
-
+                
                 if (searchData.numCatalysts < searchData.maxCatalysts && (searchData.numCatalysts > 0 || generationIndex + searchData.generation < params.maxFirstCatalystInteractionGeneration)) {
                     unsigned catIndex = 0;
                     unsigned x = 0;
