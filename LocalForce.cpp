@@ -650,8 +650,6 @@ class Catalyst {
                 exit(0);
             }
         }
-        //TODO: Remove this temporary line
-        catalyst.checkRecovery = true;
 
         int startingIndex = catalysts->size();
         for (auto &transform : transforms) {
