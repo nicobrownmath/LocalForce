@@ -650,6 +650,8 @@ class Catalyst {
                 exit(0);
             }
         }
+        //TODO: Remove this temporary line
+        catalyst.checkRecovery = true;
 
         int startingIndex = catalysts->size();
         for (auto &transform : transforms) {
@@ -1332,8 +1334,6 @@ class Searcher {
         //int dontCheckTransparentLastCatalyst = searchData.lastAddedWasCatalyst ? 1 : 0;
         //bool bonusCatalystFromTransparentWorking = false;
 
-        bool checkedRecovery = false;
-
         for (unsigned generation = searchData.generation; generation < maxGenerationAllowed; generation++) {
             int generationIndex = generation - searchData.generation;
 
@@ -1349,11 +1349,7 @@ class Searcher {
                     //catalyst broken
                     isValid = false;
                     //if we have the checkRecovery flag and this is the newest catalyst and generation count is low enough, totally invalid so return
-                    if (catalysts[catalystsEvolution[generationIndex][catID][0]].checkRecoveryAlways || 
-                        (!checkedRecovery && searchData.lastAddedWasCatalyst && catID == (int)catalystsEvolution[generationIndex].size() - 1 && 
-                        catalysts[catalystsEvolution[generationIndex][catID][0]].checkRecovery &&
-                        (unsigned)generationIndex <= searchData.lastCatGenOffset + catalysts[catalystsEvolution[generationIndex][catID][0]].recoveryTime
-                    ) /*|| (catID < (int)catalystsEvolution[generationIndex].size() - dontCheckTransparentLastCatalyst)*/) {
+                    if (catalysts[catalystsEvolution[generationIndex][catID][0]].checkRecoveryAlways /*|| (catID < (int)catalystsEvolution[generationIndex].size() - dontCheckTransparentLastCatalyst)*/) {
                         iterativeSearchTime += ((std::chrono::duration<double>)(std::chrono::steady_clock::now() - methodStartTime)).count();
                         return;
                     }
@@ -1365,12 +1361,7 @@ class Searcher {
                     catalystsEvolution[generationIndex + 1][catID][3] = catalystsEvolution[generationIndex][catID][3] + 1;
                     if (catalystsEvolution[generationIndex + 1][catID][3] > catalysts[catalystsEvolution[generationIndex][catID][0]].recoveryTime) {
                         //if we have the checkRecovery flag and this is the newest catalyst and generation count is low enough, totally invalid so return
-                        if (catalysts[catalystsEvolution[generationIndex][catID][0]].checkRecoveryAlways || 
-                        (
-                            !checkedRecovery && searchData.lastAddedWasCatalyst && catID == (int)catalystsEvolution[generationIndex].size() - 1 && 
-                            catalysts[catalystsEvolution[generationIndex][catID][0]].checkRecovery &&
-                            (unsigned)generationIndex <= searchData.lastCatGenOffset + catalysts[catalystsEvolution[generationIndex][catID][0]].recoveryTime
-                        ) /*|| (catID < (int)catalystsEvolution[generationIndex].size() - dontCheckTransparentLastCatalyst)*/) {
+                        if (catalysts[catalystsEvolution[generationIndex][catID][0]].checkRecoveryAlways /*|| (catID < (int)catalystsEvolution[generationIndex].size() - dontCheckTransparentLastCatalyst)*/) {
                             iterativeSearchTime += ((std::chrono::duration<double>)(std::chrono::steady_clock::now() - methodStartTime)).count();
                             return;
                         }
@@ -1382,8 +1373,6 @@ class Searcher {
                 else {
                     //catalyst restored
                     catalystsEvolution[generationIndex + 1][catID][3] = 0;
-
-                    if (!checkedRecovery && searchData.lastAddedWasCatalyst && catID == (int)catalystsEvolution[generationIndex].size() - 1 && catalysts[catalystsEvolution[generationIndex][catID][0]].checkRecovery) checkedRecovery = true;
 
                     //TODO: This may sometimes be checking too early?
                     /*if (catID >= (int)catalystsEvolution[generationIndex].size() - dontCheckTransparentLastCatalyst && !catalysts[catalystsEvolution[generationIndex][catID][0]].sacrificial) {
@@ -1545,9 +1534,7 @@ class Searcher {
                                 //these check in reverse order so that recently-added checkRecovery catalysts are evaluated first
                                 if (!catsRestored[catID] && !catalysts[searchData.catalysts[catID][0]].sacrificial) {
                                     //checkRecovery catalyst failure
-                                    if (catalysts[searchData.catalysts[catID][0]].checkRecoveryAlways || 
-                                        (!checkedRecovery && catID == (int)searchData.catalysts.size() - 1 && catalysts[searchData.catalysts[catID][0]].checkRecovery)
-                                        /*|| (catID < (int)searchData.catalysts.size() - dontCheckTransparentLastCatalyst)*/) {
+                                    if (catalysts[searchData.catalysts[catID][0]].checkRecoveryAlways /*|| (catID < (int)searchData.catalysts.size() - dontCheckTransparentLastCatalyst)*/) {
                                         iterativeSearchTime += ((std::chrono::duration<double>)(std::chrono::steady_clock::now() - methodStartTime)).count();
                                         return;
                                     }
@@ -1615,32 +1602,6 @@ class Searcher {
                     if (foundDecomposition) break;
                 }
                 if (foundDecomposition) break;
-            }
-        }
-        //extra state-checking for checkRecovery catalysts if another catalyst fails first
-        //don't do this for checkRecoveryAlways catalysts, those use the second type
-        if (searchData.lastAddedWasCatalyst && !isValid && !checkedRecovery && 
-            !catalysts[searchData.catalysts[searchData.catalysts.size() - 1][0]].checkRecoveryAlways &&
-            catalysts[searchData.catalysts[searchData.catalysts.size() - 1][0]].checkRecovery && 
-            (unsigned)stateEvolution.size() - 1 <= searchData.lastCatGenOffset + (unsigned)catalysts[searchData.catalysts[searchData.catalysts.size() - 1][0]].recoveryTime
-        ) {
-            LifeState testState = stateEvolution[stateEvolution.size() - 1];
-            unsigned remainingSteps = searchData.lastCatGenOffset + (int)catalysts[searchData.catalysts[searchData.catalysts.size() - 1][0]].recoveryTime - (stateEvolution.size() - 1);
-            bool recovered = false;
-            for (unsigned i = 0; i < remainingSteps; i++) {
-                testState.Step();
-                std::pair<bool, LifeState> filtering = catalysts[searchData.catalysts[searchData.catalysts.size() - 1][0]].CheckState(testState, searchData.catalysts[searchData.catalysts.size() - 1][1], searchData.catalysts[searchData.catalysts.size() - 1][2]);
-                if (!filtering.first) {
-                    break;
-                }
-                else if (filtering.second.IsEmpty()) {
-                    recovered = true;
-                    break;
-                }
-            }
-            if (!recovered) {
-                iterativeSearchTime += ((std::chrono::duration<double>)(std::chrono::steady_clock::now() - methodStartTime)).count();                        
-                return;
             }
         }
         //TODO: It should be possible to lump all these checks together to minimize the amount of steps
@@ -1920,6 +1881,26 @@ class Searcher {
                                         newCurrentState.Join(catStateSymChain);
                                         if (!catalysts[catIndex].CheckState(newCurrentState, x, y).first) {
                                             continue;
+                                        }
+                                        //checkRecovery catalysts
+                                        if (catalysts[catIndex].checkRecovery) {
+                                            LifeState testState = stateEvolution[generationIndex];
+                                            testState.Join(catStateSymChain);
+                                            bool recovered = false;
+                                            for (unsigned extraGen = 0; extraGen < catalysts[catIndex].recoveryTime; extraGen++) {
+                                                testState.Step();
+                                                std::pair<bool, LifeState> filtering = catalysts[catIndex].CheckState(testState, x, y);
+                                                if (!filtering.first) {
+                                                    //catalyst breaks
+                                                    break;
+                                                }
+                                                else if (filtering.second.IsEmpty()) {
+                                                    //catalyst recovers in time
+                                                    recovered = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (!recovered) continue;
                                         }
 
                                         //construct new data and add to stack
