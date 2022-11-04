@@ -2223,7 +2223,6 @@ class Searcher {
                                     break;
                                 case ReflectAcrossYeqNegX:
                                 case ReflectAcrossYeqNegXP1:
-                                    continue;
                                     switch (currentSymmetry) {
                                         case D2negdiagevenSubgroupsOnly:
                                         case D2negdiagodd:
