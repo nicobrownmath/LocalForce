@@ -2480,7 +2480,7 @@ class Searcher {
                                             }
                                             //update filters
                                             if (useFilter) {
-                                                newData.filters.push_back({filterStates[past1NeighborEvolution.size() - 1 - generationIndex], searchData.generation + generationIndex, catalysts.size(), 0, 0, (x + xOffset + 64) % 64, (y + yOffset + 64) % 64});
+                                                newData.filters.push_back({filterStates[past1NeighborEvolution.size() - 1 - generationIndex], searchData.generation + generationIndex, 0, 0, 0, (x + xOffset + 64) % 64, (y + yOffset + 64) % 64});
                                             }
 
                                             if (params.findPartials) {
