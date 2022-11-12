@@ -10,6 +10,8 @@ maxOutputsPerRow 100
 
 minCatalysts 0
 maxCatalysts 2
+minCatalystsBeforeSymmetry 0
+maxCatalystsBeforeSymmetry 2
 maxSlots 1
 minTransparentCatalysts 0
 maxTransparentCatalysts 0
@@ -30,6 +32,8 @@ symmetry C1
 targetSymmetries C2 C2|even C2-even C2even C4 C4even D4+ D4+|even D4+-even D4+even D4x D4xeven D8 D8even
 avoidRepeatPatternHistories false
 doDelayedSymmetryInteraction true
+allCatsCheckRecovery false
+checkRecoveryRequireUnique false
 
 #The big list of catalysts from CatForce, plus a few extras
 =True Spartan=
