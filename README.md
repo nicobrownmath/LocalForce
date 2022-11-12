@@ -24,14 +24,16 @@ The option delimiter is `" "` - i.e. space.
 | `maxOutputsPerRow`          | `n`                      | Maximum number of results to save per row                              |
 | `minCatalysts`              | `n`                      | Minimum number of catalysts                                            |
 | `maxCatalysts`              | `n`                      | Maximum number of catalysts                                            |
+| `minCatalystsBeforeSymmetry` | `n`                     | Minimum number of catalysts to place before a symmetry                 |
+| `maxCatalystsBeforeSymmetry` | `n`                     | Maximum number of catalysts to place before a symmetry                 |
 | `maxSlots`                  | `n`                      | Maximum number of catalyst slots                                       |
 | `minTransparentCatalysts`   | `n`                      | Minimum number of transparent catalysts                                |
 | `maxTransparentCatalysts`   | `n`                      | Maximum number of transparent catalysts                                |
 | `minSacrificialCatalysts`   | `n`                      | Minimum number of sacrificial catalysts                                |
 | `maxSacrificialCatalysts`   | `n`                      | Maximum number of sacrificial catalysts                                |
 | `minInteractionGeneration`  | `n`                      | Minimum interaction generation                                         |
-| `maxFirstInteractionGeneration`  | `n`                      | Maximum first interaction generation                                         |
-| `maxFirstCatalystInteractionGeneration`  | `n`                      | Maximum first catalyst interaction generation                                         |
+| `maxFirstInteractionGeneration`  | `n`                 | Maximum first interaction generation                                   |
+| `maxFirstCatalystInteractionGeneration`  | `n`         | Maximum first catalyst interaction generation                          |
 | `maxInteractionGeneration`  | `n`                      | Maximum interaction generation                                         |
 | `maxGeneration`             | `n`                      | Maximum generation                                                     |
 | `pattern`                   | `rle`                    | The active pattern                                                     |
@@ -42,6 +44,8 @@ The option delimiter is `" "` - i.e. space.
 |                             | `(seed)`                 | Optional seed                                                          |
 | `avoidRepeatPatternHistories` | `b`                    | Avoid repeating pattern histories in random search (memory-intensive)  |
 | `doDelayedSymmetryInteraction` | `b`                   | Whether to allow delayed symmetry interaction                          |
+| `allCatsCheckRecovery`      | `b`                      | Forces all catalysts to be checkRecovery                               |
+| `checkRecoveryRequireUnique` | `b`                     | Only tests one checkRecovery catalyst for each possible perturbation   |
 | `cat`                       | `rle`                    | A catalyst                                                             |
 |                             | `max-active`             | Number of generations in a row the catalyst may be missing             |
 |                             | `dx dy`                  | Offset to centre the catalyst (typically negative)                     |
