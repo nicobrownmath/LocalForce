@@ -466,6 +466,8 @@ class SearchParams {
 
     unsigned minCatalysts = 0;
     unsigned maxCatalysts = ~0U;
+    unsigned minCatalystsBeforeSymmetry = 0;
+    unsigned maxCatalystsBeforeSymmetry = ~0U;
     unsigned minTransparentCatalysts = 0;
     unsigned maxTransparentCatalysts = ~0U;
     unsigned minSacrificialCatalysts = 0;
@@ -475,6 +477,8 @@ class SearchParams {
     StaticSymmetry symmetry = C1;
     std::set<StaticSymmetry> possibleSymmetries = {C1};
     bool doDelayedSymmetryInteraction = true;
+    bool allCatsCheckRecovery = false;
+    bool checkRecoveryRequireUnique = false;
 };
 
 class CatContainerKey {
@@ -1025,6 +1029,12 @@ class Searcher {
             if (elems[0] == "doDelayedSymmetryInteraction") {
                 params.doDelayedSymmetryInteraction = (elems[1] == "true");
             }
+            if (elems[0] == "allCatsCheckRecovery") {
+                params.allCatsCheckRecovery = (elems[1] == "true");
+            }
+            if (elems[0] == "checkRecoveryRequireUnique") {
+                params.checkRecoveryRequireUnique = (elems[1] == "true");
+            }
 
             if (elems[0] == "threads") {
                 params.threads = stoi(elems[1]);
@@ -1085,6 +1095,12 @@ class Searcher {
             if (elems[0] == "maxCatalysts") {
                 params.maxCatalysts = stoi(elems[1]);
             }
+            if (elems[0] == "minCatalystsBeforeSymmetry") {
+                params.minCatalystsBeforeSymmetry = stoi(elems[1]);
+            }
+            if (elems[0] == "maxCatalystsBeforeSymmetry") {
+                params.maxCatalystsBeforeSymmetry = stoi(elems[1]);
+            }
             if (elems[0] == "minTransparentCatalysts") {
                 params.minTransparentCatalysts = stoi(elems[1]);
             }
@@ -1108,6 +1124,14 @@ class Searcher {
         }
 
         infile.close();
+
+        //option for all cats checking recovery
+        //speeds up search a lot but misses some things
+        if (params.allCatsCheckRecovery) {
+            for (auto &catalyst : catalysts) {
+                catalyst.checkRecovery = true;
+            }
+        }
 
         categoryContainer.maxOutputsPerRow = params.maxOutputsPerRow;
         allOutputsCategoryContainer.maxOutputsPerRow = params.maxOutputsPerRow;
@@ -1255,7 +1279,7 @@ class Searcher {
         std::chrono::time_point<std::chrono::steady_clock> methodStartTime = std::chrono::steady_clock::now();
         iterations++;
 
-        if ((params.avoidRepeatPatternHistories || searchData.generation == 0) && params.patternRand && searchData.numCatalysts == 0) {
+        if ((params.avoidRepeatPatternHistories || searchData.generation == 0 || searchData.symmetry == params.symmetry) && params.patternRand && searchData.numCatalysts == 0) {
             //add pattern-symmetry-history to the already tested
             //if it's contained in prior tests skip it
             std::tuple<LifeState, int, int, SymmetryTransform> standardizedData = searchData.currentState.StandardizedWithTransforms(searchData.symmetry);
@@ -1776,6 +1800,8 @@ class Searcher {
                 }
             }
 
+            std::set<std::vector<LifeState>> possiblePerturbations;
+
             unsigned maxGenerationToTest = (searchData.numCatalysts == 0 && searchData.symmetry == params.symmetry) ? (std::min(params.maxFirstInteractionGeneration, (unsigned)past1NeighborEvolution.size() - 1 + searchData.generation) - searchData.generation) : (past1NeighborEvolution.size() - 1);
             for (unsigned generationIndex = params.minInteractionGeneration - std::min(searchData.generation, params.minInteractionGeneration); generationIndex < maxGenerationToTest; generationIndex++) {
                 //going back 32 or more generations always covers everything, so if we have a filter this should still be at least generationIndex - 32                   
@@ -1783,7 +1809,7 @@ class Searcher {
             
                 std::chrono::time_point<std::chrono::steady_clock> isolatedStartTime = std::chrono::steady_clock::now();
                 
-                if (searchData.numCatalysts < searchData.maxCatalysts && (searchData.numCatalysts > 0 || generationIndex + searchData.generation < params.maxFirstCatalystInteractionGeneration)) {
+                if (searchData.numCatalysts < searchData.maxCatalysts && (searchData.symmetry != params.symmetry || searchData.numCatalysts < params.maxCatalystsBeforeSymmetry) && (searchData.numCatalysts > 0 || generationIndex + searchData.generation < params.maxFirstCatalystInteractionGeneration)) {
                     unsigned catIndex = 0;
                     unsigned x = 0;
                     unsigned y = 0;
@@ -1860,6 +1886,7 @@ class Searcher {
 
                         //neither of these can make catalystPositions empty so we ignore the 'continue if it's empty' thing
                         //apply exclusions to prevent ambiguity when cat and pat share symmetry
+                        //TODO: With multiple catalysts being added in the same generation, this seems to not work perfectly?
                         if (currentSymmetry != C1)
                             catalystPositions.Copy(catalysts[catIndex].fundamentalDomains[static_cast<int>(currentSymmetry)], AND);
 
@@ -1881,24 +1908,38 @@ class Searcher {
                                             continue;
                                         }
                                         //checkRecovery catalysts
+                                        //TODO: Maybe we could also (optionally) exclude catalysts that end up changing nothing?
                                         if (catalysts[catIndex].checkRecovery) {
                                             LifeState testState = stateEvolution[generationIndex];
+                                            std::vector<LifeState> perturbation;
                                             testState.Join(catStateSymChain);
                                             bool recovered = false;
-                                            for (unsigned extraGen = 0; extraGen < catalysts[catIndex].recoveryTime; extraGen++) {
+                                            //TODO: This may not need to be tested if it goes beyond params.maxGeneration
+                                            for (int extraGen = 0; extraGen < (int)catalysts[catIndex].recoveryTime; extraGen++) {
                                                 testState.Step();
+
+                                                if (params.checkRecoveryRequireUnique) {
+                                                    perturbation.push_back(testState);
+                                                    perturbation[perturbation.size() - 1].Copy(catStateSymChain, XOR);
+                                                }
+
                                                 std::pair<bool, LifeState> filtering = catalysts[catIndex].CheckState(testState, x, y);
                                                 if (!filtering.first) {
                                                     //catalyst breaks
                                                     break;
                                                 }
                                                 else if (filtering.second.IsEmpty()) {
-                                                    //catalyst recovers in time
                                                     recovered = true;
                                                     break;
                                                 }
                                             }
                                             if (!recovered) continue;
+                                            //having this means we only check one representative of each perturbation
+                                            //Note: This is currently checking the entire perturbation history: For example, eater 1 and eater 2 would be distinct
+                                            if (params.checkRecoveryRequireUnique) {
+                                                if (possiblePerturbations.find(perturbation) != possiblePerturbations.end()) continue;
+                                                possiblePerturbations.insert(std::move(perturbation));
+                                            }
                                         }
 
                                         //construct new data and add to stack
@@ -2009,7 +2050,7 @@ class Searcher {
                         x = 0;
                     }
                 }
-                if (searchSymmetries && (generationIndex + searchData.generation == 0 || params.doDelayedSymmetryInteraction)) {
+                if (searchSymmetries && searchData.numCatalysts >= params.minCatalystsBeforeSymmetry && (generationIndex + searchData.generation == 0 || params.doDelayedSymmetryInteraction)) {
                     //Note: Using an exclusion zones system here MIGHT be faster, but it'd be a pain to implement and also result in errors, and it probably still wouldn't be faster
                     LifeState newNeighbors = past1NeighborEvolution[generationIndex + 1];
                     newNeighbors.Join(past2NeighborsEvolution[generationIndex + 1]);
