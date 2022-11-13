@@ -60,6 +60,6 @@ The option delimiter is `" "` - i.e. space.
 |                             | `(check-recovery)`       | Catalyst checks for recovery when placed                               |
 |                             | `(check-recovery-always)` | Catalyst always checks for recovery                                   |
 
-Catalysts use the same format as CatForce, but only stable catalysts are supported.
+Catalysts use the same format as CatForce.
 
 **Random Patterns**: Using the `patternRand` option will search through random patterns within a certain bounding box. `minInteractionGeneration` should be 0 and `symmetry` should be C1 for random searches.
