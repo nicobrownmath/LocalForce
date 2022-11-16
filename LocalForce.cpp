@@ -2026,7 +2026,7 @@ class Searcher {
                                                 else if (filtering.second.IsEmpty()) {
                                                     //require cat to no longer be influencing pat evolution to count as recovered
                                                     //this is stronger than the normal requirement and TODO: should probably be optional
-                                                    //TODO: Maybe also check to make sure we go through a full period?
+                                                    //TODO: This seems to last too long?
                                                     unsigned maxCatGen = catalysts[catIndex].isBlinker ? catalysts[catIndex].period : 1;
                                                     for (unsigned catGen = 0; catGen < maxCatGen; catGen++) {
                                                         if (testState.Contains(catStateSymChains[(extraGen + 1 + catGen) % catalysts[catIndex].period])) {
@@ -2046,6 +2046,7 @@ class Searcher {
                                                             }
                                                         }
                                                     }
+                                                    if (recovered) break;
                                                 }
                                             }
                                             if (!recovered) continue;
@@ -2727,11 +2728,16 @@ class Searcher {
         if (catalysts[catIndex].isBlinker) {
             std::pair<bool, LifeState> output;
             output.first = false;
-            output.second.Inverse();
             for (unsigned gen = 0; gen < catalysts[catIndex].period; gen++) {
                 std::pair<bool, LifeState> filterForGen = catalysts[catalysts[catIndex].evolutionIndices[gen]].CheckState(state, catX, catY);
                 output.first |= filterForGen.first;
-                output.second.Copy(std::move(filterForGen.second), AND);
+                if (filterForGen.second.IsEmpty() && filterForGen.first) {
+                    output.second = LifeState();
+                    return output;
+                }
+                else {
+                    output.second.Join(std::move(filterForGen.second));
+                }
             }
             return output;
         }
