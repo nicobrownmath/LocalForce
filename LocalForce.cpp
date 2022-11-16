@@ -1258,8 +1258,9 @@ class Searcher {
         for (unsigned gen = 0; gen < catalystPeriodLCM; gen++) {
             searchData.past1NeighborWithPeriod.push_back(LifeState());
             searchData.past2NeighborsWithPeriod.push_back(LifeState());
-            searchData.past3NeighborsWithPeriod.push_back(searchData.startState);
+            searchData.past3NeighborsWithPeriod.push_back(LifeState());
         }
+        searchData.past3NeighborsWithPeriod[catalystPeriodLCM - 1] = searchData.startState;
         searchData.catalysts = {};
         searchData.filters = {};
         searchData.matchPoints = {};
@@ -1774,7 +1775,8 @@ class Searcher {
                 categoryContainerLock.unlock();
             }
             if (eventualPeriod > 2) {
-                int sampleGenerationIndex = stateEvolution.size() - eventualPeriod + ((maxGenerationAllowed - searchData.generation - stateEvolution.size()) % eventualPeriod);
+                unsigned maxGenerationAllowedPlusABit = maxGenerationAllowed + (catalystPeriodLCM - maxGenerationAllowed % catalystPeriodLCM) % catalystPeriodLCM;
+                int sampleGenerationIndex = stateEvolution.size() - eventualPeriod + ((maxGenerationAllowedPlusABit - searchData.generation - stateEvolution.size()) % eventualPeriod);
                 if (AddOscillatorsToCollection(stateEvolution[sampleGenerationIndex], eventualPeriod)) {
                     LifeState diffState = stateEvolution[sampleGenerationIndex];
                     diffState.Copy(searchData.startState, XOR);
@@ -1917,15 +1919,28 @@ class Searcher {
                         catalystPositions.Join(catalysts[catIndex].locusZoiR180.Convolve(past3NeighborsWithPeriodEvolution[generationIndex + 1][interactionGenWithPeriod]));
                         for (unsigned catGen = 0; catGen < catalysts[catIndex].period; catGen++) {
                             unsigned catGenPeriod = (catGen + generationIndex + searchData.generation) % catalysts[catIndex].period;
+                            
+                            //TODO: These lumpeds could maybe be computed and cached earlier?
+                            LifeState past3NeighborsWithPeriodLumped;
                             for (unsigned catGenPeriodIndex = catGenPeriod; catGenPeriodIndex < catalystPeriodLCM; catGenPeriodIndex += catalysts[catIndex].period) {
-                                catalystPositions.Copy(catalysts[catalysts[catIndex].evolutionIndices[catGen]].zoiR180.Convolve(past3NeighborsWithPeriodEvolution[generationIndex][catGenPeriodIndex]), ANDNOT);
-                                if (catalystPositions.IsEmpty()) {x = 0; y = 0; break;}
-                                catalystPositions.Copy(catalysts[catalysts[catIndex].evolutionIndices[catGen]].oneNeighborR180.Convolve(past2NeighborsWithPeriodEvolution[generationIndex][catGenPeriodIndex]), ANDNOT);
-                                if (catalystPositions.IsEmpty()) {x = 0; y = 0; break;}
-                                catalystPositions.Copy(catalysts[catalysts[catIndex].evolutionIndices[catGen]].twoNeighborsR180.Convolve(past1NeighborWithPeriodEvolution[generationIndex][catGenPeriodIndex]), ANDNOT);
-                                if (catalystPositions.IsEmpty()) {x = 0; y = 0; break;}
+                                past3NeighborsWithPeriodLumped.Join(past3NeighborsWithPeriodEvolution[generationIndex][catGenPeriodIndex]);
                             }
-                            if (catalystPositions.IsEmpty()) break;
+                            catalystPositions.Copy(catalysts[catalysts[catIndex].evolutionIndices[catGen]].zoiR180.Convolve(past3NeighborsWithPeriodLumped), ANDNOT);
+                            if (catalystPositions.IsEmpty()) {x = 0; y = 0; break;}
+                            
+                            LifeState past2NeighborsWithPeriodLumped;
+                            for (unsigned catGenPeriodIndex = catGenPeriod; catGenPeriodIndex < catalystPeriodLCM; catGenPeriodIndex += catalysts[catIndex].period) {
+                                past2NeighborsWithPeriodLumped.Join(past2NeighborsWithPeriodEvolution[generationIndex][catGenPeriodIndex]);
+                            }
+                            catalystPositions.Copy(catalysts[catalysts[catIndex].evolutionIndices[catGen]].oneNeighborR180.Convolve(past2NeighborsWithPeriodLumped), ANDNOT);
+                            if (catalystPositions.IsEmpty()) {x = 0; y = 0; break;}
+                            
+                            LifeState past1NeighborWithPeriodLumped;
+                            for (unsigned catGenPeriodIndex = catGenPeriod; catGenPeriodIndex < catalystPeriodLCM; catGenPeriodIndex += catalysts[catIndex].period) {
+                                past1NeighborWithPeriodLumped.Join(past1NeighborWithPeriodEvolution[generationIndex][catGenPeriodIndex]);
+                            }
+                            catalystPositions.Copy(catalysts[catalysts[catIndex].evolutionIndices[catGen]].twoNeighborsR180.Convolve(past1NeighborWithPeriodLumped), ANDNOT);
+                            if (catalystPositions.IsEmpty()) {x = 0; y = 0; break;}
                         }
                         if (catalystPositions.IsEmpty()) continue;
 
@@ -2011,17 +2026,25 @@ class Searcher {
                                                 else if (filtering.second.IsEmpty()) {
                                                     //require cat to no longer be influencing pat evolution to count as recovered
                                                     //this is stronger than the normal requirement and TODO: should probably be optional
-                                                    LifeState testStateCopy = testState;
-                                                    testStateCopy.Step();
-                                                    testStateCopy.Copy(catStateSymChains[(extraGen + 2) % catalysts[catIndex].period], XOR);
-                                                    LifeState testStateCopyWithoutCat = testState;
-                                                    testStateCopyWithoutCat.Copy(catStateSymChains[(extraGen + 1) % catalysts[catIndex].period], XOR);
-                                                    testStateCopyWithoutCat.Step();
+                                                    //TODO: Maybe also check to make sure we go through a full period?
+                                                    unsigned maxCatGen = catalysts[catIndex].isBlinker ? catalysts[catIndex].period : 1;
+                                                    for (unsigned catGen = 0; catGen < maxCatGen; catGen++) {
+                                                        if (testState.Contains(catStateSymChains[(extraGen + 1 + catGen) % catalysts[catIndex].period])) {
+                                                            LifeState testStateCopy = testState;
+                                                            testStateCopy.Step();
+                                                            if (testStateCopy.Contains(catStateSymChains[(extraGen + 2 + catGen) % catalysts[catIndex].period])) {
+                                                                testStateCopy.Copy(catStateSymChains[(extraGen + 2 + catGen) % catalysts[catIndex].period], ANDNOT);
+                                                                LifeState testStateCopyWithoutCat = testState;
+                                                                testStateCopyWithoutCat.Copy(catStateSymChains[(extraGen + 1 + catGen) % catalysts[catIndex].period], ANDNOT);
+                                                                testStateCopyWithoutCat.Step();
 
-                                                    if (testStateCopy == testStateCopyWithoutCat) {
-                                                        //catalyst recovers in time
-                                                        recovered = true;
-                                                        break;
+                                                                if (testStateCopy == testStateCopyWithoutCat) {
+                                                                    //catalyst recovers in time
+                                                                    recovered = true;
+                                                                    break;
+                                                                }
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
@@ -2109,6 +2132,7 @@ class Searcher {
                                                 newData.past3NeighborsWithPeriod[actualGenIndex].Join(std::move(past2Cat1Temp));
                                                 newData.past3NeighborsWithPeriod[actualGenIndex].Join(cat3NeighborsSymChain);
 
+                                                //TODO: These can be recalculated instead of stored
                                                 newData.past1Neighbor.Join(newData.past1NeighborWithPeriod[actualGenIndex]);
                                                 newData.past2Neighbors.Join(newData.past2NeighborsWithPeriod[actualGenIndex]);
                                                 newData.past3Neighbors.Join(newData.past3NeighborsWithPeriod[actualGenIndex]);
