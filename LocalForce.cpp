@@ -2509,7 +2509,7 @@ class Searcher {
                                                     LifeState newFilterState = std::get<0>(filterData);
                                                     newFilterState.Move(x + xOffset, y + yOffset);
                                                     newData.filters.push_back({
-                                                        newFilterState, 
+                                                        std::move(newFilterState), 
                                                         std::get<1>(filterData), 
                                                         std::get<2>(filterData),
                                                         std::get<3>(filterData), 
@@ -2521,7 +2521,9 @@ class Searcher {
                                             }
                                             //update filters
                                             if (useFilter) {
-                                                newData.filters.push_back({filterStates[past1NeighborEvolution.size() - 1 - generationIndex], searchData.generation + generationIndex, 0, 0, 0, (x + xOffset + 64) % 64, (y + yOffset + 64) % 64});
+                                                LifeState newFilterState = filterStates[past1NeighborEvolution.size() - 1 - generationIndex];
+                                                newFilterState.Move(x + xOffset, y + yOffset);
+                                                newData.filters.push_back({std::move(newFilterState), searchData.generation + generationIndex, 0, 0, 0, (x + xOffset + 64) % 64, (y + yOffset + 64) % 64});
                                             }
 
                                             if (params.findPartials) {
