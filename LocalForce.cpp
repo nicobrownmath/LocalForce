@@ -443,6 +443,10 @@ class SearchParams {
     bool patternRand = false;
     bool avoidRepeatPatternHistories = false;
     uint64_t seed = 0;
+    bool usePatternsFromFile = false;
+    std::vector<std::string> patternsFromFile;
+    unsigned minPatternIndex = 0;
+    unsigned maxPatternIndex = 0;
     int patternX = 0;
     int patternY = 0;
 
@@ -604,7 +608,7 @@ class Catalyst {
         catalyst.state = LifeState::Parse(elems[1].c_str(), stoi(elems[3]), stoi(elems[4]));
         catalyst.locus.Inverse();
 
-        catalyst.recoveryTime = stoi(elems[2]);
+        catalyst.recoveryTime = stoi(elems[2]) + 1; //TODO: This could use a parameter?
 
         std::vector<SymmetryTransform> transforms = CharToTransforms(elems[5].at(0));
         
@@ -698,6 +702,100 @@ class Catalyst {
                 catalysts->push_back(std::move(transformedCatalyst));
             }
             catalyst.state.Step();
+        }
+    }
+
+    //adds a 'translucent' catalyst based on a given active region and catalysts
+    static void AddCatalystFrom(std::vector<Catalyst> *catalysts, const std::vector<std::string> &elems) {
+        if (elems.size() <= 7) {
+            std::cout << "Bad catalyst: Missing parameters" << std::endl;
+            exit(0);
+        }
+
+        LifeState activeRegionState = LifeState::Parse(elems[1].c_str(), stoi(elems[2]), stoi(elems[3]));
+        LifeState secondaryCatalystsState = LifeState::Parse(elems[4].c_str(), stoi(elems[5]), stoi(elems[6]));
+        std::vector<SymmetryTransform> transforms = CharToTransforms(elems[7].at(0));
+        int extraRecTime = 0;
+        int slots = 0;
+        int index = 8;
+        while (index < (int)elems.size()) {
+            if (elems[index] == "extraRecTime") {
+                extraRecTime = stoi(elems[index + 1]);
+                index += 2;
+            }
+            else if (elems[index] == "slots") {
+                slots = stoi(elems[index + 1]);
+                index += 2;
+            }
+            else {
+                printf("Bad catalyst: Invalid parameter %s\n", elems[index].c_str());
+                exit(0);
+            }
+        }
+
+        std::vector<LifeState> catStates = {activeRegionState};
+        catStates[0].Join(secondaryCatalystsState);
+        LifeState required = secondaryCatalystsState;
+        LifeState antirequired = secondaryCatalystsState.ZOI();
+        antirequired.Copy(required, ANDNOT);
+        while (true) {
+            LifeState nextState = catStates[catStates.size() - 1];
+            nextState.Step();
+            for (unsigned t = 1; t <= catStates.size(); t++) {
+                if (nextState == catStates[(int)catStates.size() - t]) {
+                    //has looped, so make catalyst and end
+                    Catalyst catalyst;
+                    catalyst.state = nextState;
+
+                    for (unsigned j = 1; j <= t; j++) {
+                        catalyst.locus.Join(catStates[catStates.size() - j]);
+                    }
+                    catalyst.locus.Copy(secondaryCatalystsState, ANDNOT);
+
+                    catalyst.recoveryTime = catStates.size() + extraRecTime;
+                    catalyst.slots = slots;
+                    catalyst.period = t;
+                    if (t > 1) catalyst.isBlinker = true;
+                    catalyst.checkRecovery = true;
+                    catalyst.required = {required};
+                    catalyst.antirequired = {antirequired};
+
+                    int startingIndex = catalysts->size();
+                    for (unsigned gen = 0; gen < catalyst.period; gen++) {
+                        for (auto &transform : transforms) {
+                            Catalyst transformedCatalyst = catalyst;
+                            transformedCatalyst.Transform(transform);
+                            transformedCatalyst.FillOutData();
+                            //fill out transforms
+                            for (int i = 0; i < NUM_TRANSFORMS; i++) {
+                                transformedCatalyst.firstUnderTransform[i] = true;
+                                for (int testCatIndex = startingIndex; testCatIndex < (int)catalysts->size(); testCatIndex++) {
+                                    LifeState earlierCatState = (*catalysts)[testCatIndex].state;
+                                    earlierCatState.Transform(static_cast<SymmetryTransform>(i));
+                                    if (!earlierCatState.FindMatches(transformedCatalyst.state).IsEmpty()) {
+                                        transformedCatalyst.firstUnderTransform[i] = false;
+                                        break;
+                                    }
+                                }
+                            }
+                            //fill out evolution indices for periodic catalysts
+                            int baseIndex = catalysts->size();
+                            for (unsigned gen2 = 0; gen2 < catalyst.period; gen2++) {
+                                int indexOffset = ((baseIndex - startingIndex) + (int)gen2 * (int)transforms.size()) % (int)(transforms.size() * catalyst.period);
+                                transformedCatalyst.evolutionIndices.push_back(startingIndex + indexOffset);
+                            }
+
+                            printf("Loaded catalyst %d\n", (int)catalysts->size());
+                            catalysts->push_back(std::move(transformedCatalyst));
+                        }
+                        catalyst.state.Step();
+                    }
+                    return;
+                }
+            }
+            required.Copy(nextState, AND);
+            antirequired.Copy(nextState, ANDNOT);
+            catStates.push_back(std::move(nextState));
         }
     }
 
@@ -1053,6 +1151,31 @@ class Searcher {
                     params.seed = stoull(elems[3]);
                 }
             }
+            if (elems[0] == "patternsFrom") {
+                params.usePatternsFromFile = true;
+                std::ifstream patternsFile;
+                patternsFile.open(elems[1], std::ifstream::in);
+                if (!patternsFile.good()) {
+                    std::cout << "Could not open patterns file!" << std::endl;
+                    exit(1);
+                }
+                std::string patternLine;
+                while (std::getline(patternsFile, patternLine)) {
+                    std::vector<std::string> patternLineElems;
+                    split(patternLine, '\t', patternLineElems);
+                    std::vector<std::string> patternLineElemsElems;
+                    split(patternLineElems[3], '\t', patternLineElemsElems);
+                    params.patternsFromFile.push_back(patternLineElemsElems[0]);
+                }
+                params.minPatternIndex = 0;
+                params.maxPatternIndex = params.patternsFromFile.size();
+                if (elems.size() > 2) {
+                    params.minPatternIndex = stoull(elems[2]);
+                }
+                if (elems.size() > 3) {
+                    params.maxPatternIndex = stoull(elems[3]);
+                }
+            }
             if (elems[0] == "avoidRepeatPatternHistories") {
                 params.avoidRepeatPatternHistories = (elems[1] == "true");
             }
@@ -1163,6 +1286,9 @@ class Searcher {
             {
                 Catalyst::AddCatalyst(&catalysts, elems);
             }
+            if (elems[0] == "catFrom") {
+                Catalyst::AddCatalystFrom(&catalysts, elems);
+            }
         }
 
         infile.close();
@@ -1175,7 +1301,6 @@ class Searcher {
             }
         }
         for (auto &catalyst : catalysts) {
-            if (params.allCatsCheckRecovery) catalyst.checkRecovery = true;
             catalystPeriodLCM = std::lcm(catalystPeriodLCM, catalyst.period);
         }
 
@@ -1191,6 +1316,7 @@ class Searcher {
         }
 
         do {
+            if (params.usePatternsFromFile) printf("\n\n\nInitializing search %d/%d\n", params.minPatternIndex, params.maxPatternIndex);
             lastSearchStartTime = std::chrono::steady_clock::now();
             IterativeSearch(NextSearchData());
             firstCatalystsLeft = searchDataStack.size();
@@ -1213,7 +1339,7 @@ class Searcher {
 
             Report(); //final report
             if (params.patternRand) printf("\n\n\nInitializing next search\n");
-        } while (params.patternRand);
+        } while (params.patternRand || (params.usePatternsFromFile && params.minPatternIndex < params.maxPatternIndex));
     }
 
     SearchData NextSearchData() {
@@ -1227,6 +1353,31 @@ class Searcher {
                 state = std::move(newSearchStatesQueue.front());
                 newSearchStatesQueue.pop();
             }
+        }
+        else if (params.usePatternsFromFile) {
+            state = LifeState::Parse(params.patternsFromFile[params.minPatternIndex].c_str(), params.patternX, params.patternY);
+            state.SymChain(SymmetryChainFromEnum(params.symmetry));
+            //Move to symmetric position if possible
+            std::vector<SymmetryTransform> checkTransforms = {Rotate180OddBoth, ReflectAcrossX, ReflectAcrossY, ReflectAcrossYeqX, ReflectAcrossYeqNegXP1};
+            for (SymmetryTransform transform : checkTransforms) {
+                LifeState transformedState = state;
+                transformedState.Transform(transform);
+                LifeState transformedMatches = state.FindMatches(transformedState);
+                if (!transformedMatches.IsEmpty()) {
+                    for (unsigned x = 0; x < 64; x++) {
+                        if (transformedMatches.state[x] != 0)
+                            for (unsigned y = 0; y < 64; y++) {
+                                if (transformedMatches.GetCell(x, y) == 1) {
+                                    unsigned xOffset = x / 2 > 15 ? x / 2 + 32 : x / 2;
+                                    unsigned yOffset = y / 2 > 15 ? y / 2 + 32 : y / 2;
+                                    state.Move(xOffset, yOffset);
+                                }
+                            }
+                    }
+                    break;
+                }
+            }
+            params.minPatternIndex++;
         }
         else {
             state = LifeState::Parse(params.pattern.c_str(), params.patternX, params.patternY);
@@ -1331,7 +1482,7 @@ class Searcher {
         std::chrono::time_point<std::chrono::steady_clock> methodStartTime = std::chrono::steady_clock::now();
         iterations++;
 
-        if ((params.avoidRepeatPatternHistories || searchData.generation == 0 || searchData.symmetry == params.symmetry) && params.patternRand && searchData.numCatalysts == 0) {
+        if ((params.avoidRepeatPatternHistories || searchData.generation == 0 || searchData.symmetry == params.symmetry) && (params.patternRand || (params.usePatternsFromFile && searchData.symmetry == params.symmetry)) && searchData.numCatalysts == 0) {
             //add pattern-symmetry-history to the already tested
             //if it's contained in prior tests skip it
             std::tuple<LifeState, int, int, SymmetryTransform> standardizedData = searchData.currentState.StandardizedWithTransforms(searchData.symmetry);
@@ -1374,7 +1525,7 @@ class Searcher {
             alreadyTestedLifeStates[stateWithSymmetry].insert(newHistory);
             alreadyTestedLifeStatesLock.unlock();
         }
-        if (params.patternRand && searchData.symmetry == C1 && searchData.numCatalysts == 0) {
+        if ((params.patternRand || params.usePatternsFromFile) && searchData.symmetry == C1 && searchData.numCatalysts == 0) {
             printLock.lock();
             printf("Searching state:\n");
             //TODO: print in just a rectangle
@@ -1425,7 +1576,7 @@ class Searcher {
                 if (!filtering.first) {
                     //catalyst broken
                     isValid = false;
-                    //if we have the checkRecovery flag and this is the newest catalyst and generation count is low enough, totally invalid so return
+                    //if we have the checkRecoveryAlways flag //and this is the newest catalyst and generation count is low enough, totally invalid so return
                     if (catalysts[catalystsEvolution[generationIndex][catID][0]].checkRecoveryAlways /*|| (catID < (int)catalystsEvolution[generationIndex].size() - dontCheckTransparentLastCatalyst)*/) {
                         iterativeSearchTime += ((std::chrono::duration<double>)(std::chrono::steady_clock::now() - methodStartTime)).count();
                         return;
@@ -1437,7 +1588,7 @@ class Searcher {
                     //catalyst active but not restored
                     catalystsEvolution[generationIndex + 1][catID][3] = catalystsEvolution[generationIndex][catID][3] + 1;
                     if (catalystsEvolution[generationIndex + 1][catID][3] > catalysts[catalystsEvolution[generationIndex][catID][0]].recoveryTime) {
-                        //if we have the checkRecovery flag and this is the newest catalyst and generation count is low enough, totally invalid so return
+                        //if we have the checkRecoveryAlways flag //and this is the newest catalyst and generation count is low enough, totally invalid so return
                         if (catalysts[catalystsEvolution[generationIndex][catID][0]].checkRecoveryAlways /*|| (catID < (int)catalystsEvolution[generationIndex].size() - dontCheckTransparentLastCatalyst)*/) {
                             iterativeSearchTime += ((std::chrono::duration<double>)(std::chrono::steady_clock::now() - methodStartTime)).count();
                             return;
@@ -1459,7 +1610,8 @@ class Searcher {
             }
             if (!isValid) break;
 
-            if (generation <= params.maxInteractionGeneration && (searchData.numCatalysts < searchData.maxCatalysts || (searchSymmetries && (generation == 0 || params.doDelayedSymmetryInteraction)))) { //these are only needed for catalyst placement
+            bool canIterate = generation <= params.maxInteractionGeneration && (searchData.numCatalysts < searchData.maxCatalysts || (searchSymmetries && (generation == 0 || params.doDelayedSymmetryInteraction)));
+            if (canIterate) { //these are only needed for catalyst placement
                 past1NeighborEvolution.push_back(past1NeighborEvolution[generationIndex]);
                 past2NeighborsEvolution.push_back(past2NeighborsEvolution[generationIndex]);
                 past3NeighborsEvolution.push_back(past3NeighborsEvolution[generationIndex]);
@@ -1476,55 +1628,6 @@ class Searcher {
                 past1NeighborWithPeriodEvolution[generationIndex + 1][(searchData.generation + generationIndex) % catalystPeriodLCM].Join(stateEvolution[generationIndex].OneNeighbor());
                 past2NeighborsWithPeriodEvolution[generationIndex + 1][(searchData.generation + generationIndex) % catalystPeriodLCM].Join(stateEvolution[generationIndex].TwoNeighbors());
                 past3NeighborsWithPeriodEvolution[generationIndex + 1][(searchData.generation + generationIndex) % catalystPeriodLCM].Join(stateEvolution[generationIndex].ThreeNeighbors());
-
-
-                //if patternRand and numCatalysts = 0, add this to the state's possible histories
-                if (params.avoidRepeatPatternHistories && params.patternRand && (searchData.numCatalysts == 0 && generation < params.maxFirstCatalystInteractionGeneration)) {
-                    std::tuple<LifeState, int, int, SymmetryTransform> standardizedData = stateEvolution[generationIndex + 1].StandardizedWithTransforms(searchData.symmetry);
-                    
-                    LifeState transformedPast1Neighbor = past1NeighborEvolution[generationIndex + 1];
-                    transformedPast1Neighbor.Transform(std::get<3>(standardizedData));
-                    transformedPast1Neighbor.Move(std::get<1>(standardizedData), std::get<2>(standardizedData));
-                    LifeState transformedPast2Neighbors = past2NeighborsEvolution[generationIndex + 1];
-                    transformedPast2Neighbors.Transform(std::get<3>(standardizedData));
-                    transformedPast2Neighbors.Move(std::get<1>(standardizedData), std::get<2>(standardizedData));
-                    LifeState transformedPast3Neighbors = past3NeighborsEvolution[generationIndex + 1];
-                    transformedPast3Neighbors.Transform(std::get<3>(standardizedData));
-                    transformedPast3Neighbors.Move(std::get<1>(standardizedData), std::get<2>(standardizedData));
-            
-                    LifeStateHistory newHistory = LifeStateHistory(transformedPast1Neighbor, transformedPast2Neighbors, transformedPast3Neighbors, generationIndex + 1 + searchData.generation);
-                    LifeStateWithSymmetry stateWithSymmetry = LifeStateWithSymmetry(std::get<0>(standardizedData), searchData.symmetry);
-                    bool historyAlreadyCovered = false;
-                    alreadyTestedLifeStatesLock.lock();
-                    if (alreadyTestedLifeStates.find(stateWithSymmetry) != alreadyTestedLifeStates.end()) {
-                        //if a history in here contains our own, remove it
-                        //if a history is contained by our own, it's already been searched so break
-                        //note: for purposes of containment, 3 neighbor cells contain both 1 and 2 neighbor cells
-                        std::vector<LifeStateHistory> obsolete;
-                        for (auto &history : alreadyTestedLifeStates[stateWithSymmetry]) {
-                            if (newHistory.Contains(history)) {
-                                historyAlreadyCovered = true;
-                                break;
-                            }
-                            else if (history.Contains(newHistory)) {
-                                obsolete.push_back(history);
-                            }
-                        }
-                        if (!historyAlreadyCovered)
-                            for (auto &obsoleteHistory : obsolete) {
-                                alreadyTestedLifeStates[stateWithSymmetry].erase(obsoleteHistory);
-                            }
-                    }
-                    else {
-                        alreadyTestedLifeStates[stateWithSymmetry] = {};
-                    }
-                    if (!historyAlreadyCovered) {
-                        alreadyTestedLifeStates[stateWithSymmetry].insert(newHistory);
-                    }
-                    //TODO: This can be a pretty massive memory drain! I should try to minimize additions to it
-                    //  Possibly only add first-generation things?
-                    alreadyTestedLifeStatesLock.unlock();
-                }
             }
 
             //isolate interesting results
@@ -1532,6 +1635,7 @@ class Searcher {
             if ((unsigned)generationIndex > searchData.lastCatGenOffset && params.findPartials) {
                 //TODO: Don't run some of these due to redundancy if matchPoints has certain symmetries
                 //TODO: Maybe also require catalyst union under transform to be stable?
+                //TODO: Doesn't seem to find pi heptomino with two or three gourmet turns?
                 LifeState matchStateBorder = searchData.matchState.ZOI();
                 matchStateBorder.Copy(searchData.matchState, ANDNOT);
                 LifeState catalystsState = searchData.startState;
@@ -1620,7 +1724,7 @@ class Searcher {
                             for (int catID = searchData.catalysts.size() - 1; catID >= 0; catID--) {
                                 //these check in reverse order so that recently-added checkRecovery catalysts are evaluated first
                                 if (!catsRestored[catID] && !catalysts[searchData.catalysts[catID][0]].sacrificial) {
-                                    //checkRecovery catalyst failure
+                                    //checkRecoveryAlways catalyst failure
                                     if (catalysts[searchData.catalysts[catID][0]].checkRecoveryAlways /*|| (catID < (int)searchData.catalysts.size() - dontCheckTransparentLastCatalyst)*/) {
                                         iterativeSearchTime += ((std::chrono::duration<double>)(std::chrono::steady_clock::now() - methodStartTime)).count();
                                         return;
@@ -1642,6 +1746,57 @@ class Searcher {
             }
             if (!isValid) break;
             if (eventualPeriod > 0) break;
+
+            if (canIterate) {
+                //if patternRand and numCatalysts = 0, add this to the state's possible histories
+                if (params.avoidRepeatPatternHistories && (params.patternRand || (params.usePatternsFromFile && searchData.symmetry == params.symmetry)) && (searchData.numCatalysts == 0 && generation < params.maxFirstCatalystInteractionGeneration)) {
+                    std::tuple<LifeState, int, int, SymmetryTransform> standardizedData = stateEvolution[generationIndex + 1].StandardizedWithTransforms(searchData.symmetry);
+                    
+                    LifeState transformedPast1Neighbor = past1NeighborEvolution[generationIndex + 1];
+                    transformedPast1Neighbor.Transform(std::get<3>(standardizedData));
+                    transformedPast1Neighbor.Move(std::get<1>(standardizedData), std::get<2>(standardizedData));
+                    LifeState transformedPast2Neighbors = past2NeighborsEvolution[generationIndex + 1];
+                    transformedPast2Neighbors.Transform(std::get<3>(standardizedData));
+                    transformedPast2Neighbors.Move(std::get<1>(standardizedData), std::get<2>(standardizedData));
+                    LifeState transformedPast3Neighbors = past3NeighborsEvolution[generationIndex + 1];
+                    transformedPast3Neighbors.Transform(std::get<3>(standardizedData));
+                    transformedPast3Neighbors.Move(std::get<1>(standardizedData), std::get<2>(standardizedData));
+            
+                    LifeStateHistory newHistory = LifeStateHistory(transformedPast1Neighbor, transformedPast2Neighbors, transformedPast3Neighbors, generationIndex + 1 + searchData.generation);
+                    LifeStateWithSymmetry stateWithSymmetry = LifeStateWithSymmetry(std::get<0>(standardizedData), searchData.symmetry);
+                    bool historyAlreadyCovered = false;
+                    alreadyTestedLifeStatesLock.lock();
+                    if (alreadyTestedLifeStates.find(stateWithSymmetry) != alreadyTestedLifeStates.end()) {
+                        //if a history in here contains our own, remove it
+                        //if a history is contained by our own, it's already been searched so break
+                        //note: for purposes of containment, 3 neighbor cells contain both 1 and 2 neighbor cells
+                        std::vector<LifeStateHistory> obsolete;
+                        for (auto &history : alreadyTestedLifeStates[stateWithSymmetry]) {
+                            if (newHistory.Contains(history)) {
+                                historyAlreadyCovered = true;
+                                break;
+                            }
+                            else if (history.Contains(newHistory)) {
+                                obsolete.push_back(history);
+                            }
+                        }
+                        if (!historyAlreadyCovered)
+                            for (auto &obsoleteHistory : obsolete) {
+                                alreadyTestedLifeStates[stateWithSymmetry].erase(obsoleteHistory);
+                            }
+                    }
+                    else {
+                        alreadyTestedLifeStates[stateWithSymmetry] = {};
+                    }
+                    if (!historyAlreadyCovered) {
+                        alreadyTestedLifeStates[stateWithSymmetry].insert(newHistory);
+                    }
+                    //TODO: This can be a pretty massive memory drain! I should try to minimize additions to it
+                    //  Possibly only add first-generation things?
+                    alreadyTestedLifeStatesLock.unlock();
+                    if (historyAlreadyCovered) break;
+                }
+            }            
 
             //if we're a symmetric version of something contained in the initial start region, run a new search with that and break
             if (params.patternRand && searchData.numCatalysts == 0 && (params.doDelayedSymmetryInteraction || searchData.symmetry == C1)) {
@@ -1831,7 +1986,7 @@ class Searcher {
         if (searchData.numCatalysts < searchData.maxCatalysts || searchSymmetries) {
             std::stack<SearchData> dataToSearch;
 
-            StaticSymmetry currentSymmetry = GetPatternSymmetry(searchData.currentState, SymmetryGroupFromEnum(searchData.maxSymmetry));
+            StaticSymmetry currentSymmetry = GetPatternSymmetry(searchData.startState, SymmetryGroupFromEnum(searchData.maxSymmetry));
             std::vector<SymmetryTransform> currentSymGroup = SymmetryGroupFromEnum(currentSymmetry);
             std::vector<SymmetryTransform> currentSymChain = SymmetryChainFromEnum(currentSymmetry);
 
@@ -2089,7 +2244,7 @@ class Searcher {
                                             newData.transformLowerBound = NUM_TRANSFORMS;
                                         }
 
-                                        newData.startState = (searchData.numCatalysts == 0 && params.patternRand && false) ? stateEvolution[nextUseGenerationIndex] : searchData.startState;
+                                        newData.startState = (searchData.numCatalysts == 0 && false) ? stateEvolution[nextUseGenerationIndex] : searchData.startState;
                                         newData.currentState = std::move(newCurrentState);
                                         newData.catalysts = catalystsEvolution[nextUseGenerationIndex];
 
@@ -2176,7 +2331,8 @@ class Searcher {
                                         }
 
                                         if (params.findPartials) {
-                                            newData.matchState = (searchData.numCatalysts == 0 && params.patternRand) ? stateEvolution[nextUseGenerationIndex] : searchData.matchState;                                        
+                                            //TODO: Params for matchState updating
+                                            newData.matchState = (searchData.numCatalysts == 0 && searchData.symmetry == params.symmetry && (params.patternRand || params.usePatternsFromFile)) ? stateEvolution[nextUseGenerationIndex] : searchData.matchState;                                        
                                             newData.matchPoints = newMatchPoints;
                                             //re-add applicable match points
                                             for (auto &matchPointData : searchData.matchPoints) {
@@ -2325,6 +2481,8 @@ class Searcher {
                             if (noAvailablePositions) continue;
 
                             //don't double-count if the pattern is symmetric
+                            //TODO: This means 'don't double count if the pattern is symmetric in such a way that it would show up twice in the symmetrized output
+                            //  This depends on both current pattern symmetry (currentSymmetry), current search symmetry (searchData.symmetry), and newSymmetry (which itself depends on searchSymmetry and generator)
                             bool sharedXSymmetry = false;
                             bool sharedYSymmetry = false;
                             switch(generator) {
@@ -2333,9 +2491,9 @@ class Searcher {
                                     switch (currentSymmetry) {
                                         case D2AcrossX:
                                         case D2AcrossXEven:
-                                        case D2diagodd:
-                                        case D2negdiagevenSubgroupsOnly:
-                                        case D2negdiagodd:
+                                        //case D2diagodd:
+                                        //case D2negdiagevenSubgroupsOnly:
+                                        //case D2negdiagodd:
                                         case C2:
                                         case C2even:
                                         case C2horizontaleven:
@@ -2360,9 +2518,9 @@ class Searcher {
                                     switch (currentSymmetry) {
                                         case D2AcrossY:
                                         case D2AcrossYEven:
-                                        case D2diagodd:
-                                        case D2negdiagevenSubgroupsOnly:
-                                        case D2negdiagodd:
+                                        //case D2diagodd:
+                                        //case D2negdiagevenSubgroupsOnly:
+                                        //case D2negdiagodd:
                                         case C2:
                                         case C2even:
                                         case C2horizontaleven:
@@ -2385,10 +2543,10 @@ class Searcher {
                                 case ReflectAcrossYeqX:
                                     switch (currentSymmetry) {
                                         case D2diagodd:
-                                        case D2AcrossX:
-                                        case D2AcrossXEven:
-                                        case D2AcrossY:
-                                        case D2AcrossYEven:
+                                        //case D2AcrossX:
+                                        //case D2AcrossXEven:
+                                        //case D2AcrossY:
+                                        //case D2AcrossYEven:
                                         case C2:
                                         case C2even:
                                         case C2horizontaleven:
@@ -2413,10 +2571,10 @@ class Searcher {
                                     switch (currentSymmetry) {
                                         case D2negdiagevenSubgroupsOnly:
                                         case D2negdiagodd:
-                                        case D2AcrossX:
-                                        case D2AcrossXEven:
-                                        case D2AcrossY:
-                                        case D2AcrossYEven:
+                                        //case D2AcrossX:
+                                        //case D2AcrossXEven:
+                                        //case D2AcrossY:
+                                        //case D2AcrossYEven:
                                         case C2:
                                         case C2even:
                                         case C2horizontaleven:
@@ -2682,7 +2840,9 @@ class Searcher {
                                             }
 
                                             if (params.findPartials) {
-                                                newData.matchState = searchData.matchState.GetSymChain(x, y, generationChain);
+                                                //TODO: Params for matchState
+                                                newData.matchState = (searchData.numCatalysts == 0 && searchData.symmetry == params.symmetry && (params.patternRand || params.usePatternsFromFile)) ? stateEvolution[nextUseGenerationIndex] : searchData.matchState;                                        
+                                                newData.matchState = newData.matchState.GetSymChain(x, y, generationChain);
                                                 newData.matchState.Move(xOffset, yOffset);
                                                 //TODO: Non-identity match points that still work
                                                 //re-add applicable match points
