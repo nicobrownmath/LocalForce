@@ -643,6 +643,63 @@ public:
     return true;
   }
 
+  bool operator!=(const LifeState &b) const {
+    return !(*this == b);
+  }
+
+  LifeState operator~() const {
+    LifeState result;
+    for (int i = 0; i < N; i++) {
+      result.state[i] = ~state[i];
+    }
+    return result;
+  }
+
+  LifeState operator&(const LifeState &other) const {
+    LifeState result;
+    for (int i = 0; i < N; i++) {
+      result.state[i] = state[i] & other.state[i];
+    }
+    return result;
+  }
+
+  LifeState& operator&=(const LifeState &other) {
+    for (int i = 0; i < N; i++) {
+      state[i] = state[i] & other.state[i];
+    }
+    return *this;
+  }
+
+  LifeState operator|(const LifeState &other) const {
+    LifeState result;
+    for (int i = 0; i < N; i++) {
+      result.state[i] = state[i] | other.state[i];
+    }
+    return result;
+  }
+
+  LifeState& operator|=(const LifeState &other) {
+    for (int i = 0; i < N; i++) {
+      state[i] = state[i] | other.state[i];
+    }
+    return *this;
+  }
+
+  LifeState operator^(const LifeState &other) const {
+    LifeState result;
+    for (int i = 0; i < N; i++) {
+      result.state[i] = state[i] ^ other.state[i];
+    }
+    return result;
+  }
+
+  LifeState& operator^=(const LifeState &other) {
+    for (int i = 0; i < N; i++) {
+      state[i] = state[i] ^ other.state[i];
+    }
+    return *this;
+  }
+
   friend bool operator <(const LifeState& a, const LifeState& b) {
       for (unsigned i = 0; i < 64; i++) {
           if(a.state[i] < b.state[i]) return true;
@@ -957,6 +1014,9 @@ public:
       }
     }
 
+    output.min = 0;
+    output.max = N - 1;
+
     return output;
   }
 
@@ -991,6 +1051,9 @@ public:
       output.state[i] = Rokicki1Neighbor(state[i], tempxor[idxU], tempand[idxU], tempxor[idxB],
                             tempand[idxB]);
     }
+
+    output.min = 0;
+    output.max = N - 1;
     
     return output;
   }
@@ -1026,6 +1089,9 @@ public:
       output.state[i] = Rokicki2Neighbors(state[i], tempxor[idxU], tempand[idxU], tempxor[idxB],
                             tempand[idxB]);
     }
+
+    output.min = 0;
+    output.max = N - 1;
     
     return output;
   }
@@ -1061,6 +1127,9 @@ public:
       output.state[i] = Rokicki3Neighbors(state[i], tempxor[idxU], tempand[idxU], tempxor[idxB],
                             tempand[idxB]);
     }
+
+    output.min = 0;
+    output.max = N - 1;
     
     return output;
   }
@@ -1094,9 +1163,13 @@ public:
       uint64_t s1 = aw & ae; //samerow has 2 neighbors
       uint64_t ts0 = bB0 ^ bU0; //parity of diffrow neighbors
       uint64_t ts1 = (bB0 & bU0) | (ts0 & s0); //exactly 2 rows have neighbor parity 1
-      return  (bB1 ^ bU1 ^ ts1 ^ s1) & 
+      return  ((bB1 ^ bU1 ^ ts1 ^ s1) & 
               ((bB1 | bU1) ^ (ts1 | s1)) &
-              ((ts0 ^ s0) | a);
+              ((ts0 ^ s0) | a));
+              //| (a & ~bU0 & ~bU1 & ~bB0 & ~bB1 & ~aw & ~ae);
+              //| (~a & (ts0 ^ s0) & (bB1 ^ bU1 ^ ts1 ^ s1) & ~((bB1 | bU1) ^ (ts1 | s1))); //For B7 TEMPORARY
+              //~(ts0 ^ s0): neighbor parity is 0
+              //
   }
 
   uint64_t inline Rokicki1Neighbor(
