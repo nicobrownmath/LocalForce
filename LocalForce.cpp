@@ -594,6 +594,10 @@ class Catalyst {
     std::vector<int> evolutionIndices;
     bool isBlinker;
 
+    bool spaceship = false;
+    unsigned xMove = 0;
+    unsigned yMove = 0;
+
     std::vector<std::pair<LifeState, LifeState>> forbidden;
     std::vector<LifeState> required;
     std::vector<LifeState> antirequired;
@@ -677,6 +681,14 @@ class Catalyst {
             else if (elems[index] == "isblinker") {
                 catalyst.isBlinker = true;
                 index++;
+            }
+            else if (elems[index] == "spaceship") {
+                catalyst.spaceship = true;
+                catalyst.isBlinker = true;
+                catalyst.period = stoi(elems[index + 1]);
+                catalyst.xMove = stoi(elems[index + 2]);
+                catalyst.yMove = stoi(elems[index + 3]);
+                index += 4;
             }
             else {
                 printf("Bad catalyst: Invalid parameter %s\n", elems[index].c_str());
@@ -827,6 +839,50 @@ class Catalyst {
         for (int i = 0; i < (int)anyrequired.size(); i++) {
             anyrequired[i].first.Transform(transform);
             anyrequired[i].second.Transform(transform);
+        }
+
+        //transform spaceship motion
+        int oldXMove;
+        switch(transform) {
+            case ReflectAcrossX:
+            case ReflectAcrossXEven:
+                xMove = -xMove;
+                break;
+            case ReflectAcrossY:
+            case ReflectAcrossYEven:
+                yMove = -yMove;
+                break;
+            case ReflectAcrossYeqX:
+                oldXMove = xMove;
+                xMove = yMove;
+                yMove = oldXMove;
+                break;
+            case ReflectAcrossYeqNegX:
+            case ReflectAcrossYeqNegXP1:
+                oldXMove = xMove;
+                xMove = -yMove;
+                yMove = -oldXMove;
+                break;
+            case Rotate180OddBoth:
+            case Rotate180EvenBoth:
+            case Rotate180EvenHorizontal:
+            case Rotate180EvenVertical:
+                xMove = -xMove;
+                yMove = -yMove;
+                break;
+            case Rotate90:
+            case Rotate90Even:
+                oldXMove = xMove;
+                xMove = -yMove;
+                yMove = oldXMove;
+                break;
+            case Rotate270:
+            case Rotate270Even:
+                oldXMove = xMove;
+                xMove = yMove;
+                yMove = -oldXMove;
+                break;
+            default: break;
         }
     }
 
@@ -1071,6 +1127,7 @@ class SearchData {
     bool supressOutput = false;
     LifeState startState;
     std::vector<std::pair<LifeState, unsigned>> matchStates; //pairs are (state, gen)
+    LifeState signatureState;
     LifeState currentState;
     LifeState past1Neighbor; //cells which have had exactly 1 neighbor in the pattern in some generation (catalysts impact by having 2 neighbors)
     LifeState past2Neighbors; //cells which have had exactly 2 neighbors in the pattern in some generation (catalysts impact by having 1 neighbor)
@@ -1434,6 +1491,7 @@ class Searcher {
         searchData.symmetry = params.symmetry;
         searchData.startState = state;
         searchData.matchStates = {{searchData.startState, 0}};
+        searchData.signatureState = searchData.startState;
         searchData.currentState = searchData.startState;
         searchData.past1Neighbor = LifeState();
         searchData.past2Neighbors = LifeState();
@@ -1976,11 +2034,11 @@ class Searcher {
                     }
                     if (!failure) {
                         //TODO: These things with searchData.matchStates[0] may need proper indices
-                        LifeState transformedState = searchData.matchStates[0].first;
+                        LifeState transformedState = searchData.signatureState;
                         transformedState.Transform(std::get<3>(matchPoint));
                         transformedState.Move(std::get<1>(matchPoint), std::get<2>(matchPoint));
                         categoryContainerLock.lock();
-                        categoryContainer.Add(searchData.startState, stateEvolution[std::get<0>(matchPoint) - searchData.generation], CatContainerKey(transformedState, searchData.matchStates[0].first, (int)std::get<0>(matchPoint)));
+                        categoryContainer.Add(searchData.startState, stateEvolution[std::get<0>(matchPoint) - searchData.generation], CatContainerKey(transformedState, searchData.signatureState, (int)std::get<0>(matchPoint)));
                         categoryContainerLock.unlock();
                         break;
                     }
@@ -2005,7 +2063,7 @@ class Searcher {
             //  this would also need to be extended to cases with more than 3 catalysts
             //Efficiency gains from this would likely be marginal and it sounds like a nightmare to implement so I probably won't
             bool useFilter = !filterState.IsEmpty();
-            //useFilter = false; //decomment this to make sure it runs the same as without filters
+            useFilter = false; //decomment this to make sure it runs the same as without filters
             std::vector<LifeState> filterStates; //note: This is reverse order
             if (useFilter) {
                 filterStates = {filterState};
@@ -2074,65 +2132,108 @@ class Searcher {
                                 //cat1Neighbor with pat2NeighborsPrevGen
                                 //cat2Neighbors with pat1NeighborPrevGen
                         unsigned interactionGenWithPeriod = (generationIndex + searchData.generation) % catalystPeriodLCM;
-                        LifeState catalystPositions = catalysts[catIndex].locusOneNeighborR180.Convolve(past2NeighborsWithPeriodEvolution[generationIndex + 1][interactionGenWithPeriod]);
-                        catalystPositions.Join(catalysts[catIndex].locusTwoNeighborsR180.Convolve(past1NeighborWithPeriodEvolution[generationIndex + 1][interactionGenWithPeriod]));
-                        catalystPositions.Join(catalysts[catIndex].locusZoiR180.Convolve(past3NeighborsWithPeriodEvolution[generationIndex + 1][interactionGenWithPeriod]));
-                        for (unsigned catGen = 0; catGen < catalysts[catIndex].period; catGen++) {
-                            unsigned catGenPeriod = (catGen + generationIndex + searchData.generation) % catalysts[catIndex].period;
-                            
-                            //TODO: These lumpeds could maybe be computed and cached earlier?
-                            LifeState past3NeighborsWithPeriodLumped;
-                            for (unsigned catGenPeriodIndex = catGenPeriod; catGenPeriodIndex < catalystPeriodLCM; catGenPeriodIndex += catalysts[catIndex].period) {
-                                past3NeighborsWithPeriodLumped.Join(past3NeighborsWithPeriodEvolution[generationIndex][catGenPeriodIndex]);
-                            }
-                            catalystPositions.Copy(catalysts[catalysts[catIndex].evolutionIndices[catGen]].zoiR180.Convolve(past3NeighborsWithPeriodLumped), ANDNOT);
-                            if (catalystPositions.IsEmpty()) {x = 0; y = 0; break;}
-                            
-                            LifeState past2NeighborsWithPeriodLumped;
-                            for (unsigned catGenPeriodIndex = catGenPeriod; catGenPeriodIndex < catalystPeriodLCM; catGenPeriodIndex += catalysts[catIndex].period) {
-                                past2NeighborsWithPeriodLumped.Join(past2NeighborsWithPeriodEvolution[generationIndex][catGenPeriodIndex]);
-                            }
-                            catalystPositions.Copy(catalysts[catalysts[catIndex].evolutionIndices[catGen]].oneNeighborR180.Convolve(past2NeighborsWithPeriodLumped), ANDNOT);
-                            if (catalystPositions.IsEmpty()) {x = 0; y = 0; break;}
-                            
-                            LifeState past1NeighborWithPeriodLumped;
-                            for (unsigned catGenPeriodIndex = catGenPeriod; catGenPeriodIndex < catalystPeriodLCM; catGenPeriodIndex += catalysts[catIndex].period) {
-                                past1NeighborWithPeriodLumped.Join(past1NeighborWithPeriodEvolution[generationIndex][catGenPeriodIndex]);
-                            }
-                            catalystPositions.Copy(catalysts[catalysts[catIndex].evolutionIndices[catGen]].twoNeighborsR180.Convolve(past1NeighborWithPeriodLumped), ANDNOT);
-                            if (catalystPositions.IsEmpty()) {x = 0; y = 0; break;}
+                        LifeState catalystPositions;
+                        if (!catalysts[catIndex].spaceship) {
+                            catalystPositions = catalysts[catIndex].locusOneNeighborR180.Convolve(past2NeighborsWithPeriodEvolution[generationIndex + 1][interactionGenWithPeriod]);
+                            catalystPositions.Join(catalysts[catIndex].locusTwoNeighborsR180.Convolve(past1NeighborWithPeriodEvolution[generationIndex + 1][interactionGenWithPeriod]));
+                            catalystPositions.Join(catalysts[catIndex].locusZoiR180.Convolve(past3NeighborsWithPeriodEvolution[generationIndex + 1][interactionGenWithPeriod]));
                         }
-                        if (catalystPositions.IsEmpty()) continue;
+                        else {
+                            LifeState rotatedSecondState = catalysts[catIndex].state;
+                            rotatedSecondState.Transform(Rotate180OddBoth);
+                            LifeState fS1 = stateEvolution[generationIndex].OneNeighbor();
+                            LifeState fS2 = stateEvolution[generationIndex].TwoNeighbors();
+                            LifeState fS3 = stateEvolution[generationIndex].ThreeNeighbors();
+                            LifeState fSA = stateEvolution[generationIndex].ZOI();
+                            LifeState rSS1 = rotatedSecondState.OneNeighbor();
+                            LifeState rSS2 = rotatedSecondState.TwoNeighbors();
+                            LifeState rSS3 = rotatedSecondState.ThreeNeighbors();
+                            LifeState rSSA = rotatedSecondState.ZOI();
 
-                        //extra criterion for filtering
-                        if (useFilter) {
+                            //cell off in both, 1 neighbor in second, 2 neighbors in first
+                            catalystPositions = (~rotatedSecondState & rSS1).Convolve(~stateEvolution[generationIndex] & fS2);
+                            //cell off in both, 2 neighbors in second, 1 neighbor in first
+                            catalystPositions |= (~rotatedSecondState & rSS2).Convolve(~stateEvolution[generationIndex] & fS1);
+                            
+                            //cell on in first (off in second), 1 neighbor in second, 1 or 3 neighbors in first
+                            catalystPositions |= (~rotatedSecondState & rSS1).Convolve(stateEvolution[generationIndex] & (fS1 | fS3));
+                            //cell on in first (off in second), 2 neighbors in second, 0 or 1 or 2 or 3 neighbors in first
+                            catalystPositions |= (~rotatedSecondState & rSS2).Convolve(stateEvolution[generationIndex] & (~fSA | fS1 | fS2 | fS3));
+                            
+                            //cell on in second (off in first), 1 neighbor in second, 1 or 2 neighbors in first
+                            catalystPositions |= (rotatedSecondState & rSS1).Convolve(~stateEvolution[generationIndex] & (fS1 | fS2));
+                            //cell on in second (off in first), 2 neighbors in second, 2 or more neighbors in first
+                            catalystPositions |= (rotatedSecondState & rSS1).Convolve(~stateEvolution[generationIndex] & (fSA & ~fS1));
+
+                            //3 neighbors in second, any neighbors in first
+                            catalystPositions |= rSS3.Convolve(fSA);
+                            //any neighbors in second, 3 neighbors in first
+                            catalystPositions |= rSSA.Convolve(fS3);
+                        }
+
+                        if (!catalysts[catIndex].spaceship) {
                             for (unsigned catGen = 0; catGen < catalysts[catIndex].period; catGen++) {
-                                catalystPositions.Copy(catalysts[catalysts[catIndex].evolutionIndices[catGen]].zoiR180.Convolve(filterStates[stateEvolution.size() - 1 - generationIndex]), AND);
+                                unsigned catGenPeriod = (catGen + generationIndex + searchData.generation) % catalysts[catIndex].period;
+                                
+                                //TODO: These lumpeds could maybe be computed and cached earlier?
+                                LifeState past3NeighborsWithPeriodLumped;
+                                for (unsigned catGenPeriodIndex = catGenPeriod; catGenPeriodIndex < catalystPeriodLCM; catGenPeriodIndex += catalysts[catIndex].period) {
+                                    past3NeighborsWithPeriodLumped.Join(past3NeighborsWithPeriodEvolution[generationIndex][catGenPeriodIndex]);
+                                }
+                                catalystPositions.Copy(catalysts[catalysts[catIndex].evolutionIndices[catGen]].zoiR180.Convolve(past3NeighborsWithPeriodLumped), ANDNOT);
+                                if (catalystPositions.IsEmpty()) {x = 0; y = 0; break;}
+                                
+                                LifeState past2NeighborsWithPeriodLumped;
+                                for (unsigned catGenPeriodIndex = catGenPeriod; catGenPeriodIndex < catalystPeriodLCM; catGenPeriodIndex += catalysts[catIndex].period) {
+                                    past2NeighborsWithPeriodLumped.Join(past2NeighborsWithPeriodEvolution[generationIndex][catGenPeriodIndex]);
+                                }
+                                catalystPositions.Copy(catalysts[catalysts[catIndex].evolutionIndices[catGen]].oneNeighborR180.Convolve(past2NeighborsWithPeriodLumped), ANDNOT);
+                                if (catalystPositions.IsEmpty()) {x = 0; y = 0; break;}
+                                
+                                LifeState past1NeighborWithPeriodLumped;
+                                for (unsigned catGenPeriodIndex = catGenPeriod; catGenPeriodIndex < catalystPeriodLCM; catGenPeriodIndex += catalysts[catIndex].period) {
+                                    past1NeighborWithPeriodLumped.Join(past1NeighborWithPeriodEvolution[generationIndex][catGenPeriodIndex]);
+                                }
+                                catalystPositions.Copy(catalysts[catalysts[catIndex].evolutionIndices[catGen]].twoNeighborsR180.Convolve(past1NeighborWithPeriodLumped), ANDNOT);
                                 if (catalystPositions.IsEmpty()) {x = 0; y = 0; break;}
                             }
                             if (catalystPositions.IsEmpty()) continue;
-                        }
-                        //filter out stuff that was already checked in a stored filter
-                        int oldFilterIndex = 0;
-                        for (auto [filterState, filterGeneration, filterCatIndex, filterCatX, filterCatY, filterOffsetX, filterOffsetY] : searchData.filters) {
-                            if (generationIndex + searchData.generation < filterGeneration || (generationIndex + searchData.generation == filterGeneration && catIndex <= filterCatIndex)) {
-                                LifeState excludedCatalysts;
+
+                            //extra criterion for filtering
+                            if (useFilter) {
                                 for (unsigned catGen = 0; catGen < catalysts[catIndex].period; catGen++) {
-                                    excludedCatalysts.Join(catalysts[catalysts[catIndex].evolutionIndices[catGen]].zoiR180.Convolve(olderFilterStates[oldFilterIndex][filterGeneration - (generationIndex + searchData.generation)]));
+                                    catalystPositions.Copy(catalysts[catalysts[catIndex].evolutionIndices[catGen]].zoiR180.Convolve(filterStates[stateEvolution.size() - 1 - generationIndex]), AND);
+                                    if (catalystPositions.IsEmpty()) {x = 0; y = 0; break;}
                                 }
-                                if (generationIndex + searchData.generation == filterGeneration && catIndex == filterCatIndex) {
-                                    //some x and y aren't excluded yet
-                                    for (unsigned filterCatYTemp = filterCatY + 1; filterCatYTemp < 64; filterCatYTemp++) {
-                                        excludedCatalysts.SetCell((filterCatX + filterOffsetX) % 64, (filterCatYTemp + filterOffsetY) % 64, 0);
-                                    }
-                                    for (unsigned filterCatXTemp = filterCatX + 1; filterCatXTemp < 64; filterCatXTemp++) {
-                                        excludedCatalysts.state[(filterCatXTemp + filterOffsetX) % 64] = 0ULL;
-                                    }
-                                }
-                                catalystPositions.Copy(std::move(excludedCatalysts), ANDNOT);
-                                if (catalystPositions.IsEmpty()) {x = 0; y = 0; break;}
+                                if (catalystPositions.IsEmpty()) continue;
                             }
-                            oldFilterIndex++;
+                            //filter out stuff that was already checked in a stored filter
+                            int oldFilterIndex = 0;
+                            for (auto [filterState, filterGeneration, filterCatIndex, filterCatX, filterCatY, filterOffsetX, filterOffsetY] : searchData.filters) {
+                                if (generationIndex + searchData.generation < filterGeneration || (generationIndex + searchData.generation == filterGeneration && catIndex <= filterCatIndex)) {
+                                    LifeState excludedCatalysts;
+                                    for (unsigned catGen = 0; catGen < catalysts[catIndex].period; catGen++) {
+                                        excludedCatalysts.Join(catalysts[catalysts[catIndex].evolutionIndices[catGen]].zoiR180.Convolve(olderFilterStates[oldFilterIndex][filterGeneration - (generationIndex + searchData.generation)]));
+                                    }
+                                    if (generationIndex + searchData.generation == filterGeneration && catIndex == filterCatIndex) {
+                                        //some x and y aren't excluded yet
+                                        for (unsigned filterCatYTemp = filterCatY + 1; filterCatYTemp < 64; filterCatYTemp++) {
+                                            excludedCatalysts.SetCell((filterCatX + filterOffsetX) % 64, (filterCatYTemp + filterOffsetY) % 64, 0);
+                                        }
+                                        for (unsigned filterCatXTemp = filterCatX + 1; filterCatXTemp < 64; filterCatXTemp++) {
+                                            excludedCatalysts.state[(filterCatXTemp + filterOffsetX) % 64] = 0ULL;
+                                        }
+                                    }
+                                    catalystPositions.Copy(std::move(excludedCatalysts), ANDNOT);
+                                    if (catalystPositions.IsEmpty()) {x = 0; y = 0; break;}
+                                }
+                                oldFilterIndex++;
+                            }
+                        }
+                        else {
+                            LifeState stateRotated = catalysts[catIndex].state;
+                            stateRotated.Transform(Rotate180OddBoth);
+                            catalystPositions.Copy(stateRotated.Convolve(stateEvolution[generationIndex]), ANDNOT);
                         }
                         if (catalystPositions.IsEmpty()) continue;
 
@@ -2151,16 +2252,48 @@ class Searcher {
                                 for (; y < 64; y++) {
                                     if (catalystPositions.GetCell(x, y) == 1) {
                                         std::vector<LifeState> catStateSymChains;
-                                        for (unsigned gen = 0; gen < catalysts[catIndex].period; gen++) {
-                                            catStateSymChains.push_back(catalysts[catalysts[catIndex].evolutionIndices[gen]].state.GetSymChain(x, y, SymmetryChainFromEnum(searchData.symmetry)));
+                                        LifeState newCurrentState;
+                                        LifeState newStartState = searchData.startState;
+                                        if (!catalysts[catIndex].spaceship) {
+                                            for (unsigned gen = 0; gen < catalysts[catIndex].period; gen++) {
+                                                catStateSymChains.push_back(catalysts[catalysts[catIndex].evolutionIndices[gen]].state.GetSymChain(x, y, SymmetryChainFromEnum(searchData.symmetry)));
+                                            }
+                                            newCurrentState = stateEvolution[nextUseGenerationIndex];
+                                            newCurrentState.Join(catStateSymChains[((int)catalysts[catIndex].period - (int)(generationIndex + searchData.generation) % (int)catalysts[catIndex].period + nextUseGenerationIndex + searchData.generation) % (int)catalysts[catIndex].period]);
+                                            if (!catalysts[catIndex].CheckState(newCurrentState, x, y).first) {
+                                                //exclude forbidden placements
+                                                //TODO: This could maybe use a streamlined version that only checks brokenness
+                                                //(Maybe even just forbidden and antirequired)
+                                                continue;
+                                            }
                                         }
-                                        LifeState newCurrentState = stateEvolution[nextUseGenerationIndex];
-                                        newCurrentState.Join(catStateSymChains[((int)catalysts[catIndex].period - (int)(generationIndex + searchData.generation) % (int)catalysts[catIndex].period + nextUseGenerationIndex + searchData.generation) % (int)catalysts[catIndex].period]);
-                                        if (!catalysts[catIndex].CheckState(newCurrentState, x, y).first) {
-                                            //exclude forbidden placements
-                                            //TODO: This could maybe use a streamlined version that only checks brokenness
-                                            //(Maybe even just forbidden and antirequired)
-                                            continue;
+                                        else {
+                                            LifeState newEndCurrentState = stateEvolution[generationIndex];
+                                            LifeState catCurrentState = catalysts[catIndex].state.GetSymChain(x, y, SymmetryChainFromEnum(searchData.symmetry));
+                                            LifeState catStartState = catalysts[catIndex].state;
+                                            //rewind (generationIndex + searchData.generation) steps
+                                            unsigned extraShipGens = catalysts[catIndex].period - ((generationIndex + searchData.generation) % catalysts[catIndex].period);
+                                            for (unsigned shipGen = 0; shipGen < extraShipGens; shipGen++) {
+                                                catStartState.Step();
+                                            }
+                                            catStartState.Move(-catalysts[catIndex].xMove * ((generationIndex + searchData.generation + extraShipGens) / catalysts[catIndex].period), -catalysts[catIndex].yMove * ((generationIndex + searchData.generation + extraShipGens) / catalysts[catIndex].period));
+                                            catStartState = catStartState.GetSymChain(x, y, SymmetryChainFromEnum(searchData.symmetry));
+                                            newEndCurrentState.Join(catCurrentState);
+                                            newStartState.Join(catStartState);
+                                            LifeState evolvingStartState = newStartState;
+                                            for (unsigned stateGen = 0; stateGen < (generationIndex + searchData.generation); stateGen++) {
+                                                evolvingStartState.Step();
+                                            }
+                                            if (evolvingStartState != newEndCurrentState) continue;
+
+                                            //update catStateSymChains
+                                            for (unsigned gen = 0; gen < searchData.generation + nextUseGenerationIndex + 1; gen++) {
+                                                catStateSymChains.push_back(catStartState);
+                                                catStartState.Step();
+                                            }
+
+                                            newCurrentState = stateEvolution[nextUseGenerationIndex];
+                                            newCurrentState.Join(catStateSymChains[searchData.generation + nextUseGenerationIndex]);
                                         }
 
                                         //construct new data and add to stack
@@ -2195,7 +2328,7 @@ class Searcher {
                                             newData.transformLowerBound = NUM_TRANSFORMS;
                                         }
 
-                                        newData.startState = (searchData.numCatalysts == 0 && false) ? stateEvolution[nextUseGenerationIndex] : searchData.startState;
+                                        newData.startState = newStartState;
                                         newData.currentState = std::move(newCurrentState);
                                         newData.catalysts = catalystsEvolution[nextUseGenerationIndex];
 
@@ -2204,20 +2337,24 @@ class Searcher {
                                         newData.past3NeighborsWithPeriod = past3NeighborsWithPeriodEvolution[nextUseGenerationIndex];
                 
                                         int catStateGenOffset = ((int)catalysts[catIndex].period - (int)(generationIndex + searchData.generation) % (int)catalysts[catIndex].period) % (int)catalysts[catIndex].period;    
-                                        newData.startState.Join(catStateSymChains[catStateGenOffset]);
+                                        if (!catalysts[catIndex].spaceship)
+                                            newData.startState.Join(catStateSymChains[catStateGenOffset]);
                                         
                                         //Update newData with the new catalyst
                                         //note: in the asymmetric case, this can be done marginally more efficiently with caching
                                         //I mean you could probably also cache in the symmetric case for every possible placement but that would take a lot of memory (~46 MB per catalyst)
-                                        for (unsigned gen = 0; gen < catalysts[catIndex].period; gen++) {
+                                        unsigned numSymChains = catalysts[catIndex].spaceship ? nextUseGenerationIndex + 1 : catalysts[catIndex].period;
+                                        for (unsigned gen = 0; gen < numSymChains; gen++) {
                                             LifeState cat1NeighborSymChain = catStateSymChains[gen].OneNeighbor();
                                             LifeState cat2NeighborsSymChain = catStateSymChains[gen].TwoNeighbors();
                                             LifeState cat3NeighborsSymChain = catStateSymChains[gen];
                                             cat3NeighborsSymChain.Step();
                                             LifeState catZOISymChain = catStateSymChains[gen].ZOI();
 
-                                            for (unsigned periodIndex = gen; periodIndex < catalystPeriodLCM; periodIndex += catalysts[catIndex].period) {
+                                            //TODO: Make sure this is right when spaceship
+                                            for (unsigned periodIndex = gen; periodIndex < catalystPeriodLCM; periodIndex += numSymChains) {
                                                 unsigned actualGenIndex = (periodIndex + searchData.generation + nextUseGenerationIndex) % catalystPeriodLCM;
+                                                if (catalysts[catIndex].spaceship) actualGenIndex = periodIndex % catalystPeriodLCM;
 
                                                 LifeState past1Cat1Temp = newData.past1NeighborWithPeriod[actualGenIndex];
                                                 past1Cat1Temp.Copy(cat1NeighborSymChain, AND);
@@ -2274,7 +2411,15 @@ class Searcher {
                                         }
                                         if (!recoveryCheckingIDs.empty()) {
                                             LifeState testState = stateEvolution[generationIndex];
-                                            testState.Join(catStateSymChains[0]);
+                                            if (!catalysts[catIndex].spaceship)
+                                                testState.Join(catStateSymChains[0]);
+                                            else {
+                                                LifeState endState = catStateSymChains[nextUseGenerationIndex];
+                                                for (unsigned gen = nextUseGenerationIndex; gen <= generationIndex; gen++) {
+                                                    endState.Step();
+                                                }
+                                                testState.Join(endState);
+                                            }
 
                                             std::map<unsigned, std::vector<LifeState>> thisCatStateSymChains;
                                             std::map<unsigned, bool> checkPositiveRecovery;
@@ -2446,7 +2591,15 @@ class Searcher {
                                                 std::vector<LifeState> perturbation;
 
                                                 LifeState testState = stateEvolution[generationIndex];
-                                                testState.Join(catStateSymChains[0]);
+                                                if (!catalysts[catIndex].spaceship)
+                                                    testState.Join(catStateSymChains[0]);
+                                                else {
+                                                    LifeState endState = catStateSymChains[nextUseGenerationIndex];
+                                                    for (unsigned gen = nextUseGenerationIndex; gen <= generationIndex; gen++) {
+                                                        endState.Step();
+                                                    }
+                                                    testState.Join(endState);
+                                                }
                                             
                                                 LifeState catTransparency = catStateSymChains[0];
                                                 if (catalysts[catIndex].forceTransparent) {
@@ -2539,6 +2692,10 @@ class Searcher {
                                         if (params.findPartials) {
                                             //newData.matchState = (searchData.numCatalysts == 0 && searchData.symmetry == params.symmetry && (params.patternRand || params.usePatternsFromFile)) ? stateEvolution[nextUseGenerationIndex] : searchData.matchState;                                        
                                             newData.matchStates = searchData.matchStates;
+                                            newData.signatureState = searchData.signatureState;
+                                            if (catalysts[catIndex].spaceship) {
+                                                newData.signatureState.Join(catStateSymChains[0]);
+                                            }
                                             if (searchData.numCatalysts == 0) {
                                                 for (unsigned matchGeneration = searchData.generation + 1; matchGeneration <= nextUseGenerationIndex; matchGeneration++) {
                                                     newData.matchStates.push_back({stateEvolution[matchGeneration - searchData.generation], matchGeneration});
