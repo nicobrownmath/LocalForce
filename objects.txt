@@ -1,0 +1,2249 @@
+			2bo$bobo$o3bo$bobo$2bo! D8 t tetromino
+			2bo$2ob2o$2bo! D4 t tetromino
+			bo$2o$bo! t tetromino
+0	617733	16384	2b3o$bo3bo$o5bo$o5bo$o5bo$bo3bo$2b3o! honey farm successor
+0	617733	16384	2b3o$bo3bo$o5bo$bo3bo$2b3o! honey farm successor
+0	617733	16384	b2o$2obo$2bo! honey farm 2o$o2bo$obo!
+1	531779	12730	b2o$2o$bo! R-pentomino  
+2	471544	12604	obo$obo$3o! pi-heptomino  
+2	471544	12604	obo$3o$3o! pi-heptomino 
+3	310237	8592	b3o$o2bo$3o! lumps of muck 3	310237	8592	3o$o2bo2$b3o! lumps of muck 
+4	266004	7099	b3o$o2bo$o$bo! century 
+5	244984	9519	2bo$b3o$2obo! B-heptomino 
+6	133659	3744	2b2o$bobo$2o! wing 7	121316	10755	o11b2o$3o9b2o$obo$2bo! Herschel + block 
+			b2o$o2bo$ob2o$b2o! D2\ teardrop
+8	64485	1742	3bo$bobo$ob2o! teardrop 
+9	53177	1531	2bo$bobo$o3bo$bo2bo$3b2o! I-heptomino 
+10	50178	1323	bobo$o2bo$o$2o! two-glider octomino 
+11	48239	1081	bobo$o2b2o$o2bo! long bun 
+12	46879	1128	2o$bobo$bobo$2b2o! procrastinator 
+13	38554	909	b2o$o2$b2obo$3bo! blonk-tie 
+14	37747	934	ob3o$2o! Iwona active region 
+15	29273	1189	bobo$o$bo2bo$2b3o! U-turner 
+16	29196	984	2o2bo$o2bo$b3o! H' 
+17	28314	724	2b2o$4bo$o2bo$3o! R-turner 
+18	27077	911	2o4bo$2o4b2o$6bo! original diehard (TL hits block at (5,0)) 
+19	25303	626	2b3o$bo3bo$o4bo$bob2o$2bo! object hassled in Jason's p22 
+20	24725	768	2o$2o4bo$5b3o! traffic light hits block at (5,1) 
+21	23603	1235	o$2o$obo$2b2o! dove 
+22	22654	612	o2bo$bob2o$bo3b2o$4bo! pi+loaf 
+23	21929	1116	b3o$bo$3o! Herschel alone 
+24	18593	352	3o$3bo$3bo$3bo! butterfly 
+25	18507	859	b2o$2b2o$b2o$2o! octomino II 
+26	17795	794	2o5bo$o4bobo$7bo! traffic light hits block at (6,0) 
+27	17656	814	2o$2o$6bo$5b3o! traffic light hits block at (5,2) 
+28	17620	583	ob2o$bo2bo$2b3o! offset lumps of muck 
+29	17007	577	b3o$o2bo$o2bo$2bo! teardrop-1, dies out 
+30	16764	481	2o$obo$2b2o$4bo! object hassled in Merzenich's p64 
+31	16695	598	3o$bo$bob2o$b2o! seven blinkers 
+32	16414	671	bo$3o3$5b2o$5bo! traffic light hits block at (4,3) 
+33	16361	510	2bo$bobo$2ob2o$o! 3c/7o wave 
+34	15854	552	4b3o$2o3bo$2o! traffic light hits block at (4,1) 
+35	15621	423	obo$2ob2o$2bo! offset honey farm 
+36	15505	762	6b2o$o5b2o$2o$o! traffic light hits block at (6,1) 
+37	15475	383	2o4bo$2o2b2ob2o$7b2o! lumps of muck + block 
+38	14689	955	2bo$bo$o4b2o$bo4bo$2b2o2bo$3b2o! octomino II descendent 
+39	14585	329	3o$3bo2$b3o! 6-cell 5.s.1 
+40	14525	404	2bo2bo$bo3bo$o4bo$o$b3o! hammerhive 
+41	14509	368	bo$2obo$bobo$2b2o! flare 
+42	13997	581	b3o$o2bo$o2bo$obo! flop 
+43	13661	295	b2o$bobo$o2b2o! beehive + procrastinator 
+44	13484	408	3b2o$4bo$4bo$3bo$3o! anvil predecessor 
+45	12411	306	4bo$3bobo$3obo! pi + boat 
+46	12200	375	b3o2$4bo$o$b3o! U-turner predecessor 
+47	11929	320	3bo$2ob2o$3bo$obo$bo! I-heptomino + blinker 
+48	11426	833	bo$2o$obo$bo3b2o$5bo! honey farm hits block at (5,2) (AK-47 reaction) 
+49	11287	8422	3o$o2bo$o3bo$bobo! BWSS 
+50	11197	1605	3b2o$o$bo2bo$b3o! late generation of original diehard 
+51	11054	413	2o2b2o$o4bo$bo3bo$4bo! pi hits block at (-4,0) 
+52	11035	268	3o$3bo$o2bo$2b2o! E-heptomino cousin 
+53	10747	332	2b3o$4bo$bob2o2$3o! honey farm hits block at (5,3) 
+54	10467	328	ob3o$bo2bo$b3o! handshake + one cell diagonally connected 
+55	10295	804	o$o$o5b2o$6b2o$bo$2o! honey farm hits block at (6,0) 
+56	10257	257	2b3o$bo$bo2bo$o2bo! object hassled in unnamed p30 
+57	10252	280	2b3o$4bo$o2bo$obo! bun at duoplet 
+58	10149	195	3b2o$bo$o3bo$b3o! half-short hat 
+59	9897	962	b3o$o2bo$b3o2$6b2o$6b2o! honey farm hits block at (4,3) 
+60	9801	51	2b3o$bo2bo2$3o! honey farm hits block at (6,2) 
+61	9790	216	2bo$o3bo$o3bo$o4bo$3b2o! loaf + blinker 
+62	9396	163	bo2bo$o3bo$bo2bo$2b2o! honey farm + vertical domino 
+63	9208	248	3bo$2bobo$bo2bo$o2bo$bo! object hassled in unnamed p32 
+64	9172	278	2bo$bo2bo$4bo$3bo$3o! staircase siamese century nonomino 
+65	9064	294	b2o$o2bo$o2b2o$bo2bo! R-turner without first blinker 
+66	8844	204	3bo$bobo$bo2bo$o2bo$b2o! 
+67	8741	483	b2o$2obo$3b2o$2b2o! three boats 
+68	8698	161	b2o$o$b2ob2o$5b2o! very long pulsar 
+69	8670	195	3obo$bo$4b2o! bullet heptomino at blinker (not switch engine) 
+70	8654	282	3o$o$o3bo$b2ob2o! fake R-pentomino 
+71	8570	201	3o$o2bo$bo$2b2o! grate 
+72	8569	303	3o$o2bo$4bo$b3o! Herschel minus FNG + different glider 
+73	8456	241	2bo$bo2bo$o4bo$bo3bo$3b3o! 
+74	8426	335	2o$3bo$o2bo$b3o! B + block 
+75	8405	201	2bo$b3o$o3bo$bob3o! 
+76	8324	177	3o2$bob2o$2bo! wing+1 
+77	8301	308	2o$o2bo$o3bo$b2o! century generation 3 + B2k cell 
+78	8297	240	2o$o2bo$o3bo$bo3bo$4bo! pi hits block at (-4,1) 
+79	8106	313	2b3o$bo3bo$o$bo3bo$2b2o! 5x3 rectangle with missing corner 
+80	7910	280	2o3b2o$o5bo2$bo3bo$2b3o! queen bee 
+81	7884	160	2b2o$bobo$o3bo$bobo$2bo! E-heptomino cousin 
+82	7683	799	o$o$o4$8bo2bo$7bo2b2o$7bo2bo$8b2o! late generation of R-turner 
+83	7586	437	2bobo$bo2bo$o3bo$b3o! 
+84	7533	1387	4b3o$2bo4bo$4bob2o$b3o$o! late generation of Herschel 
+85	7360	356	2bo$o3bo$o3bo$obobo! pulsar 
+86	7180	353	11b2o$10bo2bo$2o$2o7bo2bo$10b2o! HF and block at (10,0) (sometimes formed by pi being hit) 
+87	7167	99	3o$2bo2bo$5b2o$5bo! beehive + beehive 
+88	7151	694	5bo$5b2o$2o2bobo$o4bo! honey farm hits block at (5,1) 
+89	7112	622	7b2o$7b2o3$2bo$b3o$o2bo$b2o! honey farm hits block at (5,4) 
+90	7085	177	4b2o2$b2obo$o$o$3o! B + blinker 
+91	7049	224	3o$3b2o$2obo$2bo! R hits block at (-4,1) 
+92	7019	636	7bo$6bobo$7b2o$7bo$2o4bo$bo! honey farm hits block at (6,2) 
+93	7002	157	b2o$2obo$3bo2$3b2o! loaf at duoplet 
+94	6948	195	2bo$bobo$o$bo3bo$3bobo! staircase hexomino + domino 
+95	6847	181	3b2o$b2obo$o3bo$bobo! 
+96	6798	162	bo$obo$o3bo$bo2bo$2b2o! bun generation 3 + one cell 
+97	6742	177	2b2o$bo2bo$o2bo$o$o! loaf siamese boat 
+98	6735	153	o$2o$bo$6bo$5b3o$7bo! offset long bun 
+99	6727	127	o2bo$bo2bo$bo2bo$3b2o! 
+100	6610	328	5bo$2o2b2o$b2o! paperclip minus 1 
+101	6586	221	3o2$4b2o$3b2o! object hassled in Raucci's p102 
+102	6534	190	2b3o$bo3bo$o3b2o$bo3bo$2b2o! loaf + phi spark 
+103	6430	216	b3o$o$b2o$2b2o! 
+104	6398	221	b2o$2o$4bo$4bo$4bo! traffic light hits beehive side at (4,3) 
+105	6389	175	3b2o$b2o2bo2$o$b2o! 3x2 bridge line of three 
+106	6346	395	5b2o$o3bo$2o2bo2bo$5b2o! honey farm hits block at (4,0) 
+107	6342	213	b2o$o2bo3bo$b2o3b3o! traffic light hits beehive point at (4,1) 
+108	6202	140	2bo$bo3b3o$2o$b2o$2bo! mango+1 (B + blinker) 
+109	6180	111	2ob2o$3bo$3o! 
+110	6161	206	4bo$3o2bo$4bo! thunderbird 
+111	6113	107	3o$4bo$3b3o! R + traffic light 
+112	6060	133	2o$bobobo$4b2o! century predecessor 
+113	6001	759	2bo$bobo$o3bo$b3o2$8b2o$8b2o! honey farm hits block at (6,3) 
+114	5919	134	2bo$bobo$o2bo$ob2o! 
+115	5890	341	b2o$o2bo$b3o3b2o$7b2o! block catalyzes honey farm 
+116	5869	121	3b2o$o2bo$o$o$2b2o! R + beehive 
+117	5602	402	bo3b2o$o3bob2o$o4bo$bo! HF pointy end hits block at (5,1) 
+118	5574	178	bo4bo$obo2b2o$obo$b2o! 
+119	5525	133	bo$3o$3bo$3b2o! R + glider used in bumper 
+120	5481	181	b2o$2obo$o2b2o! 
+121	5422	130	2o4b3o$2o7bo$8bo$6b2o! pi hits block at (0,-6) 
+122	5420	391	3bo$bo3bo$bo3bo$o5bo$bo3bo$bo3bo$3bo! pulsar 
+123	5408	183	6bo$2o4b2o$2o6bo$6b2o$6bo! pi hits block at (0,-5) 
+124	5276	586	obo$o2bo3b2o$2o5b2o! honey farm hits block at (7,0) 
+125	5219	158	o$obo$2ob2o$2bo! R generation 5 + one cell 
+126	5179	194	b2o$o2bo$b2o4bo$6b3o! traffic light hits beehive point at (4,2) 
+127	5167	119	b3o$2obo$bobo! pi+1 octomino 
+128	5154	143	bo$o4bo$3ob2o! F-heptomino 
+129	5154	130	2b2o$o2bo$2obo$2b2o! 
+130	5032	129	2bo$bobo$o3bo$3bo$2o! I-heptomino generation 5 without 3r cell 
+131	5001	73	bo$o2bo$bo2bo$2b2o$3bo! honey farm + loaf 
+132	4997	261	5bo$o3bobo$o3b2o$o3bo!  traffic light hits beehive point at (4,0) 
+133	4958	158	2bo$bobo$2ob2o$obo! angel+1 
+134	4956	143	obo$o2bo$o$bo3bo$2bobo$3bo! lumps of muck predecessor 
+135	4947	195	3bo$3b3o$o$o$o! blinker + beehive 
+136	4927	122	2bo$bobo$o3bo$bob2o$3bo! B + block 
+137	4921	110	2o2bo$o2b2o$bo$bobo! TL edgeshooter minus 1 
+138	4896	257	b2o$o2bo$2obo$2b3o! glider hits blinker 
+139	4843	155	2bo$2obo$bo2bo$2b3o! glider predecessor 
+140	4824	1071	2b2o3b2o$o2bo3b2o$o2bo$obo! E-heptomino 
+141	4818	486	6b3o$2o6bo$2o4bo$7bo! honey farm hits block at (7,1) 
+142	4815	226	b2o$ob2o$obo$bo2$9bo$8b2o! honey farm and block at (6,4) 
+143	4801	113	b2o$2o$2bo2$3b3o! blinker catches up to glider 
+144	4790	234	6bo$o4bobo$2o3bobo$o5bo! traffic light hits beehive edge at (5,0) 
+145	4675	73	3bo$4o$o! Z-hexomino 
+146	4659	374	o$o2bo$o2bo$b3o! H'+1 
+147	4638	114	2b2o$2o2bo$bobo$bo! 
+148	4620	100	bo$o2bob2o$o2bo2bo$bo2b2o! 5-object stamp collection 
+149	4612	231	6bo$7b2o$2o4bo$b2o! traffic light hits beehive edge at (5,1) 
+150	4592	191	3o$o2bo$bo$2b3o! 
+151	4542	84	4bo$b2o2bo$o3bo$2o! 
+152	4529	240	4bobo3$7bo$o4b3o$2o$o! traffic light hits beehive point at (5,1) 
+153	4494	206	6b2o$bo4bo$6bo$3o! traffic light hits beehive edge at (4,2) 
+154	4479	83	bo$obo$o2b2o2$2b3o! C2-offset honey farm 
+155	4471	73	2b3o3$o2b2o$b2o! pi + boat behind 
+156	4439	151	2bo$b2o$o$b2o4b2o$2bo4b2o! pi hits block at (1,-5) 
+157	4345	118	bo$3obo$o3bo! 1046M octomino 
+158	4329	238	o$o$o$4bo$3b3o! traffic light + blinker 
+159	4253	105	4bo$4bo$3bobo2$3o! bakery predecessor + 1 
+160	4238	158	bo$2o2b3o$bo! traffic light + blinker, D2 
+161	4225	126	5bo$5b2o$6bo$3o$2bo!  
+162	4220	227	2o$2o$4b3o$6bo$4b3o! pi hits block at (2,-4) 
+163	4217	181	o$o4bo$o4b2o$5bo! traffic light + blinker 
+164	4208	253	5bo$6b2o$5bo$3o! traffic light + blinker 
+165	4193	149	2b3o$bo2bo$o$bo$2bo! I-heptomino generation 5 without 1c cell 
+166	4163	256	o$2o$o2$3b3o! traffic light + blinker 
+167	4140	432	8bo$5bobobo$5bo2b2o2$2o$2o! honey farm and block at (7,2) 
+168	4130	493	bo$3o3$5b2o$4bo2bo$5b2o! traffic light hits beehive at (4,3) 
+169	4127	266	2bo$2ob2o$2bo$4bo$5bo$6bo$5bo! HF pointy end hits block at (3,3) 
+170	4091	179	b2o$o2bo$b2o$6bobo$6bo2bo$6bobo! traffic light + blinker 
+171	4088	78	4bo$o2bo$ob2o$o! 
+172	4068	239	bo$obo$obo$bo$5bobo$5bo2bo$5bobo! traffic light hits beehive point at (5,2) 
+173	4044	98	3o$o3bo$5bo$2bobo$3bo! 
+174	4035	95	2o$bobo$3obo$4bo! 
+175	4020	188	5b3o$6bo$3o! traffic light + blinker 
+176	3941	212	2bobo$2o3bo$o3bo$3bo! traffic light hits beehive edge at (5,2) 
+177	3926	84	2b2o$o3bo$o4bo$obobo! 
+178	3896	124	bo2bo$2o3b2o$4bo! traffic light hits block early at (4,0) 
+179	3892	231	4b3o$4bo2bo$2o3b2o$2o! HF pointy end hits block at (4,2) 
+180	3864	288	4b2o$2bo2bo$3bobo2$2o$2o! honey farm hits block at (4,4) 
+181	3858	115	2bo$bo$2o2bo$3bo$2ob2o! 
+182	3845	134	3bobo$bo3bo$bo3bo$2obo! 
+183	3823	141	3o$bobo$4bo$bobo$2bo! R generation 7 minus 2k cell; hassled in a p40 
+184	3814	574	o$o2b2o$o2bo$3bo2bo$4b2o! HF pointy end hits block at (5,1) 
+185	3805	289	3o3bo$7b2o$6bo! traffic light + blinker 
+186	3795	189	3bobo2$ob2o$2o$bo! HF pointy end hits block at (4,1) 
+187	3768	100	2o2b2o$o4bo$o2b2o$bo! 
+188	3764	99	2b4o$bo4bo$o4b2o2$bo2bo$3bo! 
+189	3721	138	4bob2o$3b2o3$bobo$o2bo$bobo! traffic light hits beehive point at (3,2) 
+190	3719	363	bo$3o2$6bo$6bo$6bo! traffic light + blinker 
+191	3674	200	bo$o3bo$o2b2o$b4o! 6×1+3×1 nonomino 
+192	3625	149	4b2o$4b2o2$bobo$o2bo$bobo! 
+193	3594	430	7bo$6bo2bo$6bo2bo$7bobo2$2o$2o! honey farm hits block at (7,3) 
+194	3590	101	bo$2o$o4bo$b2o2bo$5bo! loaf + blinker 
+195	3571	88	b2o$3bo$o2bo$ob2o! bi-block predecessor 
+196	3531	254	2bo$2o5bo$2bo4bo$7bo! traffic light + blinker 
+197	3528	120	b3o$o$bo2b2o$3bo! R + glider 
+198	3522	64	b3o$o2bo$4bo$3o! 
+199	3452	100	4bo$4b2o$2bo2bo$3o! wing predecessor 
+200	3433	174	7b2o$7b2o4$b2o$o2bo$b3o! honey farm and block at (6,5) 
+201	3412	74	3b2o$bo2bo$o3bo$b3o! 
+202	3404	107	b3o$3bo$bobo$3o! Multum in parvo 
+203	3398	181	3b3o$5bo$bob2o$2o! 
+204	3390	56	4bo$4b2o$o5bo$bo3bo$bo2bo$3bo! 
+205	3340	135	bo$2o$o2b2o$b3o$2bo! 2G block+loaf+blinker+tub 
+206	3333	1183	6b3o$o4bo2bo$2o3bo2bo$5bobo! L-hexomino 
+207	3327	71	2bo$bobo$o3bo$4bo$b3o! B-heptomino predecessor 
+208	3322	232	3o$bo$6b3o! traffic light hits blinker spaced for traffic stop reaction 
+209	3299	138	2bo$ob2o$3b2o$4b2o! 
+210	3282	85	2b3o$2o2bo$2obo$2bo! 
+211	3277	121	6bo$2bo3b2o$bo$2o$b2o! pi hits block at (2,-5) 
+212	3275	77	5bo$o3b2o$b2obo$bo! traffic light + blinker 
+213	3261	83	4b2o$3bobo$2obo$2bo! C2 two H' 
+214	3230	109	3bo$bo2bo$bo3bo$o4bo$b2o2bo$4bo! phi spark predecessor 
+215	3215	1335	bo$2o$bo5bo$7bo$7bo! original diehard descendant 
+216	3195	48	2obo$ob2o$obo! 
+217	3183	141	o5bo$obo3bo$o5bo! traffic light + blinker, D2 
+218	3178	57	7bo$8b2o$b2o4bo$2o5bo$bo$2bo! pi + beehive 
+219	3153	247	bo$3o4b2o$3o5b2o! traffic light hits beehive edge at (6,0) 
+220	3139	91	2b2o$b2o$2o$o! moth 
+221	3105	178	4bo$2b4o$bo4bo$o3b2o$bo2bo! phi spark hits block 
+222	3071	58	2o$o2b2o$bo2bo$bo2bo! fleet + block 
+223	3068	126	bo$bob2o$o2bo$b2o! R generation 5 + one cell 
+224	3066	152	obo$o4bo$ob2obo$5bo! honey farm hits block at (4,1) 
+225	3043	67	bo$o$3bo$2ob2o$3bo! 5+2+3 decomino 
+226	3038	237	o2bo$o3bo$o4bo$5bo$4b2o! long U-turner (B + blinker) 
+227	3025	59	3o$4bo$bo2bo$3b2o! 
+228	3014	151	2o$2o4b3o$8bo$6b3o! pi hits block at (1,-6) 
+229	2962	157	bo$2o3bo$4bobo$4bobo$4b2o! honey farm hits block at (3,2) 
+230	2959	399	8b2o$7bobo$2o5bobo$2o6bo! honey farm hits block at (8,1) 
+231	2958	78	2b2o$3b2o$bobo$3o$bo! C2 diehard 
+232	2943	76	2b3o$bo2bo$2ob2o$bo! two-glider octomino + 1 
+233	2937	87	2bobo$bo2bo$o3bo$bobo$2bo! bakery minus 3r cell 
+234	2915	81	2b2o$bo3bo$o4bo$bo3bo! century + beehive 
+235	2889	143	7b3o$6bo2bo$7b2o2$2o$2o! honey farm hits block at (7,4) 
+236	2881	88	4bo$2b3o$bo2bo$o$b3o! block catalyzes wing 
+237	2873	63	2b3o$2bo2bo$bo2$2o! domino behind B-heptomino 
+238	2871	116	2bobo$bo3bo$o3bo$3o! angel + blinker 
+239	2860	84	bo$3o$obo2$5b2o$5bo! pi hits block at (4,-3) 
+240	2851	438	bo$2o6b2o$obo5b2o$bo! honey farm hits block at (8,0) 
+241	2850	86	2b3o$bo2bo$o$bobo$3bo! 
+242	2840	121	2o$2o$4bo$3b3o! 
+243	2832	66	b3o$o2b2o$o2bo$b2o! teardrop+1 
+244	2829	91	b5o$o5bo$bo3bo$2b3o! D2 spark (long interchange) 
+245	2815	187	5b2o$2o2bo2bo$2o2b3o! HF pointy end hits block at (4,0) 
+246	2809	47	b3o$4bo$o3bo$3b2o!  
+247	2806	244	4bo$bo3bo$o3bo$o2bo$3o! 
+248	2775	147	3b3o5$4ob4o$4bo! wiggler 
+249	2772	86	o3bo$o2b2o$o2bo! blinker + beehive 
+250	2770	94	5bo$b2o3bo$o5bo$o5bo$bo3bo$4bo! R hits block at (5,0) 
+251	2760	67	2obo$bo2bo$2b3o!  
+252	2745	215	bo$obo5bo$obo4bobo$bo$7b3o! traffic light hits beehive edge at (6,1) 
+253	2744	122	bo$obo3bo$obo3bo$bo3bobo$6bo$6bo! traffic light hits beehive edge at (4,1) 
+254	2744	97	6bo$3o3bo$5bobo! traffic light + blinker, D2 
+255	2735	100	o$2obo$2b2o$3bo! stairstep generation 3 minus one 4i cell 
+256	2732	101	4bo$4b2o$bo3bo$o2b2o$bo! 
+257	2715	76	2b2o$3b2o$2b2o$obo! 
+258	2696	102	bo$o3bo$bob2o$2b2o! 
+259	2694	103	b3o5bo$o2bo5bo$o8bo$bo! angel V spark hits block 
+260	2675	91	3bo$bo2bo$o4bo$o4bo$bob3o! pi hits block at (0,-2), used in p174 
+261	2662	49	o$o$bo2bo$2b3o$3bo! century + line of 6 spark 
+262	2654	55	bo$o2b2o$bo3bo$bo3bo$2bobo$3bo! 
+263	2650	104	2o$2o2b2o$3bo2bo$4bobo$5bo! block + loaf 
+264	2628	102	b3o$o2bo$b2o3$7b2o$7b2o! honey farm and block at (5,5) 
+265	2627	59	b3o$4bo$o3bo$obo2bo! R + eventual block 
+266	2625	68	bo$2o$b2o$2bo2b3o! century + blinker 
+267	2613	30	b3o$o2b2o$2o$4bo! angel + interchange 
+268	2601	64	b2o$o2bo$bo$b2ob2o! procrastinator predecessor 
+269	2596	72	o$obo$2obo$3bo! mango+1 
+270	2594	102	2b3o$bo3bo$o5bo$bo3bo$2bo! D4 honey farm minus two cells 
+271	2593	74	3b2o$bo2bo$o3bo$o2bo$b2o! TL + blinker; pi generation 5 minus 2e cell 
+272	2564	69	2bo$b2obo$o2bo$b2o$bo! beehive edgeshooter 
+273	2561	94	b3o$4bo$2o3bo$4bo$b3o!  
+274	2551	76	5b2o$4bo2bo$7bo$2o4b2o$2o! century + block 
+275	2550	70	2bo$bob2o$2o$2bo$2bo2bo$4bo! 
+276	2548	42	3b3o$bo2bo$o$b3o! 4x2 rectangle siamese X-pentomino 
+277	2512	176	2o$o2b2o$o4bo$bo3bo$2b3o! D4 honey farm minus 3 cells 
+278	2505	419	2bo$o2bo$o2bo$obo$9b2o$9b2o! honey farm hits block at (8,2) 
+279	2502	135	b2o$2ob2o$3b2o$4bo! octomino II descendant without beehive 
+280	2501	155	5bo$5b2o$7bo$5b2o$5bo$2o$2o! pi hits block at (3,-4) 
+281	2500	64	bo$2obo$bo$2bobo$3bo! queen bee + tub 
+282	2493	123	2o3bobo$2o3bobo$5b3o! pi hits block at (5,0) 
+283	2467	67	2b2ob2o$bo4bo$o4bo$bo! glider hits long boat from side 
+284	2455	374	o11bo$bo9bo$b2o7b2o$2o9b2o! D4 pi collision (hit honey farm) 
+285	2448	191	2bo$2bo$o7bo$o6bobo$o9bo$9bo$7b2o! loaf + phi spark (glider hits loaf) 
+286	2447	225	b3o$obo$o6b3o! honey farm hits blinker 
+287	2436	118	3o$obo$obo$6b2o$6b2o! pi hits block at (5,-2) 
+288	2425	78	b2o$o$bobo$2bob3o! honey farm + TL predecessor 
+289	2409	74	4b2o$3obobo$6bo! boat + blinker 
+290	2409	112	2o2bobo$bo3b2o$6bo! R + block 
+291	2408	76	3b2o$bo2bo$o4bo$bob2o! beehive + phi spark 
+292	2404	62	b2o$o2b2o$o$b3o! R generation 4 + 1 
+293	2397	67	2bobo$bo3bo$o3bo$o$2o! R + block 
+294	2376	42	bobo$o$bo2bo$2bob2o$3b2o! T-tetromino bridge line of three 
+295	2371	104	5bo$2o4bo$2o3b3o! R + block 
+296	2366	62	2o$bo$2b3o! Thompson's methuselah 
+297	2363	201	7b2o$bobo3b2o$o3bo$bobo$2bo! pi hits block at (5,-1) 
+298	2359	54	3b2o$5bo$2o$2ob2o$2bo! 
+299	2349	222	6bo$6bo$2bo3bo$bobo$o3bo$b3o! honey farm + blinker 
+300	2332	64	2o$8b3o$bo$2b3o$2b3o! 
+301	2330	92	b2o$obo$2o$bo$6bo$5b2o! lumps of muck + block 
+302	2323	110	8b2o$2bo5b2o$bobo$o$bobo$2bo! pi hits block at (2,-6) 
+303	2311	72	o$2obo$o2bo$bobo! 
+304	2308	233	b3o$8bo$o2bo4bo$b2o5bo! honey farm + blinker 
+305	2295	240	3o$o2bo2b3o$b2o! honey farm + blinker 
+306	2289	49	b3o$bo$o$b3o! pi-heptomino predecessor 
+307	2278	91	2bo$bobo$o3bo$4b2o$b2ob2o$3bo! 
+308	2273	91	8bo$7bobo$10bo$2o5bobo$2o6bo! pi hits block at (1,-7) 
+309	2273	62	4bo$4b2o$obo$2o$bo! block catches up to glider 
+310	2273	79	o2bo$o3bo$o3bo$2b3o! 
+311	2268	59	2o$4bo$o2b2o$b3o! 
+312	2250	51	2b3o$bo2bo$o2bo$bobo! 
+313	2244	70	3bo$bo3bo$2o$bo$2b3o! 
+314	2241	61	4bo$2b2obo$bo2bo$o$bobo$2bo! 
+315	2233	58	2o3bo$2o4b2o$2bo2bo! traffic light + boat 
+316	2232	59	2b3o$2b2o$2bo$2o$o! trans-loaf with leg 
+317	2231	85	2b2o$3b2o$obo$o$o! century generation 1 + one cell 
+318	2222	92	2bo3b2o$b2o3b2o$2o$b2o! B + block 
+319	2221	54	b3o$o5bo$2obo3bo$7bo$6bo! octomino + block 
+320	2218	54	6bo$2o2b3o$2o3bo! R + block 
+321	2215	51	3bo$2bobo$obo2bo$bo2bo$b3o! pi + boat behind 
+322	2212	78	2b2o$2o2bo$2o$2b3o! long R generation 5 
+323	2211	55	o$o$o2b2o$4b2o$3b2o! pi + blinker 
+324	2203	73	2o$2o$4bobo$4bobo$4b3o! pi hits block at (4,-2) 
+325	2187	145	3o$o7b2o$3o5b2o! pi hits block at (0,-6) 
+326	2187	111	b2o$2o$b2o2$6b2o$6b2o! pi hits block at (3,-5) 
+327	2180	175	2o$2o2$5bobo$5bobo$5b3o! pi hits block at (5,-3) 
+328	2170	49	4bobo$3bo2bo$2obo$3b2o! 
+329	2169	288	3o3$5b3o$4bo2bo$5b2o! honey farm + blinker 
+330	2163	112	6b2o$6b2o4$2ob2o$bobo$2bo! pi hits block at (4,-4) 
+331	2160	46	2bo$2obo$5bo$5bo$2bo2bo$3b2o! 
+332	2159	32	3bo$2b2o$bo2bo$o2bo$bobo! 
+333	2158	51	3o$3o$4b2o$5bo! 
+334	2146	89	3b3o$2bo$bo3bo$o3bo$o$3o! pi tie boat 
+335	2143	103	7bo$6b3o$6bo$6bo3$b3o$2o$bo! moth descendant 
+336	2141	52	2bob2o$bo3bo$o$bobo$2bo! object hassled in Beluchenko's p40 
+337	2141	82	4b2o$2b2o2bo$6bo$o3b2o$obo! block + pond 
+338	2138	52	2b3o$2o2bo$b3o! handshake+1 
+339	2138	125	2b3o$o2bo$o2bo$b3o! 
+340	2136	255	6b3o2$bobo$o2bo$2b2o! honey farm + blinker 
+341	2134	345	7bo$6bobo$b2o3bo2bo$2o7bo$bo! R-turner without first blinker 
+342	2133	82	b2o$2bo$o2bo$3o! stairstep generation 3 minus 3q cell 
+343	2131	260	o$o$o3b2o$bo4bo$2bo3bo$3b3o! B + dot 
+344	2128	64	bo4bo$o5bo$bo4bo$2b3o! predecessor of seven blinkers 
+345	2115	53	b3o$bobo$2obo$bo! 
+346	2112	143	2o$2o3$7b2o$6bo2bo$7b3o! honey farm and block at (7,5) 
+347	2106	42	3b3o$2o$2obobo$4bo! beehive + century 
+348	2103	113	2o$o4bo$4bobo$4b2o$4bo! block + angel 
+349	2100	75	bo$o5bo$o4bobo$bo3bobo$5b2o! honey farm hits block at (4,1) 
+350	2097	84	2bo$b3o$o3bo$bo$5bo$5b2o! pi hits block at (3,-3) 
+351	2097	274	4b3o$3bo2bo$4b3o$o$o$o! honey farm + blinker 
+352	2085	25	3bo$o5bo$o5bo$o5bo$2b3o! long^3 table 
+353	2073	43	obo$o2bo$3bo$4bo$2b2o! 
+354	2049	54	4b2o$o3bo$o2bo$2o! 
+355	2046	208	2b3o$5bo$o3bo$b3o$bo! lumps of muck + beehive 
+356	2045	113	8bo$7bobo$7bobo$8b2o2$2o$2o! honey farm and block at (8,3) 
+357	2043	22	b3o$o3bo$bo$bobo! offset LOM + 1 
+358	2039	75	bo$o2b2o$bo2bo$2b3o! wing generation 2 minus one cell 
+359	2036	58	b2o$o2b2o$3b2o$2ob2o! 
+360	2032	286	3o$6bo$6b2o$5bobo$6bo! honey farm + blinker 
+361	2031	64	3b3o$5bo$5bo$4bo$3bo$3o! pi bridge loaf 
+362	2030	70	2b3o$2bobo$o3bo$o2bo$o2bo! 
+363	2029	64	4bo$2o3bo$o3bo$b3o! century siamese moth 
+364	2026	62	3o$4b2o$bo3bo$2b3o! century generation 4 minus 2a cell at back 
+365	2021	120	bo$2o4b3o$bo! traffic light + blinker, D2 
+366	2013	61	bo$3o2$4b3o$5bo$4bo! long bookend predecessor 
+367	2008	59	3b2o$2bob2o$o3bo$bobo$2bo! honey farm + loaf 
+368	2008	84	4bo$4b2o$2bo3bo$3o! pi + blinker 
+369	2008	109	bo$obo3b2o$obo3b2o$b2o! block catalyzes honey farm at (4,0) 
+370	1996	105	bo$ob2o$3b2o$2o2bo$2b2o! 
+371	1993	62	3o$bob2o$bo3bo$2bobo$3bo! 
+372	1992	48	2o$2obo2$2b3o! 
+373	1981	45	3bo$obo2bo$b2o3bo$3bobo! B + block 
+374	1965	36	3o$4b2o$4b2o$5bo! honey farm edgeshooter 
+375	1958	56	b2o$o3bo$bo3bo$2b3o! long mango - 1 
+376	1950	60	bo$o3bo$o3bo$o4bo$bo3bo$4bo! LOM + boat, used in p156 HF shuttle 
+377	1950	65	o4b2o$o4bo$o$b2o! R + block 
+378	1916	372	7bo$7b3o$bo$obo4bobo$2o6bo! pi + boat 
+379	1911	41	2obo$ob2o$obo$bo! 
+380	1909	58	2bobo$o3b2o$o3bo$obo! 
+381	1891	47	2b3o$o$o3bo$b3o! 
+382	1881	54	3b2o$2o3bo$o3bo$b3o! long bun + block 
+383	1879	75	b3o$o4bo$o4bo$5bo! bun with tail (failed fishhook catalysis) 
+384	1875	65	2b2o2bo$2obo2bo$2bo3bo! loaf + blinker 
+385	1866	172	4b2o$4b2o$bo4bo$o4bo$bo3bo$2b2o! 
+386	1861	51	2o2bo$o2b2o$bobo! 
+387	1857	63	6bo$bo3b2o$3o$o! R + block 
+388	1857	80	2b3o$4bo$o2bo$3o! 
+389	1853	108	bo4b2o$o5b2o$o$o2bo$b2o! LOM + block 
+390	1850	42	o4b2o$bo4bo$bo2b2o$3b2o! 
+391	1850	114	2b2o$bo3bo$o4b2o$bo3bob2o$6bo! Iwona active region + line of 6 
+392	1848	256	2b2o$bob2o$2o3$6b3o! honey farm + blinker 
+393	1844	38	5bo$5bo$bo3bo$o3bo$3bo$3o! loaf at claw 
+394	1842	42	2bo$b2o$2o2bo$b2o! offset fleet 
+395	1834	77	2o$2ob3o$5bo! 
+396	1827	136	bo$obob2o$obo$bob3o! 
+397	1824	98	6bo$4b2o$2o2b2o$o2b2o! 
+398	1824	81	b2o$2o$5bo$4b2o$4bo! 
+399	1817	18	2ob2o$o4bo$bo3bo$2b2o! 
+400	1817	58	o$2o4bo$4bobo$4b3o! R + block 
+401	1816	47	bo$o3bo$obob2o$b2obo! century + block 
+402	1815	262	6b2o$6bobo$7bo2$6b2o$3o! honey farm + blinker 
+403	1812	79	2b2o$bo2b2o$o$bo4bo$2b2obo$4bo! 
+404	1807	111	7b2o$7b2o2$3o$o$3o! pi hits block at (3,-6) 
+405	1804	84	2b3o$bo3bo$5bo$o3bo$2o! offset honeycombinator without central cell 
+406	1799	138	6bo$2o3bobo$2o2b2ob2o! block catalyzes pi at (5,1) 
+407	1798	107	2b3o$2o2$o4bo$bo$2b2o! century + block 
+408	1793	79	b3o$o3bo$bo3bo$5bo$4b2o! D2_x two barges 
+409	1792	156	2b3o$bo3bo$o5bo$bobobo$4bo! LOM + pulsar 
+410	1789	57	bo4bo$2o3bobo$5b2o$5bo! angel + block 
+411	1785	70	5bo$bo3b2o$2o$obo$b2o! LOM + block 
+412	1774	56	3o$3bo$4bo$b3o! 
+413	1770	39	5b3o$2bo$b2o$o$b2o$2bo! pi + blinker 
+414	1766	37	2b2o$2obo$o2bo$b2o! wing+1 
+415	1765	52	4bo$3bobo$2o4bo$3bobo$4bo! D2 dot behind pi 
+416	1764	118	2o$2o$7b3o$9bo$7b3o! pi hits block at (2,-7) 
+417	1761	89	2b3o$o3bo$o2b2o$2bo! domino behind angel 
+418	1761	58	2b3o$bo$o$2o$bo! 
+419	1759	64	2obo$o3bo$o4bo$b2obo$3bo! 
+420	1756	315	9bo$9bo$7b3o$3o3b2o! honey farm + blinker 
+421	1752	369	9b2o$3o6b2o$o$2bo$bo! honey farm hits block at (9,0) 
+422	1750	76	bo$bo$obo$o2b2o$o3bo! D4 honey farm with cell in center 
+423	1746	96	5b2o$5b2o$2bo$3o$bo! five blocks + F-heptomino 
+424	1745	121	2o$2o3$8bobo$7bo2bo$7bo2bo$8bo! honey farm and block at (8,4) 
+425	1741	62	5b3o$2o4bo$o4bo! R + block 
+426	1741	46	2bo$o2b2o$2o$o3bo$b3o! 
+427	1734	40	3b2o2$2b2o$b2o$2o! 188-generation beehive predecessor 
+428	1730	28	2o$3b2o$o3bo$b3o! 
+429	1729	47	3b2o$4b2o$3bo$bo$2o! block catches up to glider 
+430	1717	42	bobo$bo2bo$o2bo$bo$b3o! century + P-spark 
+431	1717	48	2b4o$bo3bo$o4bo$bo2bo$2bo! MWSS without back cell 
+432	1716	115	4b2o$3b2o6bo$4b2o5bo$11bo2$o$o$o! 
+433	1716	45	2o2$bo3bo$2b3o$2b3o! 
+434	1716	38	3b3o$3bobo$2obobo$2bo$b2o! big S with missing cell 
+435	1715	40	2o$2o3bo$4b2o$5b2o! R + block 
+436	1709	44	2o$o2bo$2b2obo$4bo! carrier bridge duoplet 
+437	1703	70	obo$o3bo$5bo$2b2o2bo$4b2o! honey farm + domino 
+438	1701	137	6bo$5bobo$2o6bo$o3bo2bo$5b2o! LOM + block 
+439	1701	55	b3o$o3bo$o4bo$bo2bo$3bo! 5+4+3 dodecomino 
+440	1699	56	3b2o$2bob2o$bo2bo$o$2bo! century generation 5 minus one 3a cell 
+441	1692	221	6bo$5bobo$5bobo$6b2o2$3o! honey farm + blinker 
+442	1691	109	obo$ob2o$o3bo$3b2o! seven blinkers + one cell 
+443	1688	28	3o$3bo$bo2bo$4bo$3b2o! D2 different-generation pi-heptominoes 
+444	1688	59	5b2o$2obo2bo$bo4bo$5bo! pi + beehive 
+445	1682	52	bo$3o2b2o$o4b2o! R + block 
+446	1681	63	2bo$b2o$o5bo$2o3b2o! wing + block 
+447	1681	295	2bo5bobo$2o5bo2bo$2bo5bobo! late generation of thunderbird 
+448	1680	110	2bo$bob2o$2o3bo$bo4bo$5bo$bo$2bo! twin bees shuttle spark - 1 
+449	1678	48	5b2o$obo2b2o$obo$3o! pi hits block at (4,-1) 
+450	1663	267	2o8b2o$2o7bo2bo$8bob2o! honey farm hits block at (9, 1) 
+451	1660	56	2o$ob2o2$4bo$b3o! century + block 
+452	1657	109	2bo$b2o$o$b2o$2bo2$7b2o$7b2o! pi hits block at (4,-5) 
+453	1655	37	bo$3o$3bo$2b3o! two T-tetrominoes at (2,2) offset 
+454	1651	65	bo$3o$o$6b2o$6b2o! R + block 
+455	1646	84	7bo$8bo$2o6bo$2o3bo2bo$6b2o! LOM + block 
+456	1644	55	b3o$bo2bo$obo2bo$3b2o$3bo! boat + blinker 
+457	1640	291	o3bo2bo$o3bo2bo$o3bo3bo$7bo! honey farm + blinker, D2 
+458	1640	29	2b2o$2obo$3b2o$3o! 
+459	1638	43	2o$o3bo$o3bo$bo2bo$2bo! 
+460	1631	56	3ob2o$5b2o$6bo! loaf + blinker 
+461	1620	34	3o2$o2b2o$b4o! 
+462	1615	44	2bo$2obo$o2b2o$o! four rectangular blocks 
+463	1608	55	2bo$b2o$2o4b2o$b2o4bo! B + block 
+464	1607	139	6bo$5bobo$4b2ob2o4$2o$2o! pi hits block at (5,-4) 
+465	1602	170	obo$o2bo4bo$o2b2o3bo$2b2o! 
+466	1599	28	o$ob3o$5bo$2b3o! pi heptaplet with domino behind 
+467	1598	23	o2bobo$bo3bo$bo3bo$3bo! beehive + blinker 
+468	1594	279	2b3o$bo3bo$3b2o$o2bo$3o! later generation of glider hits blinker 
+469	1593	73	b3o2$o2bo3b2o$3o4b2o! LOM + block 
+470	1592	232	3o$o2bo$2o2bo$2b3o! wing generation 2 + 1 cell 
+471	1590	35	2bo2bo$o4bo$bo3bo$2b2o! 
+472	1585	116	2bo4b2o$bobo3b2o$2ob2o! pi hits block at (5,1) 
+473	1584	38	b2o$2o4b3o$b2o! pi hits blinker behind, D2 
+474	1582	112	2bo$b2o$2o2bo3$4bo$4bo5b2o$10b2o! honey farm and block at (8,5) 
+475	1582	47	bo$ob2o$2bo$2bob2o$3bo! 
+476	1581	40	6bo$6b2o$2o6bo$2o4b2o$5b2o! 
+477	1577	222	5b3o$bo$obo$2o$bo! honey farm hits blinker 
+478	1577	26	2bo2b2o$bobo$o2bo$bobo$2bo! honey farm + dot behind, eventually D2 
+479	1572	45	bo$2o4b2o$bo3b2o! early traffic light + beehive 
+480	1564	33	2o$o$4o$bo2bo$3b2o! 
+481	1562	105	bo$ob2o$o2bo$bo$2b3o! 
+482	1559	52	2bo$bobo$o$2b2o$5b2o$5b2o! P-pentomino behind glider 
+483	1546	68	b2o$ob2o$bo5b2o$o6b2o! LOM + block 
+484	1545	101	6b3o$8bo$6b3o3$2o$2o! pi hits block at (4,-6) 
+485	1541	49	5bo$b2o3bo$bo4bo$o2bobo$2o! block catalyzes lumps of muck 
+486	1541	26	2b3o$bo$bo$2o! blinker with tail 
+487	1539	47	b2o$2ob2o2$5bo$4bo$2b2o! L-hexomino generation 6 + one cell 
+488	1534	61	2o$2o4bo$6b2o$5b2o! R + block 
+489	1533	49	b3o$3ob2o$o$4bo! R + block 
+490	1532	34	4bo$2bob2o$2o4bo$6bo$5bo! 
+491	1529	35	o$2o$o3b2o$5b2o! early traffic light + beehive 
+492	1528	18	bo$o$bob2o$3bob2o$2b2o! 
+493	1528	66	2b3o$o4bo$o5bo$o4bo$2b3o! two T-tetrominoes spaced at (3,0) 
+494	1524	58	bo$o4bo$2o4bo$6bo$4bobo$4b2o! century + block 
+495	1523	74	b2o$o2b2o$2o$5bo$3b2o! 
+496	1521	51	4b2o$bob2o2$2o! 3x2 bridge blinker 
+497	1520	25	bo$2obo2$2b3o$3bo! short figure eight minus one 2c cell 
+498	1517	216	5b2o$4bob2o$5bo3$3o! honey farm + blinker 
+499	1517	694	3o$o3b2o$6b2o$bo3b2o! HF destroys beehive (point) at (4,3) 
+500	1512	58	o2bo$o3bo$o4bo$3b3o! early honey farm + blinker (used in p180 oscillator) 
+501	1506	116	2obob2o$o5bo$o4bo$bo2bo$2bo! 5+2+3 decomino 
+502	1503	56	2obobo$o5bo$o4bo$bo! pi + blinker behind, D2 
+503	1498	24	2bo$bobo$o3bo$bo3bo$2b2obo$4bo! 
+504	1498	33	2o3b2o$o3bo2bo$7bo$7bo! century + block 
+505	1496	138	2o$2o4bobo$6bobo$6b3o! pi hits block at (6,-1) 
+506	1494	268	5bo$5b2o$6b2o$5b2o$bo$2o! B + block 
+507	1491	88	3o$obo$obo4$6b2o$6b2o! pi hits block at (5,-5) 
+508	1488	1022	8b2o$7b2o$8bo5$bo$3o$o! late generation of octomino II 
+509	1487	78	o$3o4b2o$bo5b2o! R + block 
+510	1483	102	6bo$5bobo$2o6bo$2o5bo$6bo! B + block 
+511	1478	39	2bobo$bo2bo$bo2bo$3o! century + angel 
+512	1477	54	2b4o$bo3bo$o3b2o$bobo$2bo! 
+513	1474	70	2b3o$bo3bo$o4bo$4b3o2$obo! pond + blinker 
+514	1472	118	bobo$o2bo$o2bo$bo4$9b2o$9b2o! honey farm and block at (7,6) 
+515	1470	32	2b2o$bo2bo$bo3bo$2o2bo$b3o! R predecessor 
+516	1467	63	2obo$o2bo$o3bo$2b2o! LOM + loaf 
+517	1460	1783	b3o$o2bo$bobo$b2o! teardrop cousin 
+518	1456	50	4bo$b2o2bo$o2bobo$2o2b2o! 
+519	1456	78	b3o$o2bo$bo$2o! hook with leg 
+520	1456	188	6b2o$bo4b2o$o$o$o2bo$b2o! LOM + block 
+521	1456	95	8bo3bo$9b2o$9b2o2$2o$2o! honey farm and block at (9,2) 
+522	1456	70	bo$o5b2o$o5b2o$o2bo$b2o! LOM + block 
+523	1450	73	2o$o2b2o$o3bo$b3o! hammerhive + block 
+524	1449	147	7b3o$9bo$7b3o2$2o$2o! block catalyzes pi at (3,-7) 
+525	1449	59	b3o$2o2bo$bob2o! B generation 1 + one cell 
+526	1446	32	2bo$bobo$2o2bo$o3bo$3b2o! B + loaf 
+527	1446	8794	bo$3o$o3bo$2bo2bo$2bo3bo$5bo! B predecessor 
+528	1446	70	4b3o$4bo2bo2$2o3b3o$2o! LOM + block 
+529	1445	250	b2o$obo$2bo5b3o$2bo$3bo! honey farm + blinker 
+530	1442	67	2o2bo$o2b2o$bo2bo$b3o! ej9p 
+531	1437	50	2bo$b2o$2o$bob2o2$5bo! B + beehive 
+532	1436	56	8b2obo$8bobo$8bo$2o$2o! teardrop + block 
+533	1434	28	2bo$o3bo$o4bo$o4bo$3b3o! LWSS with extra back cell 
+534	1434	55	o3bo$o3b2o$o3bo! honey factory (line of eight) 
+535	1425	62	3o$o2bo$o4bo$b2o2bo$3b2o! pi predecessor 
+536	1421	29	b3o$o$b3o$6bo$5b2o! pi hits block at (2,-3) (glider hits pond) 
+537	1418	62	5bo$4b3o$6bo2$2o$2o! R + block 
+538	1418	112	5b2o$5b2o$bo$o$o$o2bo$b2o! LOM + block 
+539	1416	88	o$b2o$3b2o$4bo$b3o! 
+540	1414	53	7bo$6b3o$2o6bo$2o! R + block 
+541	1412	75	2o$o2b2o$o3bo$bobo$2bo! I-heptomino generation 5 + one cell 
+542	1411	145	2bo$bobo$o3bo3b2o$bobo4b2o! pi hits block at (6,0) 
+543	1401	217	6bo$5bobo$6b2o$6bo3$3o! honey farm + blinker 
+544	1401	81	bo4bo$bo4bo$o5bo$bo2bo$bo2bo! beehive + loaf 
+545	1400	30	2b3o2$3bo$o$2o! C2-symmetric B-heptominoes 
+546	1399	96	4bo$4bo$o3bo$2o$b2o! loaf + blinker 
+547	1399	126	2o$o3bo$bobo$bob4o! pi hits block at (3,3) 
+548	1395	45	3b2o$b2ob2o2$o$b2o! offset lumps of muck cousin 
+549	1395	136	4b2o$4bo2$2o3bo$2o3bo$5bo! early honey farm hits block 
+550	1394	37	6bo$obo3bo$o5bo2$b3o! LOM + blinker 
+551	1392	66	2b3o$2o$2o$2o$2b2o! 
+552	1390	34	b2o$o2bo$o$4o! R generation 4 + one cell 
+553	1384	21	bo$2b2o$o2bo$bo2bo$bobo! R + beehive 
+554	1384	168	bo$o$o3b2o$bo4bo$2bo3bo$3b3o! honey farm + blinker 
+555	1383	22	bo$3bo$2o2bo$2ob2o! 
+556	1381	79	b2o3b2o$2o4b2o$bo! R + block 
+557	1374	52	b3o$bo2bo$o3bo$2b2o! teardrop generation 2 + one B3j inner cell 
+558	1372	50	bo2bo$bo3bo$2o3bo$2bobo! 
+559	1371	224	6bo$5bobo$5bobo$6b2o3$3o! honey farm + blinker 
+560	1369	102	3o$obo$obo$7b2o$7b2o! pi hits block at (6,-2) 
+561	1368	32	o$o$o4b3o$bo2bo$2bo$4b3o! R bridge block 
+562	1363	43	4b2o$4b2o2$bo$3o$o! R + block 
+563	1359	38	ob2o$o3bo$o2b2o$2b2o! beehive siamese 3x2 
+564	1355	36	bo$o$o3bo$b4o$4bo! 
+565	1355	48	o2bobo$3o2bo$o2bobo! 
+566	1350	60	bo$ob2o$o3bo$5bo$2bobo! B + blinker 
+567	1345	200	2o6b3o$2o8bo$8b3o! pi hits block at (0,-8) 
+568	1343	32	5bo$bo4bo$o4bo$bo3bo$2b2o! 
+569	1340	81	2o$2o$4b3o2$3bo2bo$3b3o! LOM + block 
+570	1338	75	3b3o2$6bo$6b2o2$4o4b2o! HF hits block at (4,1) 
+571	1338	77	b2o$2o$bo$5b2o$5b2o! R + block 
+572	1334	42	2b2obo$2o3bo$2obobo! 
+573	1334	26	2bo3bo$2o4bo$2bo3b2o! early TL hits beehive edge at (4,1) 
+574	1333	208	6b3o$6bo2$bo$ob2o$b2o! HF turns beehive (point) into boat at (5,3) 
+575	1332	79	2o$2o$5b3o2$4bo2bo$4b3o! LOM + block 
+576	1328	227	2o$o3bo$o3bo$6bo$4b3o$5bo! HF turns beehive (point) into boat at (5,2) 
+577	1324	64	2o$2o4bo$5b3o$7bo! R + block 
+578	1322	46	2bo$bobo$o3bo$bobo$3o! traffic light 3x3 plus domino 
+579	1321	197	3o$o2bo$b2o4b3o! honey farm + blinker 
+580	1318	84	2o$2o$6bo$5b2o$6b2o! R + block 
+581	1315	37	2bobobo$2obo2bo$b2o3bo! 
+582	1312	222	6b3o$o4bo2bo$o5b2o$o! honey farm + blinker 
+583	1308	29	4bo$bo3bo$bo2bo$o2bo$2o! 
+584	1307	56	b2o4b2o$o2bo3b2o$o$o$bo! LOM + block 
+585	1303	75	6b2o$6b2o$bo$2o$b2o! R + block 
+586	1302	33	2o3bo$bobo2bo$5b2o! 
+587	1301	23	3o$3bo$o3bo$5bo$3b2o! 
+588	1300	66	2b3o$bo3bo$o3b2o$o$2o! 
+589	1299	52	4b2o$o4bo$o4bo$o3bo$2bo! pi + beehive 
+590	1297	51	3o$o2bo2$b3o2b2o$6b2o! LOM + block 
+591	1294	48	4b3o2$2o2bo2bo$2o3b3o! LOM + block 
+592	1293	65	b3o2$o2bo$3o$7b2o$7b2o! LOM deletes block 
+593	1292	83	bo$2o5b2o$b2o4b2o! R + block 
+594	1285	45	bo$3o$o4bo$5bo$2bo2bo! R + blinker 
+595	1284	74	2o$2ob2o$o3bo$b3o! house siamese block 
+596	1283	49	4o$o3bo$bo3bo$bo2bo$2b2o! TL+G predecessor 
+597	1282	42	bo5b2o$o6b2o$o$o2bo$b2o! LOM + block 
+598	1281	21	2b2o$bo2b2o$o3b2o$bo$2b3o! 
+599	1279	81	5b2o$5b2o2$bobo$o2bo$o2bo$2o! LOM + block 
+600	1275	26	o3bo$o3bo$o2bobo! early TL + blinker, D2 
+601	1269	33	3b3o$2bo2bo$bo2b2o$o$bobo! R-turner + loaf 
+602	1267	470	o3b3o$2o2b2o$bo2bo$2bo! long bookend 
+603	1266	102	2bo$2o$bo2bo4bo$2b2o4bobo$8b2o! LOM + boat 
+604	1265	70	b2o$o2bo$o2b2obo$b2o3bo$6bo! pond + blinker 
+605	1264	40	4bo$4b2o$5b2o2$o$2o$o! traffic light + loaf 
+606	1261	48	6bo$2bo2bobo$2o4b2o$2bo! traffic light + boat 
+607	1261	31	2o$o$o3bo$bo2bo$3b2o! 
+608	1259	55	b3o$o4bo$o4bo$b3obo! twenty blinkers 
+609	1258	99	b3o3b2o$7b2o$o2bo$3o! LOM + block 
+610	1255	29	4b2o$obo2bo$o4bo$o3bo$2bo! pi + traffic light 
+611	1254	228	3o$2bo$5bo$4bob2o$5b2o! HF turns beehive (point) into boat at (4,3) 
+612	1252	30	6b2o$7b2o$3o3b2o! pi + blinker behind 
+613	1251	63	7b2o$7b2o$2b2o$o2bo$o2bo$obo! LOM + block 
+614	1249	88	b2o$o2bo$3b2o$2bo2$7bo$7b2o! LOM + block 
+615	1246	110	o$o2b2o$o4bo$3bobo$3b2o! bun + blinker 
+616	1246	37	b3o$3bo$2obo$bo! unnamed D2_x 
+617	1243	95	5b2o$5b2o2$b3o$o2bo2$3o! LOM + block 
+618	1240	27	4bo$2obobo$2o3b2o! 
+619	1239	37	2o2$bob2o$bo$2bo2bo$3b3o! fleet + traffic light 
+620	1237	61	b2o$o3bo$2o2bo$bo2bo! 
+621	1235	90	7b2o$7b2o4$3o$o$3o! pi hits block at (5,-6) 
+622	1234	63	2o$2o$6bo$7bo$7bo$4bo2bo$5b2o! LOM + block 
+623	1230	94	bo2bo$bo2bo$o3bo$obo$bo! 
+624	1229	214	3b2o$3bo2bo$3bo2bo$4bobo$2o$2o! LOM + block 
+625	1229	12730	2o$2o5bo$6b3o$6bo! R deletes block 
+626	1228	45	3b2o2b2o$o3bo2b2o$2b2o$2bo! R-turner predecessor 
+627	1228	58	3b3o$o$2o$b2o! W-pentomino + blinker 
+628	1228	47	3obo$3bob2o$4bo! very long mango minus one outer S2i cell 
+629	1226	98	12b2o$bo10b2o$o2bo$o2bo$bobo! honey farm and block at (10,2) 
+630	1223	42	6b2o$2bo4b2o$3o4bo$6bo! pi + beehive 
+631	1223	44	o$b2o$o3b2o$b3o! 
+632	1222	41	b2o$2o$b2o$5b3o! pi + blinker 
+633	1221	58	2o$obo$obo$bo$9b2o$9b2o! honey farm and block at (9,3) 
+634	1219	66	7b2o$7b2o2$bo$3o$o! R + block 
+635	1218	39	3b3o$2o3bo$o4bo$bo2bo! B + block 
+636	1217	70	2o$2o2$6bo$5bobo$7bo$4b3o! LOM + block 
+637	1214	23	o$ob2o$o3bo$2bo2bo$4bo! 3c/7 wave trans-siamese 3x2 rectangle 
+638	1212	102	2o$2o3$5b2ob2o$6bobo$7bo! pi hits block at (6,-3) 
+639	1208	46	6bo$6b2o$2o3b2o$2o! R + block 
+640	1208	59	b3o2$o2bo$3o3b2o$6b2o! LOM + block 
+641	1207	32	2b3o$bo3bo$o3b2o$bo2b2o! R predecessor 
+642	1203	44	14bo$14bobo$14b3o$2o14bo$2o! Herschel with block (3,1) farther behind than usual 
+643	1202	67	2o6bo$2o4b3o$7bo! sacrificial block turns R into B 
+644	1199	30	5bo$2b2obo$bo$3o! angel siamese tail 
+645	1198	37	4b2o$bo3bo$o4bo$o2bo$3o! glider tries to escape fleet 
+646	1198	85	o$o$o3b2o$3bo2bo$3b3o$4bo! honey farm + blinker 
+647	1197	22	4bo$bo3bo$2o3bo$bob2o! 
+648	1196	63	5b3o$4bo3bo$8bo$7bo$2o$2o! LOM + block 
+649	1196	16	obo$2bo$3bo$b3o! unnamed nonomino 
+650	1196	79	o$o$2o3b2o$bo4bo$bo! sacrificial block turns LOM into pi+loaf 
+651	1193	111	3o3b2o$5bo2bo$5b3o! early honey farm + blinker 
+652	1193	51	3b3o$2b2ob2o$2b2o2$2o! 
+653	1193	19	7b2o$3o5b2o$7b2o$7bo! B + blinker 
+654	1192	66	6b2o$2o5b2o$2o5bo! R + block 
+655	1190	123	3o4b2o$obo4b2o$obo! pi hits block at (6,1) 
+656	1188	198	7bo$7bo$7bo2$2o$o2bo$obo! honey farm + blinker 
+657	1188	64	4bo$bo3bo$o5bo$o5bo$bo3b2o! B + block 
+658	1184	87	5b3o$7bo$5bobo$2o3b2o$2o! B + block -> traffic light 
+659	1183	47	2o2bo$b2ob2o$2b3o! stairstep siamese R decomino 
+660	1183	47	bo$bo$o$b2obo$b2ob2o! trans-block on handshake 
+661	1183	266	b2o$2obo$2bo2$6b3o$6bo! HF turns beehive (point) into boat at (4,4) 
+662	1183	149	8b3o$10bo$2o6b3o$2o! pi hits block at (1,-8) 
+663	1182	35	4bo$5bo$b2o3bo$o2bo2bo$5b2o! B + block 
+664	1182	24	2b3o$bo$2o$b3o! 
+665	1182	85	3o2b2o$2bo2b2o$3o! pi hits block at (0,4) 
+666	1180	68	3b2o$2bo2bo$bo3bo$o3bo$bo! handshake at block 
+667	1179	36	b2o2bo$b2o3bo$o2bobo! D2 beehive at blinker 
+668	1178	18	b3o$2o2bo$3bo$3bobo$4bo! 
+669	1175	21	b2o$ob2o$o3bo$bo2bo$bo2bo! 
+670	1173	21	2b2obo$3bo2bo$bo2bo$2o3bo! 
+671	1172	44	4bo$o2bo$o2bo$3o! bookend tie block 
+672	1170	39	2b3o$o3bo$o$o2bo$b2o! 
+673	1169	41	3o3$3bobo$3b3o$4bo! pi + blinker 
+674	1168	19	bobo$obob2o$o2b2o! 
+675	1167	44	2ob3o$2o3bo! block and L-tetromino 
+676	1165	98	3o$obo$obo3$7b2o$7b2o! pi hits block at (6,-4) 
+677	1161	25	obo$o2bo3b2o$obo3bobo$7bo! traffic light + boat 
+678	1160	44	4b3o$3bo3bo$7bo$6bo2$2o$2o! LOM + block 
+679	1159	40	5bo$2o4bo$o5bo$4b2o$4bo! LOM + block 
+680	1158	57	7b2o$bo5b2o$o$o$o2bo$b2o! LOM + block 
+681	1155	40	2bo$b2o$2o4bo$bo3b2o! century + block 
+682	1154	90	2o5b3o$2o4bo2bo2$6b3o! LOM deletes block 
+683	1151	233	2bo4b3o$3o3bo2bo$7b2o! HF hits beehive point at (4,1) 
+684	1146	30	bobo$6bo$2o3b2o$bobob2o! 
+685	1145	161	3o$o$3o$9b2o$9b2o! pi hits block at (2,-8) 
+686	1143	100	4bobo$3bo3bo$4bobo$5bo$2o$2o! pi hits block at (4,4) 
+687	1139	41	2o$2o3b2o$5bo2bo$5bo2bo$6bobo! LOM + block 
+688	1136	60	2o$b2o$bo2$5b2o$5b2o! R + block 
+689	1133	33	bo$obo2bo$bo4bo$6b2o$5bo! TL+tub temporary long ship reaction 
+690	1132	104	6b3o4$b2o$2obo$bobo$2bo! honey farm + blinker, noninteracting 
+691	1130	154	8b2o$8b2o3$3o$o$3o! pi hits block at (4,-7) 
+692	1126	50	b2o$o2bo$bo2bo$bo2bo$5bo! Eppstein's p130 active region 
+693	1124	28	3o$o2bo$bobo$bobo! grate+1 
+694	1123	63	5bo$5b2o$b2o3bo$2o$b2o! pi + beehive 
+695	1119	22	3bo$bob2o$o2bo$3o! offset butterfly 
+696	1118	34	o$o2b4o$o5bo$bo$2bo2bo! beehive + boat 
+697	1117	41	6b3o3$b2o2$bo$obo$b2o! honey farm and blinker at (6,5) 
+698	1117	14	2b3o$2o2bo$o$b3o! R + block 
+699	1117	42	6bo$5b3o$7bo2$2o$2o! R + block 
+700	1116	88	5b2o$5b2o2$2bo$bobo$o3bo$bo2bo! phi + block 
+701	1114	78	2o$2o5bo$7b2o$6b2o! R + block 
+702	1112	68	2o$2o2$5bo$5b2o$4b2o! R + block 
+703	1111	61	3o$o3bo$bo3bo$2b3o! 
+704	1111	76	6b2o$6b2o3$bo$2bo$o$3o! honey farm and block at (6,6) 
+705	1109	41	5bo$5bo$bo3bo$2o$bo! traffic light + blinker 
+706	1108	209	3o$7bo$6bobo$6bobo$7b2o! honey farm + blinker 
+707	1107	45	2b2o$2o2bo$2o3bo$b2obo! 
+708	1106	31	3o$3bo$3b2o$2obo$2bo! long boat plus D2_x boats 
+709	1106	31	5b2o$4bo2bo$obobobo$bo3bo! 
+710	1105	42	3o$o2bo2$bob2o! octomino siamese V-pentomino 
+711	1104	106	6b2o$6b2o$3o$obo$obo! pi hits block at (5,3) 
+712	1103	56	b3o2b2o$6b2o$o2bo$3o! LOM + block 
+713	1103	339	3bo$bo3bo$bo3bo$o5bo$bo4bo$bo$4b2o! loaf+1 
+714	1103	25	6bo$2obo3bo$o5bo$bo4bo$2b2o! century + block 
+715	1103	20	4bo$2b4o$2o$2bo! 
+716	1103	31	7bo$7b2o$8b2o$2bo$2ob2o$2bo! traffic light + loaf 
+717	1103	55	3bobo$bo3bo$bo$o2bobo$5bo! 
+718	1100	48	6b2o$6b2o2$bo$3o$o! R + block 
+719	1099	54	b2o$o2bo$o2b2o$2obo$2bo! 
+720	1098	142	7bo$8bo$8bo$5bo2bo$2o4b2o$2o! LOM + block 
+721	1096	43	3b2o$o2bo$o2bo$3o! V-pentomino with tail 
+722	1091	28	2bo4bo$bobo3bo$2obo3bo$2bo! R + blinker 
+723	1090	22	2o2b2o$o4bo$o3bo$bo2bo$2bo! U-pentomino at Z-pentomino 
+724	1088	21	b3o$obob2o$4b2o! pi predecessor minus S3a cell 
+725	1086	45	2o$2o2$6bo$5b2o$6b2o! R + block 
+726	1081	66	6b3o$5bo2bo2$2o3b3o$2o! LOM + block 
+727	1078	294	3o$o$bo4bo$2bo3bo$5b2o! HF hits beehive edge at (5,3) 
+728	1078	83	6bo$5b3o$5bo2$2o$2o! R + block 
+729	1077	79	7bo$b2o4bo$o2bo3bo$b3o! honey farm + blinker 
+730	1077	38	2b3o$4bo$o3bo$ob2o$bo! 
+731	1076	132	2bo$o2bo$o2bo2b3o$obo! honey farm + blinker, D2 
+732	1075	183	4bo$3b2o$2bo2bo$o$o3bo$o2bo! HF+TL found in R evolution 
+733	1071	196	4bo$2bo2b2o$b3o2$2bo$3o! two beehives 
+734	1068	77	8bo$9bo$2o3bo3bo$2o4b3o! LOM + block 
+735	1068	48	2b3o$bo3bo$o$b5o! long interchange minus S2c cell 
+736	1067	79	2o$2o3$8bo$8b2o$7b2o! R + block 
+737	1065	40	2b2o$b2o$2o$5b2o$5b2o! LOM + block 
+738	1064	175	bo$2o$obo$bo4b3o$6bo! HF hits beehive edge at (4,2) 
+739	1064	40	2b2o$bo$o4bo$b3obo$5bo! 
+740	1063	15	3b2o$5bo$o3bo$ob2o$o! 
+741	1063	33	bo$o$bo2bo$2b3o$4bo! 
+742	1062	41	b2o$o2bo$bo2bo$bo2bo$4bo! U-turner predecessor plus one B1e cell 
+743	1059	40	bo3bo$o4b2o$o5b2o$bo4bo! century + block 
+744	1057	46	2o$2o$8bo$6b3o$7bo! R + block 
+745	1056	31	3bo$b2ob2o$o3b2o$o$obo! Herschel + flare 
+746	1056	38	o3bo$o4bo$o4bo$4b2o! pi + blinker 
+747	1053	41	2b3o$bo3bo$o3b2o$b2ob2o! clean paperclip 
+748	1052	60	3bo$4b2o2$3bo$3ob2o! LOM + block 
+749	1050	32	bo$o2bo2bo$bo2b2obo$4b3o! B + block 
+750	1049	35	obo$o2bo2bo$obo2bobo$6b2o! traffic light + boat 
+751	1048	38	2o4bo$2o4b2o$7b2o$6b2o! block catalyzes B to form Herschel 
+752	1047	16	2bo2bo$bo4bo$o4bo$bob2o$2bo! B siamese T-tetromino in front 
+753	1046	54	6b2o$6b2o$b2o$2o$bo! R + block 
+754	1044	85	5b3o$4bo2bo2$4b3o$2o$2o! LOM + block 
+755	1043	66	6bo$5b3o$5bob2o2$2o$2o! early TL hits beehive edge at (4,1) 
+756	1042	38	b3o$o$o4bo$bo4bo$3bobo! century + blinker 
+757	1042	16	3obo$3b3o$obo$bo! 
+758	1040	22	2bo$b3ob2o$o2bobo$8bo2$8bo! pi hits block at (3,0) 
+759	1040	55	o$3o$bo5b2o$7b2o! block catalyzes R 
+760	1040	21	b3o$o4bo$5bo$2obobo! unnamed, D2 
+761	1040	87	6bo$4b3o$5bo3$2o$2o! R + block 
+762	1039	117	2bo5b2o$bo6b2o$2bo$3o! teardrop + block 
+763	1036	38	2b2o$2o2bo$2o$3b3o! 
+764	1034	26	5b2o$2bobobo$bobo$o$bo! traffic light + loaf 
+765	1034	14	2bo$bobo$bo2bo$2obo$2b2o! 
+766	1032	20	bob3o$o3bo$o2bo$bobo! early century ancestor 
+767	1029	59	2o2bo$2obobo$3bobo$3b3o! 
+768	1028	20	o4bo$3b2ob2o$3bobo$bo$bo! 
+769	1028	41	b2o$o2bo$bo3bo$2bo2bo$3b2o! 
+770	1028	37	3o4bo$bo4bobo$5bo2bo$6b2o! 
+771	1027	79	bo$b2o$2o4b2o$6b2o! traffic light + loaf 
+772	1023	57	o$3o$bo$6b2o$6b2o! R + block 
+773	1023	39	2bo$bobo$2ob2o$o2b2o! 
+774	1023	149	4bo$3b3o3$3o! lumps of muck predecessor 
+775	1020	13	3bo$b2o2bo$obo3bo$b2o2bo! R generation 6 minus one 3j cell 
+776	1018	25	4bo$o2b2o$bo$b3o! object hassled in 30P25 after hitting eater 1 
+777	1018	53	b2o$2o$bo2$6b2o$6b2o! R + block 
+778	1018	34	7bo$7b2o$7bobo$3o5b2o! century + blinker 
+779	1016	75	2o$2o3b3o$5bo$5b3o! pi hits block at (1,6) 
+780	1014	20	3bo$bo2bo$bo3bo$o2bo2bo$5bo! 
+781	1014	29	3b2o$2o2bo$o3bo$o2bo! Z-tetromino behind pi-heptomino parent 
+782	1014	45	7bo$5b3o$6bo3$2o$2o! R + block 
+783	1013	16	b2o$o2bo$o3bo$o3bo$bo2bo! 
+784	1012	64	2o$2o2$5bo$4b3o$6bo! R + block 
+785	1012	71	o$2o$7b2o$7b2ob2o$7b3o! pi generation 3 parent siamese P-pentomino 
+786	1012	68	2o$2o5b3o$6bo2bo2$6b3o! LOM + block 
+787	1012	26	2bo2b2o$obobobo$4b3o! pond siamese beehive 
+788	1011	77	4b3o$4bo$4b3o2$2o$2o! pi hits block at (3,5) 
+789	1010	25	2bo$bobo$o3bo$o2bo$2bo! TL "diamond" with one 2n cell moved outward 
+790	1010	95	3o$2bo3b2o$3o3b2o! pi hits block at (0,6) 
+791	1009	26	b3o$bo2bo$o4bo$3bobo$4bo! house at preblock 
+792	1006	19	3b2o$bobo$2obo$2bo! pre-pond with tail 
+793	1006	50	6b2o$6b2o2$2bo$b2o$o2bo$b2o! R + block 
+794	1005	29	3bo$4bo$3b3o$2obo$2o! wing parent being sparked by domino 
+795	1003	20	3b2o$2bo2bo$o4bo$o4bo! century generation 1 siamese Z-tetromino 
+796	1002	84	2b3o$bo2b2o$o2bo$bobo$2bo! Early honey farm hits block at (3,2) 
+797	1002	29	3o$o2bo$bo2bo$3b2o! R-pentomino bridge boat 
+798	1002	268	obo3bo$2o5bo$7b2o$6b2o$6bo! B + block 
+799	1001	19	3o3bo$2bo2b3o! traffic light + beehive 
+800	1001	31	2bobo$bo2bo$o3bo$o2bo$obo! 
+801	1000	109	2o$2o4b3o$6bobo$6bobo! block catalyzes pi at (6,2) 
+802	999	32	2o$o2b2o$b2obo$2bobo! wing grandparent at L-tetromino 
+803	998	127	6bo$2o4b3o$o$3o! R + beehive 
+804	996	33	6b2o$2o4bobo$2o6bo$6b3o! B turns block into beehive 
+805	995	200	6bo$bo3bobo$2bo2bobo$o5bo$3o! HF hits beehive edge at (5,2) 
+806	990	16	5b2o$bo2bo2bo$o2bob2o$bo! bun + blinker 
+807	987	19	2bo$o$o3bo2bo$o5bo$bo4bo$2b2o! fleet + blinker 
+808	986	40	2bo$3o$6b3o$6bo$6bo! beehive + loaf; produces temporary integral 
+809	986	30	3bo2bo$2b2o2bo$bo3bo$o$bobo$2bo! object hassled in unnamed p80 
+810	986	19	bo$obo$2o4bo$6b2o$6bo! traffic light + boat 
+811	985	32	4bo$3b3o$bo3bo$o2bo$o2bo$bo! pi + loaf 
+812	984	32	4bo$2bobo$bob2o$2o! predecessor of object hassled in Jason's p22 
+813	984	59	3o$2bo$3o2b2o$5b2o! pi hits block at (1,5) 
+814	984	37	5bo$5b2o$3o2bo! early traffic light hits blinker 
+815	983	69	5b3o2$5bo2bo$6b3o3$2o$2o! LOM + block 
+816	980	83	4b2o$3bo2bo$o4bo$o3b2o$o! honey farm + blinker 
+817	979	48	4b2o$b2ob2o$o3bo$o$3o! 
+818	977	52	4bo$2obobo$o$b2ob2o$3bo! Iwona active region siamese W-pentomino 
+819	977	36	4bo$4bo$4bo2$3o4$7bo2bo$7b3o! traffic light hits loaf 
+820	976	228	o$ob3o$2b2o$3bo2bo$4b2o$5bo! honey farm hits block at (4,2) 
+821	975	160	4b2o$2bo2bo$2o3bo$2o2bo! boat behind pi-heptomino parent 
+822	974	20	3o3bo$bo3bobo$6bo! traffic light + tub 
+823	973	11037	2bo$o3bo$o4bo$o4bo$5bo$bo2bo! pi-heptomino predecessor 
+824	972	36	ob3o$5bo$o3b2o$2b2o! LOM + boat 
+825	969	41	2bo$2o2bo$b2o4b2o$2bo3bobo! B + block 
+826	968	199	2o$2bo4b3o$obo$2o! honey farm + blinker 
+827	967	63	2o$2o$7bo$8bo$8bo$5bo2bo$6b2o! LOM + block 
+828	964	21	2b3o$o4bo$2bo2bo$4b2o! E-heptomino + dot spark 
+829	962	16	b2o3bo$obo4b2o$bo4bo! traffic light + boat 
+830	962	56	o$o$o$6b2o$5bo2bo$6b3o! honey farm and blinker at (7,4) 
+831	960	54	2o$2o$4b2o$5b2o$5bo! R + block 
+832	960	18	b3o$o3bo$3b2o$2ob2o! R generation 6 minus 4i cell 
+833	960	43	b3o2$o$4b2o$b2obo$3bo! 
+834	959	107	7b2o$7b2o4$obo$obo$3o! pi hits block at (6,-5) 
+835	959	48	bo$2o$b2o2$5b2o$5b2o! R + block 
+836	958	43	bo$o2bo$bo2bo$2b2o$4b2o! pi + loaf 
+837	958	21	o$obo3bo$o4bobo$6bo! traffic light + tub 
+838	957	96	bo$obo$obo$2o3$9b2o$9b2o! honey farm and block at (9,4) 
+839	956	41	2b3o$bo2bo$o3bo2$3o! 
+840	954	18	o$2ob2o$o3bo$2bobo! 
+841	954	71	3b2o$2b2ob2o$6bo$bo4bo$o4bo$2bo! 
+842	953	34	o4bo$o4b2o$o6bo$5b2o$5bo! 
+843	953	23	4o$o2bo$o$b2o! 
+844	952	28	bo$obo$obo2bobo$bo3bo2bo$5bobo! 
+845	950	37	2b3o$bo3bo$o5bo2$b2ob2o$3bo! 
+846	945	33	b3obo$o5bo$o2bo2bo$bo! 
+847	944	9	2bo$o3bo$o3bo$3obo! 
+848	944	33	2bob3o$b2o$3o! 
+849	942	47	5b2o$5b2o3$bo$2o$b2o! 
+850	941	103	bo$obo$o$bo3b2o$2bo3bo$3b3o! 
+851	940	21	4bo$4b2o$5b2o$4b2o$2o$bo! 
+852	940	8	b2o$b2o$o3bo$obo$o! 
+853	939	21	3bo$bo2bo$bo3bo$o3bo$obo$b2o! 
+854	939	71	4b2o$5bo$o4bo$o3bo$2o! 
+855	938	21	3o$o3bo$bo2bo$3b2o! 
+856	932	26	2bo4bo$2o4bobo$2bo4b2o! 
+857	932	30	b2o$o2bo$b2o2b2o$6b2o$7bo! beehive + loaf 
+858	931	35	o$3o$bo$7b2o$7b2o! 
+859	931	28	2bo$o4b2o$o5b2o$o3b2o! 
+860	931	30	bo2b2o$o4bo$o4bo$2o! 
+861	929	36	b2o$o2b2o$bo$bobo! 
+862	928	85	bo$obo$obo$b2o2$5b3o! 
+863	928	32	obob2o$2o3b2o$7bo$5b2o$5bo! 
+864	928	103	6bobo$5bo2bo$5bo2bo$5b2o2$2o$2o! LOM + block 
+865	928	23	3b3o$5bo$o4bo$o3bo$2o! 
+866	927	80	2o$2o$5b3o2$5bo2bo$6b3o! 
+867	923	20	5bo$5b2o$5bo2$2o$obo$bo! 
+868	922	55	6bo$6b2o$5b2o2$2o$2o! 
+869	921	25	3bo$2bobo$o4bo$bo2bo$b3o! 
+870	921	53	8bo$7b2o$2obo$o2bo$b3o! 
+871	920	74	2o$obobo$o2bob2o$4bo! 
+872	919	34	o3bo$o2b2o$2obo! 
+873	918	33	2b4o$bo4bo$o$b3o! 
+874	917	52	8bo$2o5b3o$2o7bo! 
+875	917	66	3bo$2bobo$2o3bo$o3bo$3o! 
+876	916	50	2o$b2o$bo3$6b2o$6b2o! 
+877	916	139	2o$2o4b2o$7b2o$7bo! R + block 
+878	915	82	2o$2o$7b3o$6bo2bo2$6b3o! 
+879	915	50	4b2o$3bo2bo$3bo$4b3o2$2o$2o! 
+880	913	59	7bo$2o4b2o$2o5b2o! 
+881	913	41	b2o$2o$5bo$5b2o$5bo! 
+882	912	34	5b2o$4bo2bo$2o2bo2bo$2o2bobo! 
+883	911	38	6b2o$6b2o3$bo$2o$b2o! 
+884	911	19	2b2o$bobo$bob2o$2o! 
+885	911	64	bo$obo$obo$2o3$6b3o! 
+886	910	231	3b2o$2o8bo$2o2bo5bo$10bo! honey farm + blinker 
+887	909	25	2bo$bo3bo$o5bo$bo4bo$3b3o! 
+888	908	45	2o$2o3$7bo$6b3o$8bo! 
+889	907	86	10b3o3$2o7bo2bo$2o8b2o! 
+890	906	24	2b3o$bo$o3bo$2o2bo$2bo! 
+891	903	53	b2o3b2o$o2bo2b2o$o$2o! 
+892	899	30	bo$3o2$6bo$5bobo$5b2o! 
+893	899	11	5bo$2obob2o$o4bo2$b2o! 
+894	898	160	bo$10b2o$2o7bo2bo$2bo6bo2bo$9bobo! 
+895	898	22	5bo$bo4bo$bo4bo$obo2b2o$2o! 
+896	898	36	4bo$4b2o$bo$3o$bo! 
+897	895	27	4bo$3b3o$b2o2bo$o$o! 
+898	895	38	7bo$2bo2bo2bo$2ob2o2bo$2bo! 
+899	895	33	7b2o$7bobo$6bo2bo4$3o! 
+900	894	36	4b2o$3bobo$o3bo$2b2o$2bo! 
+901	894	37	2bobo$5bo$o3bo$ob2o$o! 
+902	894	84	3o3$5b2o$2b2obo$3b2o! 
+903	893	107	2o$2o2$5b3o$5bobo$5bobo! pi hits block at (5,4) 
+904	893	37	o2b3o$bo4bo$bo4bo$3b2o! 
+905	892	70	6b2o$7b2o$7bo2$2o$2o! 
+906	890	35	3bo$2bobo$o4bo$o3bo$o! 
+907	890	16	2b3o$o4bo$o4bo$2ob2o! glider hits beehive 
+908	890	12	b3obo$o4bo$o4bo$4bo! 
+909	889	29	2bo4b2o$2o4b2o$2bo3bo! 
+910	888	54	3bobo$5bo$bo3bo$2obo! 
+911	888	65	bo$3o$o3$6b2o$6b2o! 
+912	888	115	bo2b2o$o3b2o$ob2o2bo$2o! glider hits beehive 
+913	887	17	2bo$bo2bo$2o2bo$3b2o! 
+914	884	32	2bo$b2o$2o$4b3o! 
+915	881	17	2ob2o$o$o3bo$2b2o! 
+916	881	23	2bo$bo2bo$o4bo$b2o2bo$4b2o! 
+917	881	33	bo2bo$o3bo$o2bo$3o! 
+918	880	32	o$2o$o5b2o$5bobo$6bo! 
+919	880	15	2b4o$6bo$o$o4b2o$b3o! 
+920	878	19	b3o$bo2bo$o4bo$ob3o$o! 
+921	876	35	b2o$2bo$obo$2o$8b2o$8b2o! 
+922	876	195	3o$o$3o2$9b2o$9b2o! pi hits block at (3,-8) 
+923	875	64	8b2o$b3o4b2o$o2bo2$3o! 
+924	874	8	3o4bo$6bobo$5bo$4b2obo$5bo! 
+925	870	18	2b2o$2o2bo$o2bo2$b2o! 
+926	870	61	obo$o2bo$o2bo$2b2o$8b2o$8b2o! 
+927	870	67	6bo$5bobo$6b2o$2o$bobo$3b2o! 
+928	868	237	7bo$7b2o$2o7bo$b2o5b2o$8bo! HF hits beehive edge at (6,0) 
+929	868	69	3bobo$3bo2bo$3bobo2$3o! 
+930	864	89	8b2o$8b2o2$obo$obo$3o! pi hits block at (6,-3) 
+931	863	32	3o3b2o$3bo2b2o$bobo$2bo! 
+932	862	48	2o$2o7bo$7b3o$8bo! 
+933	861	53	7b2o$6bo2bo$2o7bo$2o7bo$8bo! 
+934	860	97	3b2o$bobo2$o3bo$b3o! 
+935	860	20	o2b2o$o4bo$o4bo$2b3o! 
+936	858	48	7bo$2o5bo$2o2bo2bo$5b2o! 
+937	858	23	5bo$4bobo$2o2bobo$b2o2bo! 
+938	857	16	2bo$bobo$o6bo$bo6bo$2bob2obo$3bo! 
+939	857	133	3o$o$3o3$9b2o$9b2o! pi hits block at (4,-8) 
+940	857	18	2bo$bob2o$2o$5bo$3b2o! 
+941	855	26	2o2bo$o3bo$o2b2o! gliders by the dozen 
+942	854	13	bobo$o2b2o$bobo$2bobo! 
+943	854	25	7bo$6b3o$bo$obo$b2o! 
+944	849	59	2ob2o$bo3bo$6bo$3bobo! 
+945	849	53	6b2o$6b2o4$bo$b2o$2o! 
+946	848	61	5b2o$5b2o$o$bo$3o! 
+947	847	24	3o$bobo2bo$2bo2bo$2bo2bo! 
+948	846	19	6bo$5b3o2$2o$obo$bo! traffic light + boat 
+949	845	31	5bo$5b2o$7bo$o4b2o$o4bo$o! 
+950	845	13	2b2o$o3bo$o3bo$obobo! 
+951	842	14	4b2o$o2bo2bo$bo4bo$bo4bo$3b2o! 
+952	841	31	o4bo$o2bob2o$o4bo! 
+953	841	98	2bo$2bo$bobo$2bo$obo4$10b2o$10b2o! honey farm and block at (8,6) 
+954	840	14	bo$obo$bo2bo$bo2bo$2bobo! B + loaf 
+955	839	59	bo$3o$2bo2$4b2o$4b2o! 
+956	839	46	7b2o$7b2o$bo$2o$b2o! 
+957	838	35	2bobo$b2o2bo$o3bo$2o! 
+958	837	88	2o$2o3$4b3o$4bo$4b3o! pi hits block at (4,5) 
+959	837	19	2bo$bobo$o$2bo2bo$3b3o! 
+960	836	20	b2o$obo$bo4b3o$7bo! traffic light + boat 
+961	836	40	2b3o$bo$o$bo3bo$2b3o! 
+962	836	63	2o$2o$4b2o$4bo2bo$4bo2bo$5bobo! 
+963	835	62	2b3o$bo3bo$o$b6o! 
+964	835	64	6b3o2$6bo2bo$7b3o2$2o$2o! 
+965	834	182	5bo$4bo3bo$4bo3bo$o5bobo$2o$bo! HF hits beehive point at (5,3) 
+966	833	32	b3obo$o4bo$obo$bo! 
+967	831	57	2o$b2o$bo5b2o$7b2o! 
+968	830	35	bo2bo$o4bo$2bo2bo$3b3o! 
+969	830	21	3o$2bo$4bobo$4b2o! clean bi-pond 
+970	830	66	3bo3bo$bo6bo$o6b2o$o2bo$3o! 
+971	828	71	3b3o$2bo3bo$5b2o2$o2bo$2o! 
+972	827	19	2b3o$bo$o3bo$3o! 
+973	827	27	o$obo$o$2bob2o$2bobo$3bo! 
+974	825	15	b3o$o2bo$bo$2b3o$3b2o! 
+975	823	100	2o$2o4$7b3o$9bo$7b3o! pi hits block at (7,-5) 
+976	823	91	6bobo$6bobo$6b3o$2o$2o! pi hits block at (6,3) 
+977	823	13	b2o4bo$o2bob2o$bobo$2bo! 
+978	822	25	2b2o$bo3bo$o4bo$o$2o! 
+979	820	35	3o3b2o$bo4b2o$o! 
+980	819	20	2bo$bobo$o3bo$5bo$3b3o$4bo! 
+981	818	19	3b2o$bobo$o2$b3o! 
+982	818	22	2b3o$bo2bo$o$3bo$b3o! 
+983	816	8	2b3o$bo3bo$o4bo$o3bo$obo! 
+984	816	89	bo$ob2o$o$bo3bo$2b2o$4bo! 
+985	816	54	6bo$6bo$6bo2$2o$2obo$b3o! 
+986	816	8	2b2o3bo$b2o4bo$o6bo$b2o$2bo! 
+987	815	48	2bo$2obo$o2bo$4o! 
+988	815	17	6b2o$6b2o$2o$bobo$2b2o! wing + block 
+989	815	22	6bobo$bo3bo2bo$obo3bobo$2o! 
+990	814	62	3o$o$obo$b2o7b2o$10b2o! 
+991	813	24	2b3o$2obo$3bo$3o! 
+992	813	116	7b3o$7bobo$2o5bobo$2o! pi hits block at (7,-1) 
+993	813	108	7b3o$7bobo$7bobo$2o$2o! pi hits block at (7,-2) 
+994	812	228	6bo$6bo$6bo$2o3bo$o3bo$b3o! pi generation 6 minus 2e cell 
+995	811	167	8b2o$7bo2bo$8b3o2$3o! honey farm + blinker 
+996	810	21	bo$2obo$2bob2o$3bo! 
+997	810	51	2o$2o$5b2o$4b2o$5bo! 
+998	809	64	2b4o$bo4bo$o$bo3bo$2b3o! 6+5+5 polyomino 
+999	807	21	b2o$bob2o$2obo$2bo! 
+1000	807	23	bo$obo$3bo$2b3o$3bo! 
+1001	806	25	4b3o$4bobo$4bobo2$3o! 
+1002	805	187	8bo$7bobo$7bob2o$8b2o$3o! honey farm + blinker 
+1003	805	26	bo4b2o$2o5b2o$o5b2o! 
+1004	804	15	b2o$o2bo$obo5bo$bo4bobo$8bo! traffic light + loaf 
+1005	803	21	3bo$bo3bo$bo3bo$o2b2o$2o! 
+1006	802	29	4bo$2b2obo$5bo$o3bo$ob2o! 
+1007	802	27	2bo$2ob2o2bo$2bo4b2o$8b2o! 
+1008	802	29	5bo$5b2o$obo3bo$o2bo$obo! 
+1009	802	59	b2o$o2bo4b2o$o7b2o$o$bo! 
+1010	800	47	b2o$2o5b2o$b2o3b2o! 
+1011	800	31	4bobo$3bo2bo$3bo2bo$o3b2o$o$o! 
+1012	799	58	3bo$3bobo$6bo$5bo$2o$b2o! 
+1013	798	70	3o$ob2obo$2bobobo$3bobo! 
+1014	797	15	2bo$bobo$o4bo$bo2b2o$2b3o! 
+1015	796	25	bobo$o2bo2b2o$bobobo2bo$6b2o! 
+1016	795	115	obo5b2o$obo5b2o$3o! pi hits block at (7,0) 
+1017	794	26	2bo$2o$2bob2o$5bo! 
+1018	794	30	3b3o$o$2o$o! 
+1019	793	24	3obo$bo3bo$2bobo$3bo! 
+1020	793	34	o$o3bo$o3b2o$4bo! 
+1021	792	18	3b3o$o2bo$o2bo$obo! 
+1022	791	36	2o$2o$5b2o$5bobo$7bo$5b3o! 
+1023	791	201	8bo$bo5b2o$obo5bo$obo3b2o$bo! HF hits beehive edge at (6,1) 
+1024	791	115	5bobo$6b2o$7bo$2o$2o! R + block 
+1025	789	71	6b2o$6b2o$3o$2bo$3o! 
+1026	789	205	9b3o$2o9bo$2o7b3o! pi hits block at (0,-9) 
+1027	788	7	b2o$o2bo$5b2o$b2ob2o! 
+1028	788	28	b2o$2o$4b2o$4b3o! 
+1029	787	35	2b2o$o3bo$2o3bo$2o2bo! 
+1030	785	17	b2o$2ob2o$o$2bobo$3bo! 
+1031	784	135	bo$obo$2o4b3o$bo! Bach 
+1032	783	203	b2o$2obo$2bo2$6b3o$6b3o! HF hits beehive edge at (5,4) 
+1033	783	39	7bo$6b3o$8bo2$2o$2o! 
+1034	782	44	2b2o$b2obo$o3bo$bob2o$bo! 
+1035	782	17	2bobo$bo3bo$o3bo$o$obo$b2o! 
+1036	782	101	7bo$7b2o$8b2o$o8bo$2o! LOM + block 
+1037	781	26	2bo$2ob2o$3b2o$o3bo$bo! 
+1038	781	24	2b2o$bo2bo$bo$ob2o$2o! 
+1039	781	38	6bo$bo4b2o$2o5b2o$7bo! 
+1040	780	16	2b3o$2b2o$bo$3o! 
+1041	780	60	8bobo$3o5bo2bo$11bo$11bo! 
+1042	779	38	ob3o$3bobo$2bo2bo$4b2o! 
+1043	779	61	bo$b2o$2o$6b2o$6b2o! 
+1044	779	217	8b2o$7bo2bo$8b2o2$3bo$bo2b2o$2o! HF hits beehive edge at (5,4) 
+1045	776	24	3bo$4bo$3b2o$bo$3o! 
+1046	775	25	3bo$bo3bo$bo3bo$o2bobo$2o! 
+1047	775	35	3b3o2$3o$obo$2bo! 
+1048	775	76	bo$o$o$o2bo4b2o$b2o5b2o! 
+1049	774	22	2o$obo$2bobo$2bo2bo$3b3o! 
+1050	773	22	4bo$o3b3o$2o$bo! 
+1051	773	31	2bo$bobo$o3bo$bo3bo$2b3o! 
+1052	773	24	2b2o$o3bo$2o3bo$2o2bo$2b2o! 
+1053	772	12	3bo$4bo$o4bo$o4bo$2o2b2o! B + beehive 
+1054	769	61	b3o$o3bo$o$bo3$7b2o$7b2o! 
+1055	767	20	o$b2o$4b2o$2bobo$3bo! 
+1056	767	51	2o$2o5bo$6bo$5b3o! 
+1057	767	25	5bo$2bo3bo$b2o3bo$o4bo$b3o! 
+1058	764	15	2bo$bobo$o3bo$bo2bo$4b2o! 
+1059	764	27	obo$o3bo$4b2o$2bob3o! 
+1060	762	28	5bo$5b2o2$2o$bobo$2b2o! 
+1061	761	42	5b2o$4bo2bo$2o5bo$2o4b2o! 
+1062	760	114	b3o4b3o$o2bo$b2o! honey farm + blinker, D2 
+1063	759	41	3bobo$2obobo$o$o3bo$bobo$2bo! 
+1064	758	14	o$o$2b3o2$2bo2bo$3b3o! LOM + domino 
+1065	757	34	4bo$2bobo$4bo$3bo$3o! 
+1066	757	50	b3o$5bo$3bo2bo$o2bobo$3o! 
+1067	757	49	9bo$2o5b3o$2o6bo! 
+1068	755	37	3ob2o2$o3bo$b3o! 
+1069	754	37	8b2o$8b2o$2o$o2bo$o2bo$bobo! 
+1070	754	9	4bo$bo3bo$o3bo$4o$bo! 
+1071	753	12	5b2o$o2b2obo$b2o3bo$5bo$4bo! 
+1072	753	16	b3o$o2bo$bobo$bo2bo$2b2o! honey farm C2 predecessor + one cell 
+1073	749	33	bo$obo2bo$o2b2o$bo3bo! 
+1074	749	46	o2bo$o3bo$o4bo$bo2bo$3bo! 
+1075	746	32	b2o2bo$2o3b2o$7bo$5b2o$5bo! 
+1076	745	12	o$obobo$4bo$2b3o! prepond + domino 
+1077	745	10	4bo$2o2bo$bo2b2o$bo! long mango 
+1078	745	26	2b3o$bo$o2b2o$bobo! 
+1079	744	10	3b3o2$2o$bob2o$2bo! 
+1080	744	35	bob2o$bo2bo$o2bo$b2o! 
+1081	743	25	bo$obo5bo$o2bo2bobo$b2o5bo! 
+1082	743	23	2bo$b2o$o2bo3bo$2o6bo$8bo$7bo! 
+1083	741	17	3o$o2b2o$obo! unnamed, D2 
+1084	741	48	2o$2o6bo$7b3o$9bo! 
+1085	740	50	b2o$2o6b2o$bo6b2o! 
+1086	740	12	b3o$3bo$o$4b2o$b2ob2o$3bo! 
+1087	738	44	7bo$b2o2b2ob2o$2o5bo$o! 
+1088	738	53	8b2o$8b2o3$obo$o2bo$o2bo$2b2o! 
+1089	737	7	o$3o$2b2o$4bo$4b2o$3bo! 
+1090	737	11	2bo$bobo$o$bo2bo$2bo2bo$2bobo! 
+1091	736	63	bo$3o$o3$7b2o$7b2o! R + block 
+1092	736	17	b3o$4bo$4bo$ob2o$bo! 
+1093	736	13	2b3o$bo3bo$o4bo3$2bo3bo$3b3o! century + traffic light 
+1094	734	46	b2o$b2o2$bo$obo$5b2o$5bo! century + block 
+1095	734	20	4bo$2ob2o$2o2b2o! 
+1096	734	29	2bo$o3bo$2o2bo$bo2bo! 
+1097	734	13	2o5bo$2o3bobo$4bob2o! teardrop and block, non-interacting 
+1098	734	13	3bo$bo3bo$bo3bo$o2bo2bo$5b2o! 
+1099	733	19	3o$o2bo$2o$2b3o! 
+1100	733	207	10b2o$3o7b2o$o$3o! pi hits block at (1,-9) 
+1101	732	93	bo$obo$obo$2o$4b3o! honey farm + blinker 
+1102	731	91	5b3o$2obo3bo$bo4bo$5bo! HF hits beehive edge at (5,1) 
+1103	730	11	ob2o$o3bo$o2bo$2b2o! LWSS with extra 2i cell in back 
+1104	728	41	4b2o$5b2o$bo$3o! beehive + blinker 
+1105	728	15	2b2o$o3bo$o4bo$bo3bo$2b3o! 
+1106	728	61	2o$2o2$5b3o2$5bo2bo$6b3o! LOM + block 
+1107	728	49	6bo$5b3o$7bo4$2o$2o! 
+1108	727	48	9bo$7b3o$8bo2$2o$2o! 
+1109	727	9	bobo$o2bo$bo3bo$3bobo$3b3o! number 105 plus huge spark 
+1110	725	21	5b2o$b2o2b2o$3bo$obo$bo! 
+1111	724	50	2b3o$bo2bo$o4bo$bo2bo! 
+1112	724	22	4b2o$2b2o2bo$b2o2bo$4bo$o2bo$bo! 
+1113	724	53	o$o$bo2bo$2bob2o$3b2o! honey farm predecessor 
+1114	724	57	7b2o$7b2o2$bobo$o2bo$o2bo$2o! LOM + block 
+1115	722	32	3o$o2b2o$3b2o$b3o! 
+1116	721	51	b2o$2o$bo6b2o$8b2o! R + block 
+1117	719	37	5b3o$7bo$5b3o2$3o! 
+1118	718	31	3o$o2bo$b2o2$8bo$8bo$8bo! 
+1119	718	31	3bo$bo3bo$bo4bo$o5bo$bo4bo$bo3bo$3bo! 
+1120	718	31	bo$obo$o2b2o$4bo$4bo! 
+1121	717	30	3bo$b2obo$2o$bo$b2ob2o$3bo! 
+1122	716	51	8bobo$7bo2bo$7bo2bo$2o5b2o$2o! LOM + block 
+1123	714	21	b2obo$4bo$o3bo$3o! 
+1124	714	90	7bobo$2o5bobo$2o5b3o! pi hits block at (7,1) 
+1125	713	36	9bo$7b3o$8bo$2o$2o! 
+1126	713	36	o$o5b2o$o6b2o$6b2o! 
+1127	711	52	8b2o$8b2o3$3o$o2bo2$b3o! 
+1128	711	50	3o$o2bo2$b3o4b2o$8b2o! 
+1129	710	22	bob2o$bo3bo$o5bo$bo$bo3bo$3bo! 
+1130	710	46	4bobo$5b2o$6bo3$2o$2o! 
+1131	710	96	6b3o$8bo$6b3o5$2o$2o! pi hits block at (6,-6) 
+1132	709	15	4b2o$3bobo$2o4bo$bobo$2b2o! honey farm predecessor 
+1133	708	80	10b2o$10b2o5$2o2bo$obobo$bo! honey farm and block at (9,5) 
+1134	708	16	o$2obo$2bobo$b3o! octomino plus huge spark 
+1135	707	42	2o$2o3$7bo$7b2o$6b2o! 
+1136	707	76	7bo$6bobo$bo4bo2bo$2o5b2o$bo! traffic light + loaf 
+1137	707	69	2o$2o9bo$11bo$11bo2$11b2o$11b2o! honey farm and block at (10,3) 
+1138	705	32	5bo$5b2o$6bo$b2o$2o$b2o! 
+1139	705	27	5b2o$b2o2b2o$obo$obo$2o! 
+1140	704	34	b3o$o3bo$2o$b4o! R generation 6 minus one 3j cell 
+1141	703	37	3b3o$4bo2$3o! 
+1142	701	230	7b2o3$bo5b2o$2o3bobo2$b2o$2bo! HF hits beehive edge at (5,1) 
+1143	701	27	bo$o2bo$bo3bo$bo3bo$4b2o! 
+1144	698	45	7b2o$2o5b2o$b2o$bo! 
+1145	698	86	8b2o$8b2o$o$3o$bo! R deletes block 
+1146	697	37	5b2o$5bobobo$2o5b2o$2o! 
+1147	696	5	3b2o$o3bo$o3bo$o2bo$3o! 
+1148	696	28	5bo$bo3bo$3o2bo! 
+1149	696	22	2b3o$o3bo$o3bo$2b2o! 
+1150	695	41	bo$ob2o$o3bo$4bo$b3o! 
+1151	695	56	2o$2o3$5b3o$5bobo$5bobo! 
+1152	694	37	b3o$o2bo$o3bo$2b2o! 
+1153	694	41	b2o2b2o$o2bo2b2o$b2o4bo! beehive + loaf 
+1154	693	169	bo$obo$obo$2o2$7b3o! honey farm + blinker 
+1155	692	18	2b3o$o4bo$o4bo$5bo$2b3o! traffic light "diamond" plus central domino 
+1156	692	22	2o$o3b2o$o5bo$bo3bo$2b2o! 
+1157	691	59	b2o6bo$2o6bobo$b2o2bo3b2o! 
+1158	691	21	b2o$o2bo$bob2o$b3o! 
+1159	691	53	2o$2o$7bo$6b2o$7b2o! 
+1160	690	20920	5b2o$bo2bo2bo$obo2b2o$b2o! beehive + boat 
+1161	690	13	2b3o$bo3bo$o5bo$2bo2bo! 
+1162	690	17	2bobo$2bo2bo$bo2bo$obo$2o! century + beehive 
+1163	689	26	b3o$bo2bo$o4bo$3b3o! 
+1164	689	17	5bo$2b2obo$bo3bo$o$bobo$2bo! traffic light + loaf 
+1165	689	15	b2o3bo$o2b2o2bo$b2o3bo! unnamed, D2 
+1166	689	53	8bo$o6bobo$2o4b2obo$o7bo! 
+1167	687	22	3b2o$b2o3bo2$o3bobo$b3obo! 
+1168	687	17	3o$bo2bo$5bo$2bobo! switch engine 
+1169	687	49	6bo$5bobo$o2bobobo$b2o3bo! block + pond 
+1170	687	85	3o3$3bobo$3bo2bo$3b2o! honey farm + blinker 
+1171	685	27	4bo$2ob2o$o$b3o! 
+1172	685	64	o8bo$2o6b2o$o8bo! 
+1173	684	36	2b2o$bo$o2b2o$3o! 
+1174	684	185	2b2o$o2bo$bobo$9b2o$8bo2bo$9b2o! HF hits beehive edge at (6,3) 
+1175	684	20	4bo$bo3bo$b2o3bo$o4bo$bo$bo! 
+1176	684	321	3o$o$obo$b2o4b2o$7b2o! B + block 
+1177	684	30	3o$o2bo$5bo$bo3bo$b2o2bo! 
+1178	683	14	2b3o$bo$2b2o$obo! 
+1179	682	75	7bo$7b2o$6bo$3o$2bo! beehive + pond 
+1180	681	4	2o$2o2b2o$o4bo$o2b2o$bo! predecessor of number 83 
+1181	681	16	bo$ob2obo$o4b2o$bo! 
+1182	680	26	5bo$4b3o$4bobo3$3o! 
+1183	680	8592	2bo$b2o$o$6b2o$4bo2bo$4bo2bo$4bobo! lumps of muck + dying spark 
+1184	679	15	2o$obo$o$bo2bo$2b3o! 
+1185	679	59	3o$bo3b3o$5bobo$5b2o! 
+1186	678	54	4b2o$4bo$4o$3o$bo! 
+1187	677	25	2bo$2b2o$o2bo$2ob2o! 
+1188	676	42	2o$2o2$9bo$7bobo$7b3o! 
+1189	675	28	3bo$bo2bo$2o3bo$4bo$b3o! 
+1190	675	12	3o$ob2o$o2bo$4bo! 
+1191	674	14	o2bo$o2bo$o4bo$3b3o$4bo! 
+1192	674	76	6b2o$6b2o2$3o$2bo$3o! pi hits block at (3,6) 
+1193	673	34	3o$o2b2o$2ob2o$4bo! 
+1194	673	84	8bo$6b3o$7bo4$bo$b2o$2o! later generation of D2_x two barges 
+1195	672	16	bobo$o3bo$o3bo$4o! 
+1196	671	10	4bo$5bo$b2o3bo$o4bo$bo2bo$bo2bo! 
+1197	671	22	b3o$o5b3o$b3o2bo! 
+1198	670	8	2b2o$o3bo$o2bo$3o! century generation 6 minus one 2k cell 
+1199	670	20	3o$o3b2o$b2obo$3bo! 
+1200	666	10	b3o$o2bo$o2b2o$2o! 
+1201	665	4	2bo$2o5bo$2bo4b2o$7bo! 
+1202	665	7	3b2o$2o2bo$bo2bo$o! 
+1203	665	34	b2o$2o$b2o4b3o$7bo! 
+1204	664	25	2bo$bob2o$2o3bo$o3bo$b3o! 
+1205	663	100	2o$2o3$7bobo$7bobo$7b3o! pi hits block at (7,-4) 
+1206	663	63	8b2o$7b2o$8bobo$9b2o2$2o$2o! 
+1207	662	12	4b2o$bob2o$o3bo$bobo$2bo! 
+1208	662	101	2o2bo$o5b2o$o3bo2bo$6b2o! HF hits beehive edge at (5,0) 
+1209	661	16	b3o$o2b2o$bo3bo$2b3o! long mango + 3j cell inside 
+1210	661	36	bobo8b2o$o2bo8b2o$o2bo$b2o! 
+1211	660	163	bo$2o$obo$bo$7b3o! honey farm + blinker 
+1212	660	36	2o$bo$7b2o$5bo2bo$5b3o$6bo! 
+1213	660	39	9bo$7b3o$8bo3$2o$2o! 
+1214	660	22	2obo$o3bo$o3bo$b2o! 
+1215	660	39	6bo$6b2o$o7bo$o5b2o$o5bo! 
+1216	658	12	bobo$o2bo$bo2bo$3b3o$3b2o! 
+1217	658	204	9b3o$11bo$9b3o$2o$2o! pi hits block at (2,-9) 
+1218	658	77	b4o$b2o2bo$o4bo$4bo! 
+1219	658	54	3o4b2o$bo5b2o$o! 
+1220	656	55	obo$2o5b2o$o6b2o! 
+1221	655	13	2b2o$bob2o$3bo$3o! 
+1222	655	26	b2o$2o$b2o$6b3o$6bo! 
+1223	655	16	14bo$14bo4$2o$2o2$8b6o! 
+1224	654	12	2b4o$bo$o5bo$bo$2bob2o$3bo! octomino II predecessor 
+1225	652	13	bob2o$2o2b2o$bo2bo! 
+1226	652	31	7bo$6bobo$6bobo$7b2o4$3o! 
+1227	651	12	3b2o$b2ob2o$b2o$2o! 
+1228	650	77	3bo$2b2o$4bo$2bo$obo$o$9b2o$9b2o! 
+1229	648	20	2b3o$bo3bo$o4bo$obobo$bo! 
+1230	647	16	bo$obob2o$o4bo$b3obo! 
+1231	646	74	obo$obo$3o2$7b2o$7b2o! 
+1232	646	18	o$3o$bo2$3b3o! 
+1233	645	66	3b2o$2o2bo$3bo$o3bo$2bo! 
+1234	645	12	obobo$o4bo$2o2bo! 
+1235	642	16	2b2o$b2ob2o$o$b3o$2bo! four aligned beehives 
+1236	639	16	4b3o$2bo$bobo$o$bo3bo$2b3o! 
+1237	639	184	7bo$6b2o$o2bo2bo$obo$b2o! HF hits beehive point at (3,3) 
+1238	639	14	3b2o$bo3bo$4bo$2obo$o! 
+1239	638	18	4bo$4b2o$6bo$2o3bo$bo3bo! 
+1240	638	53	o$bo$3o4b2o$7b2o! 
+1241	638	22	3b3o$5bo$bo3bo$o3bo$bobo! 
+1242	638	29	6b2o$5bo2bo$8bo$2o5b2o$2o! 
+1243	636	13	2bo$b3o$o2bo$bo3bo$2bo$4bo! 
+1244	635	10	2o$3o2bo$4b2o$5bo! 
+1245	635	206	obo4b2o$o2bo2bo2bo$2o5b2o! HF hits beehive point at (6,1) 
+1246	634	21	5b2o$bobo2bo$o5bo$bo3bo$2b2o! 
+1247	634	19	4bo$2o2bo$obo2bo$4bo$4bo! 
+1248	634	67	7b2o$7bo2bo$7bo2bo$8bobo2$2o$2o! 
+1249	633	16	2o$bo$2b2obo$3b3o$4bo! 
+1250	633	27	6bo$6b2o$8bo$o5b2o$o5bo$o! 
+1251	631	28	2b4o$bo$o3b2o$bo2bo$2bo! 
+1252	631	59	11bo$b2o8bobo$obo8b3o$bo11bo! 
+1253	631	197	6b3o$bo6bo$obo3bo$obo4bo$bo! HF hits beehive edge at (6,2) 
+1254	630	29	b2o5b2o$obo5b2o$o$3o! 
+1255	628	13	2b2o$bobo$3o2$6bo$6b2o! 
+1256	628	38	4bo$2b2obo$bo$ob2o$obo! 
+1257	628	67	o4bo$o4bo$o3b2o$2o$2o! 
+1258	628	27	4o$bo2bo$2b3o$3bo! 
+1259	627	17	bo3b2o$3o$4b3o! 
+1260	627	165	2bo$b2o$10bo$2o8bo$o9bo! honey farm + blinker 
+1261	626	7	o$2obo$4bo$bo3bo$4bo! 
+1262	626	82	6bo$bo4bo$2o3b2o$obo$bo! HF hits beehive edge at (5,0) 
+1263	625	21	b2o$obo$bo2$3bo$b2ob2o! 
+1264	625	10	2bo$bo$o4bo$o4bo$bo2bo$bo2bo! 
+1265	624	12	2bo2bo$b2o2bo$o4bo$obo$bo! 
+1266	623	20	3b2o$3b2o$bo3bo$o3bo$o3bo! 
+1267	623	37	3o$6b2o$7b2o$6b2o! 
+1268	623	4	2b2o$o3bo$o4bo$o4bo$b2o2bo$4bo! 
+1269	622	12	2b2o$bobo$o3bo$b3o! 
+1270	622	36	4b3o$4bobo$4bobo3$3o! 
+1271	622	18	3bobo$2b2o2bo$3bo2bo$o3b3o! 
+1272	621	7	2bo2bo$bo3bo$o4bo$bobo! 
+1273	620	70	2bo$2ob2o$5bo2$2o$6bo$4b3o! HF hits beehive edge at (4,2) 
+1274	620	33	o3bo$bo2b2o$obo3bo$4b2o$4bo! 
+1275	620	320	3b2o$2bo2bo$o3bo$o2b2o$2o! 
+1276	619	7	2bo$bobo$o$3bo$b3ob2o$4bo! 
+1277	617	140	4bo$3bobo2$ob2o$3o$o! HF hits beehive point at (6,2) 
+1278	617	14	2b3o$bo3bo$o3b2o2$b2o! 
+1279	616	31	4b3o$6bo$4b3o$o$o$o! 
+1280	616	109	6b2o$b2o5bo$o2bo3b2o$b2o5bo! HF pushes beehive at (5,0) 
+1281	614	22	2o$2o$6b2o$7b2o$6b2o$6bo! 
+1282	614	48	bo$obo$b2o7bo$9bo2bo$9bo2bo$10bobo! 
+1283	614	13	4b2o$2bo3bo$2o5bo$2bobobo$4b2o! 
+1284	614	55	bo$o$o4bo$bo3bo$6bo$4b2o$4bo! 
+1285	614	74	4b2o$5b2o3$obo$3o$bo! 
+1286	614	10	o$2o$2bob2o$2bobo$3bo! 
+1287	613	38	2bo5b2o$bo6b2o$o$bobo$2bo! 
+1288	612	62	bo$2o$b2o2$7b2o$7b2o! 
+1289	611	117	6b2o$6b2o2$o$bo$3o! R + block 
+1290	610	18	2o$2obo$2bo$2bo$3b3o! 
+1291	610	20	bo$obo3bobo$b2o4bo$7bo! 
+1292	610	35	2o5b2o$2o6bo$5bo2bo$6b2o! 
+1293	610	8	7bo$6b2o$bo5bo$obo$bo! 
+1294	609	12	3o3bo$3b3o$4bo! 
+1295	609	25	bo2b2o$o3bo$o2bo$b3o! 
+1296	609	88	5bo$bo3bo$2ob3o$bo$2bo! loaf predecessor 
+1297	608	45	3o$o2bo$2bo$b3o! 
+1298	608	21	2b3o$bo2bo$o$2o! 5+3+1+1 undecomino 
+1299	606	22	2b3o$bo2bo$3bo$3o$o! 
+1300	605	12	bobo$bo2bo$o3bo$ob2o$b2o! 
+1301	604	12	2bo$2o2bo$4bo$bob2o! 
+1302	604	15	b2o2bo$2o4bo$2b2obo! 
+1303	604	9	3obo$o3bo$b2obo! 
+1304	602	101	9b2o$9b2o$2b2o$o2bo$o2bo$obo! LOM + block 
+1305	602	15	b2o$o2bo2$3b4o$b2o! 
+1306	602	45	7b2o$7b2o$2bo$3o$bo! 
+1307	602	43	2o$2o6b3o$7bo2bo2$7b3o! 
+1308	601	17	b3o$bo2bo$o3bo$ob2o$bo! 
+1309	599	16	b2o$2o$o4bo$bo3bo$4b2o! 
+1310	599	45	6bobo$7b2o$2o6bo$2o! 
+1311	599	5959	5b2o$4bo2bo$5b2o$bobo$o2bo$bobo! angel predecessor 
+1312	598	18	2bo$2b2o$bob2o$2obo$b2o! 
+1313	598	9	2b2o$bo2b2o$o4bo$bobobo$2bo! 
+1314	598	48	3o2$6b3o$8bo$6b3o! 
+1315	597	42	2o$2o6b2o$10bo2$7b3o! 
+1316	596	32	b2o$o2b3o$b2o3bo! 
+1317	596	13	b2o2$3b2o$o2b2o$b3o! 
+1318	596	24	3b3o$bo2bo$2obo$bo! 
+1319	595	11	2bo$bobo$o3bo$bo3bo$5bo$3bo! 
+1320	594	36	3o$o7bo$3o5bo$8bo! 
+1321	594	12	b3o$5bo$o5bo$bo3bo$2b3o! 
+1322	592	16	o2b2o$o4bo$o5bo$2b2obo! 
+1323	592	23	4bo$o3bo$o3b2o$2bobo$b3o$2bo! 
+1324	591	19	2b3o$o$2bo2bo$2bo$3bo$2bo! 
+1325	591	23	bo$3o2bo3$o3bo$b3o! 
+1326	590	14	2o$obo3bo$bo3bobo2$5b3o! 
+1327	590	101	o6b3o$o$o6bo2bo$8b2o! honey farm + blinker, D2 
+1328	590	27	6b2o$o4bo2bo$2o3bo2bo$o5b2o! 
+1329	589	16	bo$o3bo$o3bo$4o$bo! 
+1330	589	13	2bo$bo2bo$o3bo$bo3bo$2b3o! 
+1331	587	12	b2o$o$bo2bo$2bob2o$3bo! 
+1332	587	36	8b3o$2o$2o5b3o! 
+1333	587	18	o3bo$o3bo$bo3bo$3bobo$3b2o! 
+1334	587	14	b3o$2ob2o$3bo$2bo! 
+1335	586	57	3o4b2o$2bo4b2o$3o! 
+1336	586	8	b3o$o$3b2o$4o! 
+1337	586	20	bo$o3bo$o3bo$bo2bo$2b2o! 
+1338	585	24	o3b2o$o3b2o$2o$bo$bo! 
+1339	585	172	10b2o$10b2o2$3o$o$3o! pi hits block at (3,-9) 
+1340	585	58	b2o$b2o$o$b2o$b2o2$8b3o! 
+1341	584	20	b2o$2obo$3bo$b3o! 
+1342	584	66	bo$obo2$bo3$6b2o$7b2o$6b2o! 
+1343	584	8	3b2o$2bobo$o3bo$o$o2bo! 
+1344	584	35	bo2b2o$o3b2o$o2bo2bo$2o! 
+1345	584	35	o3b2o$o5bo$o5bo$3b3o! 
+1346	583	56	5b3o$6bo$7bo3$2o$2o! 
+1347	583	77	3bo$2b2o2$obo$o4b3o! R + blinker 
+1348	583	25	2b2o$bo2bo$4bo$2ob2o! 
+1349	582	14	o$3o$bobo$3b2o$2b2o! 
+1350	582	20	2b2o$2o2bo$5bo$4bo$o2bo$b3o! 
+1351	582	19	2b2o$bobo$3o2$5b2o$5bo! 
+1352	581	24	b3o$4bo$o3bo$ob3o! 
+1353	581	55	6b2o$6bo2bo$6bo2bo$7bobo4$2o$2o! 
+1354	581	33	b2o$2o$bobo$2b2o3b2o$7b2o! 
+1355	581	19	o2b3o$bo4bo$bo3bo$3b2o! 
+1356	580	12	5b2o$3o2bobo$7bo$5b3o! 
+1357	580	52	b2o$2o$bo$8b2o$8b2o! 
+1358	580	30	b3o$bo2bo$o3bo$2b3o! 
+1359	579	16	o$o2bo$o2b2o$4bo$2b2o! 
+1360	578	11	4bo$3bobo$6bo$bo3bo$o3bo$bobo$2bo! 
+1361	578	12	6b2o$5bo2bo$bobo2b2o$o2bo$bobo! 
+1362	578	28	3bo$2o$o$o5bo$b2obobo$3bo! 
+1363	577	53	8b2o$8b2o4$3o$o2bo2$b3o! 
+1364	577	62	7bo$7b2o$6b2o3$2o$2o! 
+1365	576	35	2b2o$o2bo$o2bo6b2o$obo7b2o! 
+1366	575	9	2o2b2o$o2bobo$o2b2o$bo! 
+1367	575	27	b3o$o3bo$bob2o$4bo! 
+1368	575	23	2bo$bobo$4bo$o2bo$b3o! 
+1369	575	177	10b2o$11b2o$2o8b2o$2o! 
+1370	574	40	3o2b3o$5bo2bo$6b2o! 
+1371	574	81	obo$b2o$bo3b2o$4bo2bo$5b2o! glider + beehive -> R 
+1372	573	33	obo$o2bo$o3bo$bo2bo$2b3o! 
+1373	573	27	o$o$o$6bobo$5bo2bo$7b2o! 
+1374	573	66	8bo$9b2o$8bo$o2bo$2b2o$2bo! 
+1375	573	16	o3bo$2obobo$o3bo! 
+1376	572	16	bo$ob2o$bo2bo$2b3o$3bo! 
+1377	572	14	2bo$2o2bo$bo2bo$bo2bo! 
+1378	571	15	o$o3b2o$o2bo2bo$6bo$6bo! 
+1379	571	180	3o6b3o$obo$o2bo$b2o! honey farm + blinker 
+1380	571	12	bo$3obo$o3bo$2b3o! 
+1381	571	179	7b2o$6bobo$6bobo$7bo$b2o$2o2$6bo! 
+1382	570	83	8b3o4$obo$obo$3o! 
+1383	570	59	7b2o$6b2o$7bo2$2o$2o! 
+1384	570	9	o2bo$o2b2o$o3bo$4bo! 
+1385	570	11	4bo$b2obo$2ob2o! 
+1386	570	40	6b2o$6b2o2$bo$3o$2bo! 
+1387	569	47	6b2o$7b2o$7bo4$2o$2o! 
+1388	569	16	2b2o$bo2bo$o3bo$bo2bo$2bob2o! 
+1389	569	30	3b3o$o5bo$o4bo$o2b2o! 
+1390	568	7	b3o$bo2bo$2o$bob2o$b2o! 
+1391	566	54	bo2b2o$2o6bo$bo2bo2b2o$8bo! 
+1392	566	36	7bo$7b2o$6bobo$7bo$o$o$o! 
+1393	565	63	19bo$17b3o$2o15bobo$2o15bo! 
+1394	565	137	bo2bo$o4bo$o5bo$o5bo$bo4bo$2bo2bo! 
+1395	564	3	b3o$2bobo2$2bo2bo$2bobo$2o! 
+1396	564	82	7bobo$7bobo$2o5b3o$2o! 
+1397	563	41	o$o2bo$o3bo$2b3o! 
+1398	563	18	2bo$bo3bo$o4bo$o4bo$b3o! 
+1399	562	15	2b3o$3b2o$o$3o! 
+1400	561	15	o$2o$2ob3o! acorn 
+1401	561	88	5bo$5b3o$6bo3$2o$2o! 
+1402	561	37	2o$o3bo$2bobo$2b3o! 
+1403	561	14	2b2o$o2bo$2obo$o! 
+1404	560	43	b2o4b2o$o2bo3b2o$4bo$b3o! 
+1405	560	12	bob2o$o3b2o$bo3bo! 
+1406	560	17	bo$obob2o$bo3bo$2b3o! house with tub 
+1407	560	18	3o$o$2o3bo$2bo2bo$2b2o! 
+1408	560	51	3o6b2o$o8b2o$obo$b2o! 
+1409	560	94	4b3o$5bobo$7bo$b2o$o2bo$b2o! 
+1410	559	237	2o$o$o5bo$bo4bo$2bo3bo$4bo! 
+1411	558	64	6b3o$3o$2bo$o$bo! 
+1412	558	39	3o$bobob3o$2bo! 
+1413	558	20	b2o$o2bo$o2bo$b2o4bo$7b2o$7bo! 
+1414	558	43	b3o2$o2bo5b2o$3o6b2o! 
+1415	558	31	obo$bo$bo4b2o$5bo2bo$6bobo$7bo! 
+1416	557	17	3o$ob2o$o3bo$5bo$4bo! 
+1417	556	27	o$3o$3bo$2b3o! 
+1418	556	27	3o3$5b3o$7bo$5b3o! 
+1419	556	86	5b2o$5b2o$2bo$b2o$2o$b2o! 
+1420	556	22	3bobo$2bo2bo$5bo$2o2bo$bobo! 
+1421	556	7	2b3o2$2o$bob2o$b2o! 
+1422	555	26	b3o$o3bo$5bo$2obo$2bo! 
+1423	555	42	7b2o$7b2o4$bo$3o$o! 
+1424	554	15	3bo$bo3bo$2o$bobo$2bo3bo$3b3o! 
+1425	553	10	3o$o2bo$ob2o$3b2o! 
+1426	553	32	b3o$o$o4bo$bo4bo$5bo$4bo! 
+1427	553	28	2bo$2o6b2o$b2o6b2o$2bo5b2o! 
+1428	553	50	bo$obo2$3o$4b2o$3bo2bo$4b2o! 
+1429	552	240	8bo$7bobo$bo4bo2bo$3o4b2o! traffic light + loaf 
+1430	551	17	2b2o$2o2bo$o2b2o$ob2o! 
+1431	551	12	3b2o$4bo$3obo! 
+1432	551	28	3o3$3b3o$3bo2bo$4b2o! 
+1433	551	54	2o$2o$7b2o$8b2o$8bo! 
+1434	551	26	7b2o$8bo$2o3bo2bo$2o4b2o! 
+1435	550	6	4bo$3b3o$2bo2b2o$2bo$obo! 
+1436	550	5	4bo$bo3bo$o5bo$o4bo$b4o! 6+6+3 polyomino 
+1437	550	16	3bo$2bobo2$bo$2obo2bo$b3obo! 
+1438	550	27	5b2o$bo2bo2bo$bo3b2o$obo! 
+1439	549	15	3bo$2b2o$bo2bo$3o2$5b2o$5bo! 
+1440	549	31	o$2o$3bo$b2ob2o$b2o! 
+1441	549	30	4bo$bo2bo$2obo2$8b2o$8b2o! 
+1442	549	36	5b2o$5bo$2ob2o$b3o$2bo! 
+1443	549	51	3b3o$2bo$bo4bo$o$bo2b2o$2b2o! 
+1444	548	16	5b2o$5bobo$7bo$2o3b3o$b2o! 
+1445	548	47	3o$bobo$2b2o3b2o$7b2o! 
+1446	548	14	3bo$2b2o$4bo$bobo$2o! 
+1447	547	20	3o$3bo$4bo$5bo2$4b2o! 
+1448	547	19	8b2o$2o7b2o$2o6b2o$8bo! 
+1449	546	13	2b2o$3b2o$b3o$o$2o! 
+1450	546	17	3o$2obo$4bo$bo2bo$2bobo! 
+1451	546	82	o$o$o3$6bo$5bobo$5bob2o$6b2o! 
+1452	545	12	2b3o2$bo2bo$3bo$3o! 
+1453	545	22	2bo$b2o$2o6b2o$b2o5b2o! 
+1454	545	11	3bo$bo2bo$bo3bo$obobo! 
+1455	544	7413	4b2o$3bobo$3bo$2o$o3bo$b3o! angel predecessor 
+1456	544	40	2o$2o3bo$4bo$4bo2bo$5b3o! 
+1457	544	72	b3o2$o2bo$b2o2$12b2o$12b2o! 
+1458	544	21	3ob2o$bo3bo$2b3o! 
+1459	544	42	6b2o$4bo2bo$2o4bo$obo$b2o$2bo! 
+1460	544	7	bo$obo2b3o$b2o3bo! 
+1461	544	18	b3o$o2bo3b2o$o6b2o$bo! 
+1462	543	19	2o$bo4b2o$7bo$5b2o$5bo! 
+1463	543	8	3o$o2bo$4bo$5bo$2bo2bo$3bo! 
+1464	543	125	o2bo$ob2o$o2bo! wiggler 
+1465	543	40	3b2o$2bo2bo$2o2bo$b3o! 
+1466	542	9	b2obo$o3b2o$o3bo$b2o! 
+1467	542	188	3o$o10b2o$3o8b2o! 
+1468	542	8	2o3bo$2o2b2o$3bo$bobo$2bo! 
+1469	542	19	2bo$bobo$o2b2o$bo2bo$2bo! 
+1470	541	34	3o$obo$obo2$6bo$6bo$6bo! 
+1471	540	39	3o$o2bo$b2o3$8bo$8bo$8bo! 
+1472	540	61	bo$2o3b2o$o3bobo$7bo$4bobo$5bo! 
+1473	539	11	bo$o3b2o$bobobo$2bo! 
+1474	538	19	2b2obo$bobobo$o$bobo$2bo! 
+1475	538	59	2o$2o4b3o$6bo$6b3o! 
+1476	538	45	b3o$o3bo$2o2$3bo2bo$4b2o! 
+1477	537	8	3bobo2$2o3bo$bob2o$2bo! 
+1478	537	14	3bo$2bob2o$b2o$o2bo! 
+1479	537	32	b2o$2o2$4bobo$4b3o$5bo! 
+1480	537	16	bo$obo$obo$3b2o$4b2o$3b2o! 
+1481	537	12	3o$3bo2bo$5b2o$b2o! 
+1482	537	61	b2o$o2bo$3o3$5b2o$4b2o! 
+1483	537	17	2bo$bobo$o3bo$bo2bo$3b3o! 
+1484	536	22	3o$o2bo$o3bo$b2o2bo$3b2o! 
+1485	536	6	2b2o$o$2o2bo$b3o! 
+1486	536	10	bobo$o2b2o$bo$2b2obo$4bo! 
+1487	536	46	bo2bo$5bo$o5bo$o5bo$bo4bo$bo3bo$3bo! 
+1488	535	13	2bo$bobo$o$o$3b3o$5bo! 
+1489	535	10	2bobo$o4bo$o3bo$2obo! 
+1490	535	38	3o$o2bo2$b3o$8b2o$8b2o! 
+1491	535	47	7bo$6b3o$8bo4$2o$2o! 
+1492	534	7	b3obo$o5bo$bob3o$4bo! 
+1493	534	15	4b3o$3o2bo$4bo! 
+1494	533	70	10b2o$10b2o5$obo$2bo$bobo$2bo$2bo! 
+1495	533	60	o2$2o$o5bo$6b2o$8bo$6b2o$6bo! pi + beehive; glider hits long boat from side 
+1496	533	17	b3o$o3bo$o4bo$b2obo$2b2o! 
+1497	532	20	3o$bo3bo$2bo2bo$2bobo! 
+1498	532	79	2o$2o6bo$7b2o$8b2o! 
+1499	532	39	2bo$b2o$o$b2o6bo$2bo6bo$9bo! 
+1500	532	28	7bo$bo5bo$bo5bo$o2b2o$b2o! 
+1501	531	7	2bo$bo2bo$4b2o$3o2bo$5bo! 
+1502	531	29	6b2o$2o3bobo$2o2b2o$5b2o! 
+1503	531	24	6b2o$6b2o$2o$o$o2bo$b2o! 
+1504	530	26	4bo$3b3o$3bob2o3$3o! 
+1505	530	32	bo3bo$3o2bo$5bo! 
+1506	529	105	2o$2o4$7bobo$7bobo$7b3o! 
+1507	529	37	2o3bo$o5bo$o5bo$5b2o! 
+1508	529	41	2o$2o8bo$8b3o$9bo! 
+1509	529	11	bo2bo$o3bo$2o2bo$o! 
+1510	529	15	3b2o$bobo$o$4bo$b2ob2o! glider hits loaf from back end 
+1511	528	237	4bo$bo$o4bo$o$3o2b2o$5bo! 
+1512	528	58	3o$2ob2o2$2bo$3b2o! 
+1513	528	21	2b3o$bo2bo$o4bo$o$3o! Lidka seed 
+1514	527	19	bo$3o2$6b2o$5bo2bo$5bobo$6bo! 
+1515	527	22	2bo$b2o$2o$b2o$8b2o$8b2o! 
+1516	527	28	3b2o$3bobo$2bo2bo$bo2bo$o3bo$2o! 
+1517	527	22	2bo$bobo$o3bo$bobo3bo$7bo$7bo! beehive + boat 
+1518	527	11	o2b2o$o3bo$3obo! 
+1519	527	41	2o$2o3$6b2o$5b2o$6bo! 
+1520	526	60	2o$2o4$5b3o2$6b3o! 
+1521	525	11	4o$4bo$4b2o$3b2o$3bo! 
+1522	525	8	2b2o$bo$o2bo$bo3bo$6bo$3bobo$4bo! 
+1523	524	46	2o$obob2o$obob2o$bo! 
+1524	524	3	2o$b3o2$2b3o! 
+1525	524	9	5b2o$2obobo$2o$3b2o! 
+1526	524	14	2o$bo2bo$bo3bo$2bo2bo$4bo! 
+1527	524	23	2b2o$2o2bo$o2b2o$3o! stairstep generation 3 minus one 2e cell 
+1528	523	25	b3o$o$bo$2b2o$4bo! 
+1529	523	13	3o$bo$6bo$5bobo$6bo! 
+1530	523	15	obo$o2bo$obo4bo$6bobo$7b2o! 
+1531	523	8	2bo$bo2bo$o4bo$b2o$4b2o$4bo! 
+1532	523	10	2bobo$2o3bo$2bo2bo$2b3o! 
+1533	522	27	bo$b2o$o5bo$7b2o$6bo! 
+1534	521	12	5bo$5b2o$5bo$o$2o$o! 
+1535	520	52	b2o$o2bo$12b2o$12b2o$3o! 
+1536	520	14	2b2o$o3b2o$o4bo$o4bo$3b2o! 
+1537	520	41	8b2o$8b2o2$bo$2o$b2o! 
+1538	520	11	2b2o$2b2o$bo2bo$bo2bo$o2bo! 
+1539	520	34	bo2bo$o3b2o$o4bo$2o! 
+1540	520	43	b2o$2o6b2o$b2o5b2o$2bo! 
+1541	519	63	b2o$o2bo$bo2bo$bobo5bo$9bo$9bo! 
+1542	519	12	5bo$b2o3bo$b2o3bo$o5bo$bo3bo$bo! 
+1543	519	26	b3o$o$bob2o$3bo! 
+1544	519	45	2o$b2o$bo3$7b2o$7b2o! 
+1545	518	14	2bo$bo4bo$2o4bo$bobo$2b3o$3bo! 
+1546	517	32	6b2o$6b2o3$2obo$b3o$2bo! 
+1547	516	11	bo$3o$o5bo$6bo$2bo3bo$4bo! 
+1548	516	7	2o$2o$4bo$5b2o$3bo$b2o$bo! 
+1549	515	11	b3o$o3bo$3bo$o$2o! 
+1550	515	24	6bo$b2o3bo$2o4bo$bo! 
+1551	515	10	3b2o$b3obo$o4bo$bo2bo$bo2bo! 
+1552	515	18	2b3o$bo2bo$4bo$2obo! 
+1553	514	13	2b2o$o4b3o$bobo$2bo! 
+1554	514	15	3o$o2bo$o3bo$4bo$2b2o! 
+1555	513	11	3b2o$2bo2bo2$4bo$o2bo$3o! 
+1556	513	9	2bo2b3o$2o4bo$2bo! 
+1557	513	6	2b2o$bo2bo$bo2bo$2o3bo$3b2o! 
+1558	512	12	obo$o2bo$o$2b3o! 
+1559	512	10	3o$o$o3bo$b2obo! 
+1560	512	34	2o3bo$o3b2o$bo3bo$2b3o! 
+1561	512	8	2b2o$bobo$4bo$o2bo$3o! 
+1562	512	42	7bo$8bo$2o3bo2bo$2o3b3o! 
+1563	512	66	3obo$4bobo$5b2o! 
+1564	511	9519	2bo$b3o$2obo3b2o$7b2o! 
+1565	511	47	b2o$o2bo$3bo$2b2o3b2o$7b2o! 
+1566	511	21	2o2b3o$b2o$bo! 
+1567	510	16	bo2bo$bo3bo$o4bo$b2ob2o$b2o! 
+1568	510	27	7b3o2$8b3o2$2o$2o! 
+1569	509	8	obo$o$obobo$3b3o$5bo! 
+1570	509	42	2o3bob2o$2o3b3o$6bo! 
+1571	508	10	6bo$7b2o$bo4bo$3o! 
+1572	508	24	7bo$6bobo$8bo$2obo4bo$bo5bo2$2bo! 
+1573	507	21	2bo$2ob2o$2o$o4bo2$2b3o! 
+1574	507	20	bo$3o$obo2$5b3o! 
+1575	507	16	3o3b2o$o2bo2b2o2$2b2o! 
+1576	506	20	5bo$2bo3bo$o5bo$o2b4o$o! 
+1577	506	189	3o$o$bo$3bobo$3b2ob2o$5bo! 
+1578	506	14	9b2o$b2o6b2o$2o$b2o$2bo! 
+1579	506	9	3bo$bo3b2o$o5bo$o$bo3bo$2b3o! 
+1580	505	19	2o$o5bo$o5bo$bo3b2o$2bo! 
+1581	505	104	3o$o$3o4$9b2o$9b2o! 
+1582	505	13	obo4b2o$o2bo3bobo$obo5bo! 
+1583	505	9	b3o$3bo$2o3bo$o3bo! object hassled in 30P25 before hitting eater 1 
+1584	505	65	5b3o$5bo$5b3o3$2o$2o! 
+1585	504	13	b2o$3bo$o3bo$b4o$3bo! 
+1586	504	49	9bo$8bobo$8bobo$9b2o5$2o$2o! 
+1587	504	28	6bo$bo4b2o$3o3b2o2$4b2o! 
+1588	504	11	o$ob2o$2o2bo$2b3o! 
+1589	503	11	2bo$bo2bo$o4bo$bo3bo$2bob2o! 
+1590	503	14	bo$ob2o$2b2o$b2obo$4b2o$3bo! 
+1591	503	142	3o9bo$10bobo$9b3o! 
+1592	502	31	5b3o$7bo$5bobo$5b2o2$2o$2o! 
+1593	502	8	5bo$2bobobo$b2o3b2o$o3bo! 
+1594	501	9	3b2o$ob2o$o2bo$obo! 
+1595	501	27	b2o$4bo$2o3bo$2o2bo$2b2o! 
+1596	501	14	b2o$o2bo$o2bo$b2o2$6b3o$7bo! 
+1597	500	9	b3o$o3bo$bo2bo$4bo$2b2o! 
+1598	500	30	2o3b3o$2o2bo2bo$4bo$5bo! 
+1599	500	18	3bo$3bob2o$bo4bo$bo3b2o$o2bo! 
+1600	500	155	3o$10b3o$8b2ob2o$10bo! 
+1601	500	38	o$o$o$5b3o$7bo$5b3o! 
+1602	500	11	2bo$b3o$2obo2$6b2o$6b2o! 
+1603	500	7	bo2bo$bo2bo$o3bo$2o$2bo! 
+1604	499	8	o2bo$bo3bo$bo3bo$3bobo! 
+1605	499	3744	bo$bo4b2o$o5b2o$b2o$2bo! wing deletes block 
+1606	499	20	bo2bo$2o3bo$4bo$b3o! 
+1607	499	74	4bo$3bobo$2bo3bo$2obobo$2o2bo! 
+1608	499	9	bo$2o5bo$bo6b2o$7bo! 
+1609	498	44	8b2o$8b2o3$2b2o$o2bo$o2bo$obo! 
+1610	497	27	bo$3o2$b5o! 
+1611	497	69	13b2o$b3o9b2o2$o2bo$b2o! 
+1612	497	44	o$o2bo$2ob2o$3b2o! 
+1613	497	15	bobo$obobobo$obob2o$bo! 
+1614	497	29	2o$2o2$5b2o$6b2o$5b2o$5bo! 
+1615	496	36	2b3o$bo2bo$b2obo$o! 
+1616	495	10	2b2o2$2ob2o$2obo$bo! 
+1617	495	59	5bo$7bo$bo5bo$o6bo$o$3o! 
+1618	495	60	10bo$3o6b2o$8bobo! 
+1619	495	16	5bo$3ob2o$4b2o! 
+1620	494	21	8b2o$7bob2o$2o6bo$2o5bo! 
+1621	494	18	4bo$3bobo$ob2o2bo$bo2b2o$o! 
+1622	494	11	bo$ob2o$o2bo$2o2bo! 
+1623	494	7	o2b2o$bo2bo$bo2bo$2b3o! 
+1624	493	40	bo$2o2$4b2o$2bobo$2b2o! 
+1625	493	21	5o$o4bo$6bo$bo3bo$3b2o! very long U-turner 
+1626	493	1073	bobo$2ob2o$5bo$2b2obo$3b2o! 
+1627	493	8	2b3o$bo2bo$o$b2o$6bo$7b2o$7bo! 
+1628	493	18	o4bo$b2o3bo$2b4o$4bo! stairstep generation 3 minus 2k cell 
+1629	492	39	b2o$obo5bo$bo5b2o$8bo! 
+1630	491	12	2obo$o$bo2bo$2b3o! 
+1631	491	24	bo2b2o$2o3bo$bob2o! 
+1632	491	49	3b3o2$3o$2bo$3o! 
+1633	491	42	2o6bo$2o5b2o$8b2o! 
+1634	491	26	5bo$4bobo$3b2ob2o2$o$o$o! 
+1635	491	7044	bo$3o$5bo$o4b2o$4b2o$4bo! 
+1636	490	39	bo$b2o$2o2$7b2o$7b2o! 
+1637	490	14	8b2o$8b2o$2bo$bo$2o$b2o$2bo! 
+1638	490	6	2bo$b2o$2obo$4b2o$4b2o! 
+1639	489	27	2ob2o$4bo$o3bo$b3o! R generation 7 minus 2c cell 
+1640	489	13	2o2b3o$2o2bo2bo2$6b2o! 
+1641	489	24	2ob2o$o3bo$bo2bo$b3o! 
+1642	488	63	5bo$2bo3bo$bo5bo$o6bo$bo5bo$2bo3bo$5bo! 
+1643	488	2	4b2o$6bo$bo3bo$o3bo$bo2bo$2bo! 
+1644	488	35	7bo$6bobo$6bo2bo$7b2o$3o$bo! 
+1645	487	9	2o$b2o$bo$2bobo$3bo! 
+1646	486	9	bobo$2o$obobo$b2obo$4bo! glider hits boat from side 
+1647	486	28	bo$3o$obo$4bo$2b3o! 
+1648	486	40	4b3o$6bo$4b3o2$o$o$o! 
+1649	486	77	6b2o$2bo5bo$bo5bo$o6bo$bo4bo! 
+1650	486	5	2b2obo$bo3bo$2o3bo$bobo! 
+1651	485	28	o$o3bo$o4bo$3b3o$4bo! 
+1652	485	28	2o$2o$7bo$7b2o$8b2o$7b2o! 
+1653	484	15	2b2o$bo2bo$o4bo$o5bo$4b2o$4bo! 
+1654	484	17	bo$o3bo$bob2o$3b2o! 
+1655	484	16	3bo$2bobo$5bo$ob3o$o! 
+1656	483	23	2o3b2o$2o3bo$5bo2bo$6b2o! 
+1657	483	17	ob3o$o3bo$bo$2bo! 
+1658	483	25	o$o$o3$3b2ob2o$4bobo$5bo! 
+1659	482	11	3b2o$bo3bo$2o2bo$bobo! 
+1660	482	18	5bo$5bo$bo3bo$o2bo$o2bo$3bo! 
+1661	481	40	2o3bo$o5bo$bo3bo$b2obo! 
+1662	481	39	9b2o$9b2o$bo$b2o$o2bo$2bo$2bo! 
+1663	481	15	ob2o$o3bo$o3bo$2bobo! 
+1664	481	9	4bo$4b2o$bo$ob2o$b2o! 
+1665	480	15	2bo$b2o3b2o$o5b2o$bo$bo! 
+1666	480	41	2o$o2bo$obo3$7b3o! 
+1667	479	9	o$o$2ob2o$bo2bo$2b2o! 
+1668	479	22	3o$3o$6b2o$7b2o$6b2o! 
+1669	479	7	o$2o$o4b2o$5bobo$6bo! 
+1670	478	11	bo$o$o2bobo$2o4bo$5bo$4bo! 
+1671	478	19	4b3o$o4bo$o3bo$o! 
+1672	478	12	bobo$o3bo$o2b2o$2o! 
+1673	478	6	o$o2b3o$2bo$2bo2bo$2b3o! 
+1674	478	14	2b2o$bo$bo3bo$o5bo$bo3bo$2b3o! 
+1675	477	19	2o$2o2$6b2o$8bo$4bobo$4b3o! 
+1676	477	17	2bo$b3o$2o3bo$2b2o$3bobo! 
+1677	477	16	2b2o$2b2obo$bo3bo$o$b2o! 
+1678	476	17	5b2o$3bo2bo$2o3bo$b3o! 
+1679	476	14	2bo$bob2o$2o$b3o! 
+1680	475	61	bo5bo$obo4bo$7bo$6bo$bo3bo$2b3o! 
+1681	475	125	2bo$bobo$2ob2o2$10b2o$10b2o! 
+1682	475	18	2bo$bobo4bo$o2bo3b3o$b2o! 
+1683	474	9	3o$3b2o$bo2b2o$bo2bo$2b2o! 
+1684	474	7	5bo$b2o2bo$b2obo$o$2o! 
+1685	474	8	b2o$o2bo$o3bo$b2ob2o$3b2o! 
+1686	473	16	b3o$o2bo$o$bo$6b2o$6b2o! 
+1687	473	48	9bobo$8bo2bo$2o6bo2bo$2o6b2o! 
+1688	473	10	bobo$4bo$2o3bo$5bo$bo3bo$2bo! 
+1689	473	27	2bo$bobo$o4bo$bo4bo$2bo$3b3o! 
+1690	472	32	o$2obobo$bo2b2o! 
+1691	472	12	b2o$bob2o$o$2bobo$3bo! 
+1692	471	59	o$o4b2o$o4bobo$5bobo$6bo! 
+1693	471	84	2b3o$bo3bo$o3b2o$bo3bo! 
+1694	471	14	3bobo$2bo3bo$bo3bo$o$ob2o$bo! 
+1695	471	11	b3obo$o4bo$bo3bo$b2o! 
+1696	470	6	3bo$2bo$bo4bo$2o4bo$bo4bo$5bo$4bo! 
+1697	469	31	2bo$bobob2o$o4b2o$2b2o2bo! 
+1698	469	27	2o$2o$4bob2o$4bo2bo$4b3o! 
+1699	469	27	b2o$o2b2o$5o$4bo! 
+1700	469	36	bo4bo$obo2bobo$2o4b2o$6bo! 
+1701	469	9639	b3o$o2bo$2obo3$5b2o$5b2o! 
+1702	469	71	obo$obo$3o$8b2o$8b2o! 
+1703	468	113	7bo$7bo$3o2bo$o5bo$o5bo$bo3bo! 
+1704	468	15	3o$3o$o3bo$2bobo$4bo! 
+1705	467	21	3o$o2bo$3bo$2bo4b2o$7b2o! 
+1706	467	17	3b2o$2bo2bo$5bo$bo3bo$o3bo$bobo! 
+1707	467	13	3bobo$2bo3bo$bo3bo$o3bo$bobo! 
+1708	467	19	o$o$o3bobo$4bobo$4b3o! 
+1709	467	6590	3bo$o3bo$2o3bo$5bo$4b2o! 
+1710	467	5	2o2b2o$2o3bobo$6b2o! 
+1711	467	12	b3o$o2bo$o4bo$o4bo$bo3bo! 
+1712	466	64	7bobo$2o5bo2bo$2o5bo2bo$9b2o! 
+1713	466	65	6bo$6b3o$7bo$2o$2o! 
+1714	464	88	3o$o$3o5$8b2o$8b2o! 
+1715	464	17	4bo$2b3o$3bo$2o$2bo! 
+1716	463	18	4b2o$4b2o$3o3bo$7bo! ship + blinker 
+1717	463	35	3o$o2bo$o3bo$4bo$b3o! 
+1718	463	28	2bo$b2o$o$b2o$2bo5b3o! 
+1719	463	45	bo$bo3bo$bo4bo$6b2o$2o3bo$2o! 
+1720	463	18	b2o$o3bo$3bobo$6bo$2o3bo! 
+1721	463	11	b2o$b2o$o5bo$bo3b3o$3bo3bo! 
+1722	463	11	2b3o$o3bo$o3bo$b2o! 
+1723	462	45	6bobo$6bobo$6b3o3$2o$2o! 
+1724	462	19	3o2b3o$6bo$5bo! 
+1725	462	30	8b2o$8b2o3$o$3o$bo! 
+1726	462	21	8bo$7b2o$6b2o$2bo$2ob2o$2bo! 
+1727	462	24	b2o$o4bo$2o4bo$bobobo! 
+1728	461	12	b2obo$o3bo$o3bo$3o! 
+1729	461	31	9bo$2o6b3o$2o8bo! 
+1730	459	62	bo$bo4b2o$2o3bo2bo$5b3o! 
+1731	459	32	b3o$o3bo$o4bo$o4bo$4bo! 
+1732	459	14	b3o$o3bo$2o$5bo2$2b3o! 
+1733	459	34	2o$o$o2bo$b2o$6b2o$6b2o! 
+1734	459	5	2o$o2bo$o2b2o$3bo! 
+1735	458	7	3o$2bo$2b2obo$4b2o! 
+1736	458	28	2o$2o3b2o$2b2obo$4bo! 
+1737	458	5959	2b3o$bo2bo$o$bob2o! 
+1738	458	24	2bo$bo$2o$b2o4bobo$2bo5b2o$8bo! 
+1739	458	17	b3o$o3bo$5bo$o3bo$b3o! 
+1740	458	40	o3b3o$o3bobo$o3bobo! 
+1741	457	14	bo$bo5bo$obo3bobo$6bo2bo$7b2o! 
+1742	457	9	5bo$2obobo$2ob3o! 
+1743	456	65	3o$o2bo$3o2$9b3o! 
+1744	456	11	5bo$b3obo$o2bo$o$o! 
+1745	456	6	6bo$obo3b2o$o2bo2bo$obo! 
+1746	456	7	bo2b2o$2o3bo$bo3bo! 
+1747	456	29	2o$2o3$4b2obo$4bo2bo$5b3o! 
+1748	456	16	4bo$2b2obo$2o3bo$3b2o$3o! 
+1749	456	23	4b3o$4bo2bo$4bob2o4$2o$2o! 
+1750	455	28	b2o$o2bo$o$o5b2o$6b2o! 
+1751	455	51	bob3o$2o4bo$3bobo$4bo! 
+1752	455	13	4bo$5bo$bo3bo$o3bo$o3bo$b2o! 
+1753	455	34	2bo2bo$bo3bo$o4bo$bo$2b2o! 
+1754	454	38	7b2o$6b2o$7bo4$2o$2o! 
+1755	454	15	2bo2bo$bo3bo$o5bo$bo3bo$2b3o! 
+1756	454	44	6b3o$6bo$6b3o$2o$2o! pi after hitting fishhook in front 
+1757	453	31	b3o$o2bo$o6bo$b2o5bo$8bo$7bo! 
+1758	453	45	6bo$2bo3bo$5bobo$2o2bobo$o5bo$bo! 
+1759	453	42	8bo$8b2o$9b2o$8b2o$2o$2o! 
+1760	453	33	2o6b2o$2o5b2o$8bo! 
+1761	452	38	9b2o$bo7b2o$3o$o! 
+1762	452	19	2bobo$2ob2o$3bo$b2o! 
+1763	451	16	b3o$o3b2o$o2bo$bo! 
+1764	451	24	b2o$o2bo$o3bo$bobo$b2o! glider hits pond 
+1765	451	17	b2o$o2bo$4bo$b3o$2b2o! 
+1766	450	72	bobo$o3bo$bobo6b2o$2bo7b2o! 
+1767	450	31	8bo$7b2o$8bo$6b2o2$o$o$o! 
+1768	450	19	5bo$4bo$4bo2bo$2o3b3o$2o! 
+1769	450	17	2b2o$o2bo$o2bo$obo2$4b3o! 
+1770	449	20	4bo$2o2bo$bo2bo$2b2o! 
+1771	449	5	o2b3o$obo$3bobo$4bo! 
+1772	449	5	bo$2o5bo$bo4b2o$7bo! 
+1773	449	13	bo4bo$obo3bo$bo3bobo! 
+1774	449	10	4bo$2b4o$2o$2b3o! 
+1775	448	3	b2o$obo$4bo$o2bo$b3o! 
+1776	448	32	3o2$6bobo$6bobo$6b3o! 
+1777	448	6	bo$bo2b2o$o5bo$bo4bo$bo3bo$3b2o! 
+1778	448	6	bo$obobo$o2b2o$4bo! 
+1779	448	45	b3o2$o2bo$b2o10b2o$13b2o! 
+1780	448	12	5bobo$o3bo2bo$2o3bobo$o! 
+1781	447	25	bo$2o$bo$5b2o$4bo2bo$4bo2bo$5b2o! 
+1782	447	23	bo3b2o$bo3bobo$o6bo$bo5bo$bo4bo! 
+1783	447	80	6b3o$8bo$6bo$7bo$b2o$o2bo$b2o! 
+1784	447	17	o$o3bobo$o3bobo$4b3o! 
+1785	446	3	3b2o$2bobo$o3bo$o2bo$b2o! 
+1786	446	21	b3o$o3bo$2o3bo$4bo$2bo! 
+1787	446	45	2o7bo$2o6b3o$10bo! 
+1788	446	5	4bo$bo2b2o$o3bo$2o! 
+1789	446	21	3bobo$3o$3o2b2o! 
+1790	445	50	9b2o$9b2o3$3o2$b3o! 
+1791	445	25	5bo$bobobo$o3b2o$o2bo$bo! 
+1792	445	29	4bo$5bo$5b2o$3o2bo$4bo! 
+1793	445	33	b2o$o2bo$o$2o2$6b2o$6b2o! 
+1794	445	7	5bo$bob3o$o5bo$bo3b2o! 
+1795	444	16	2o$obo$bo2$5b3o$6bo! 
+1796	444	42	7b3o$9bo$7b3o2$3o! 
+1797	443	39	2bo$bobo$o3bo$o$o5bo$bo4b2o$2bo! 
+1798	443	19	bobo$o3bo$bo3bo$2bo2bo$5bo! 
+1799	443	39	10b2o$10b2o$obo$o2bo$o2bo$2b2o! 
+1800	443	23	8b2o$8b2o$bo$b2o$2o! 
+1801	443	62	o2b3o$2o3$8bo$7bobo$7bobo$8bo! 
+1802	442	25	6b3o$8bo$6bobo$6b2o2$2o$2o! 
+1803	442	189	b3o$o3bo$o2bo$o2bo! 
+1804	442	44	b2o5b3o$o2bo5bo$b2o5bo! 
+1805	442	9	2bo$bob4o$o$bobo$2bo! 
+1806	442	20	4b3o$4bo2bo$7bo$6bo2$2o$2o! 
+1807	442	65	o$o$o7bo$7bob2o$7bo2bo$8b3o! 
+1808	441	224	3o$o$bo4b2o$2bo4bo$5b2o! 
+1809	441	22	2bo$b2o$2o$b2o2$9b2o$9b2o! 
+1810	440	16	bobo$o2bo2b2o$o2bo2b2o$2o! 
+1811	440	98	2bobo$bobobo$o5bo$bo3bo$2b3o! 
+1812	440	50	7b2o$7b2o2$bo$3o$2bo! 
+1813	440	7	2b3o$bo4bo$o5bo$bo5bo$2bo3bo! 
+1814	440	25	5b2o$5b2o2$2bo$3bo$o2bo$3o! 
+1815	439	15	2bo$o2bo$o3bo$bo2bo$3b2o! 
+1816	439	21	2o$2o2$6b2o$7b2o$6b2o$6bo! 
+1817	439	13	2b3o$bo3bo$5bo$o3bo$b3o! 
+1818	439	103	9b3o$11bo$2o7bobo$2o7b2o! 
+1819	439	67	5bobo$7bo$5b2o$b2o4bo$o2bo$b2o! 
+1820	439	23	b2o$2o$bo$5b3o! 
+1821	439	38	4b2o$2o3bo$o$o3bo$b3o! 
+1822	439	48	9b2o$9b2o2$2b2o$o2bo$o2bo$obo! 
+1823	439	29	5b3o$4bo2bo$4bo$5bo$2o$2o! 
+1824	439	15	2bo4bo$b2o3b2o$3o2$3b2o! 
+1825	439	37	6b3o3$3o$o$3o! 
+1826	439	22	b3o$o3b2o$bo4bo$3bobo$4bo! 
+1827	438	21	7bo$2o6bo$b2o5b2o$7b2o! 
+1828	438	19	bo3bo$o3b2o$b2ob2o! 
+1829	438	17	2bo$b2o$2o4bo$b2o3bo$6bo! 
+1830	438	25	2b2o$o3b2o$bo$bo4bo$2bo2bo$3b2o! 
+1831	438	17	b2o$2o2$5b2o$6bo$6bo$5bo! 
+1832	437	10	5bo$4b2o$4b2o$2bo$2o$2bo! 
+1833	437	125	b2o$3b2o$2o2bo$4bo$2b2o! 
+1834	437	6	b3o$2bo$o$2o! 
+1835	436	14	bo$ob2o$4bo$bo3bo$bo$2b3o! 
+1836	436	2	bo2bo$bo2bo$o3bo$obo$2o! 
+1837	436	45	2bo$bobo$2ob2o3$7b3o! 
+1838	435	98	8bo$7bo$9bo$3o4b3o! 
+1839	435	20	5b2o$4bobo$5bo$3o$o$3o! 
+1840	435	51	7bo$6bobo$9bo$6bobo$7bo3$3o! 
+1841	435	20	b2o$obo2b3o$bo$5bobo$6bo! 
+1842	434	9	2bo$bo3bo$o2bobo$bo3bo$2bo! 
+1843	434	23	b2o$2o3bo$5b2o$6b2o! beehive + loaf 
+1844	434	36	7bobo$7bo2bo$7bo2bo$2o7b2o$2o! 
+1845	434	34	8b2o$8b2o4$o$2o$b2o$2bo! 
+1846	433	10	2ob2o$ob3ob3o$o! 
+1847	433	24	2b2o$bo2bo$2o2bo$3b2o! 
+1848	433	23	2bo$o3bo$2o$ob3o! 
+1849	432	42	3o3$6b2o$6bobo$8bo$6bobo$6b2o! 
+1850	432	4	2b3o$o4bo$o4bo$bobo! 
+1851	432	71	b2o$o2bo$b2o$7bo$6bo$6b2o$7b2o! 
+1852	432	7	b2obo$b2o2b2o$o3bo! 
+1853	432	13	4bo$2b2obo$bo3bo$o3bo$obo$bo! 
+1854	431	13	3o$2bo$2bo2$5bobo$5bo2bo$5bobo! 
+1855	431	48	7b2o$7b2o$o$bo$3o! 
+1856	431	15	6bo$5bobo$8bo$2o$bobo$2bobo! 
+1857	431	4	2bo$b3o$o3bo$bo2bo$3b3o! 
+1858	431	95	obo6b2o$obo6b2o$3o! 
+1859	430	7	4o$3bo$o3bo$b3o! 
+1860	430	25	bo$o$o2bo$b3o3b2o$7b2o! 
+1861	430	99	3o$obo$obo6b2o$9b2o! 
+1862	430	48	b2o$2o$bo7b2o$9b2o! 
+1863	429	43	7b3o$6bo3bo$6bo$7bo2$2o$2o! 
+1864	429	16	4b2o$2o$o$o$b3obo$4bo! 
+1865	429	40	2o$2o5$7b2o$6bo2bo$7b3o! 
+1866	428	9	ob2o$o3bo$4b2o$b2obo! 
+1867	428	46	10b2o$9bobo$9bobo$10bo3$2o$2o! 
+1868	428	30	2bo$b2o$o$b2o$2bo2$7b3o! 
+1869	427	15	2o$bo$2b4o$3b2o$4bo! 
+1870	427	19	bo$6bo$o5bo$3o4bo$4bobo$4bobo! 
+1871	427	16	3o6$18bo$18bobo$18b3o$20bo! 
+1872	427	10	2bo3bobo$2o4bo2bo$2bo3bobo! 
+1873	426	23	2b2o$2o2bo$2o2bo$2b3o! 
+1874	426	7	b2o$2o$2bob2o$5bo! 
+1875	426	40	7b3o2$b2o$2o$b2o! 
+1876	426	23	4b3o$bo$o$3o$bo! 
+1877	426	16	7b3o$9bo$7bobo$2o5b2o$2o! 
+1878	425	9	2b3o$bo3bo$o5bo$b3obo! 
+1879	425	12	2ob2o$o4bo$bo4bo$2bo2bo$4bo! 
+1880	425	18	5b2o$5b2o$b2o$o2bo$o$2o! 
+1881	424	23	6b2o$5bo2bo$8bo$7b2o$2o$2o! 
+1882	424	45	6bo$5b2o$6b2o4$2o$2o! 
+1883	424	28	2o$2o2$8bo$9bo$9bo$6bo2bo$7b2o! 
+1884	424	9	4b2o$6bo$5bo$2o2b2o$bobo! 
+1885	423	694	bo$obo$bo3bo$4bobo$5b2o$5bo! 
+1886	423	6	3b3o$o4bo$o3b2o$o! 
+1887	423	29	b2o$obo$obo$bo3b3o! 
+1888	423	18	5bo$o5bo$o5bo$o4b2o$2bo! 
+1889	423	19	2bo$3bo2b2o$o2bo2b2o$3o! 
+1890	422	18	3bo$bo2bo$5bo$o4bo$ob3o! 
+1891	422	14	b2o$o4bo$bo2b2o$b2o! 
+1892	422	14	3bo$4b2o$bo2bo$o3bo$b3o! 
+1893	422	20	b2o$2o$b2o$2bo6b2o$9b2o! 
+1894	422	35	b2o$2o$o3b2o$bo3bo$2b3o! 
+1895	422	6	o3bo$ob2obo$o5bo$3bobo$4bo! 
+1896	422	13	2b2o$bo2bo$o4bo$bo3bo$3b3o! 
+1897	422	49	7bobo$7bobo$7b3o2$2o$2o! 
+1898	421	29	bo$2o3bo$4b2o$3bobo$3b2o! 
+1899	421	17	5b2o$2o4b2o$2o2bobo$4b2o! 
+1900	421	7	b2ob2o$o4bo$3bobo$4bo! 
+1901	421	43	o$o4bobo$o4bobo$5b3o! 
+1902	421	2	2o$ob2o$bo2bo$2b3o! 
+1903	420	128	2bo$3o$8bo$7bobo$8b2o$8bo! 
+1904	420	10	2bo$2o$bo2bo$2b3o! 
+1905	420	16	b3o$o2b2o$3o2bo! 
+1906	420	3	5b2o$3obobo$2bo3bo! 
+1907	420	62	8b2o$8b2o2$b2o$2o$bo! 
+1908	420	8	4bo$2bob2o$2o3bo$b2o! 
+1909	419	18	b3o$o2bo$o6b2o$bo5b2o! 
+1910	419	9	o4bo$o4bo$o4bo$2b3o! 
+1911	419	8	b2o$o2bo$o3bo$o2bo$2o! 
+1912	419	9	ob3o$bo2bo$2bo2bo$3b2o! 
+1913	419	23	o$o3bo$2bo2bo$2bo3bo$2b2o2bo$4b2o! 
+1914	419	18	8b2o$8b2o2$b2o$obo$o$3o! 
+1915	418	43	5b3o$5bobo$o4bobo$o$o! 
+1916	418	25	7bo$3o5bo$2ob3o$2bo! 
+1917	418	29	b2o$2o$b2o5b3o$8bo! 
+1918	417	52	4b3o$3bo2bo$o$o2bo$2o! 
+1919	417	12	2b2o$bo3bo$o5bo$bo4bo$6bo$3bobo! 
+1920	417	8	b3o$o3bo$2o3bo$o3bo$2bo! 
+1921	417	13	2bo$bobo$o3bo$o4bo$o$o4bo! 
+1922	417	19	2o$bobo3b2o$2b2o3b2o! 
+1923	416	40	bo$obo$2o2$5bobo$4bo2bo$4bo2bo$5bo! 
+1924	416	8	b2o$o2bo$o3bo$2bobo$4bo! 
+1925	416	33	bo$3o$o$9b2o$9b2o! 
+1926	416	36	4b3o$4bo2bo$5b2o$2o$obo$bo! 
+1927	415	9	b2o$2o$bobobo$2bo3bo$3bobo$4bo! 
+1928	415	17	b2o5b2o$o2bo4b2o$3bo$2b2o! 
+1929	415	4	2bo$bobo$o4bo$bo3bo$2bob2o! 
+1930	415	24	3b2o$o2b2o$b2o$2o! 
+1931	415	4	o2bo$b2o2bo$2bo3bo$3bobo! 
+1932	415	15	7b2o$6bo2bo$6bo2bo$bo5b2o$3o! 
+1933	415	15	bobo$obob2o$obo3bo$6bo! 
+1934	414	23	3b3o$2bo3bo$bo3b2o$o$o2bo$2bo! 
+1935	414	6	3bo$o3bo$o3b2o$o3bo! 
+1936	414	7	3b2o$2bo2bo$5bo$bo2bo$2obo! 
+1937	414	62	8b3o5$3o$o$3o! 
+1938	414	27	5b3o$5bo2bo$8bo$7bo$2o$2o! 
+1939	414	11	5bo$3b2ob2o$5bo2$bo$obo2$3o! 
+1940	414	26	b2o$2o$bob2o2$2bobo! 
+1941	414	14	2b3o$2bo2bo$2bo2bo$2o4bo$4b2o! 
+1942	413	31	2o$2o$6bo$5bo$5bo2bo$6b3o! 
+1943	413	17	6bo$o5b2o$o7bo$o5b2o$6bo! 
+1944	413	50	7b2o$7b2o2$3o$2bo$3o! 
+1945	413	80	3o$obo$obo2$9b2o$9b2o! 
+1946	413	4	4bo$2b2obo$2o$o4bo$b3o! 
+1947	412	3	o$2o$o5bo$5b3o! 
+1948	412	16	2bo$bo4bo$3o3b3o! 
+1949	411	147	9b3o$11bo$9b3o3$2o$2o! 
+1950	411	25	b3o2$o2bo$b2o2$6b2o$5bobo$6bo! 
+1951	411	14	6bo$5b3o$4bo2bo$2o2b2o$2o! 
+1952	411	30	4b2o$4bobo$2o4b2o$2o! 
+1953	411	55	6b3o$8bo$6b3o2$o$o$o! 
+1954	410	17	2bo$b3o$4bo$2o3bo$bo2bo! 
+1955	410	8	3b2o$5bo$2b3o$o2bo$bo$bo! 
+1956	410	11	5bo$obo2bo$o3bo$3o! 
+1957	410	29	3bobo$o2bo$3o$bo! 
+1958	410	48	3bo$obobo$bo2bo$b4o! 
+1959	410	11	bo4bo$obo4b2o$bo4bo! 
+1960	410	48	bo$2o5$10b2o$11b2o$7b2ob2o! 
+1961	409	11	3b3o$2bo3bo$5b2o$2bob2o$o! 
+1962	409	116	o$3o$bo$9b2o$9b2o! 
+1963	409	14	3o$bobo4b2o$2b2o4b2o! 
+1964	409	18	6b3o$8bo$6bobo$6b2o$2o$2o! 
+1965	409	7	bo$o2bo$bo3b2o$3bobo$4bo! 
+1966	409	21	3o$3bo$o2b2o$3b2o$3bo! 
+1967	409	34	4b3o$6bo$4bobo$4b2o2$2o$2o! 
+1968	409	11	4b2o$3bobo$3bo$2o$2ob2o! 
+1969	409	40	2bo$b2obo$o4bo$2ob2o! 
+1970	408	16	bo3bo$2o$bo5bo4$5b3o$6bo! 
+1971	408	17	b3obo$2o4bo$3bobo$4bo! 
+1972	408	43	6b2o$6b2o4$3o$obo$obo! 
+1973	408	8	3o$o3b2o$5bo2$2b3o! 
+1974	408	35	6b2o$6b2o2$2bo$3bo$o2bo$3o! 
+1975	408	255	2b3o$bo3bo$o3b2o$2b3o! 
+1976	407	26	3o5b3o$o$3o! 
+1977	407	32	2obo$ob3o$o3b2o$5b2o! 
+1978	407	60	3o$o3b2o2$2bobo$3bo! 
+1979	406	8	4bo$4bobo$4bo2bo$2o3b2o$2o! 
+1980	406	11	5bobo$4bo2bo$5bobo2$bo$3o! 
+1981	406	10	4b2o$6bo$2bobobo$ob2obo$o! 
+1982	406	6	2obo$o3b2o$bo$2bobo! 
+1983	406	16	7b2o$6bo2bo$6bo$7b3o2$o$2o$o! 
+1984	406	13	2o$bobobo$5bo$6b2o$5bo! 
+1985	405	9	bobo$o2bo$bobo$7bo$6bobo2$6b3o! 
+1986	405	18	5bo$b2o$2o3bo$o2b2o$b2o! 
+1987	404	12	2bo$bob2o$2o$5bo$4bo$3bo! 
+1988	404	10	b2o$5bo$ob2obo$bo3bo! 
+1989	404	10	bo$obo$o2bo$2obo$2b3o! 
+1990	404	17	2b3o$bo3bo$o5bo$bo$bo2b2o$3bo! 
+1991	403	7	4bo$5b2o$o3bo$b2o$2bo! 
+1992	403	69	2o$2o5b2o$5bobo$5b2o! 
+1993	403	12	5bo$bo3bo$o5bo$o3b2o$bo3bo$bo2bo! 
+1994	403	14	b3obo$o3bobo$bobo$2bo! 
+1995	402	16	5b2o$o4bo2bo$2o3bo2bo$bo4bo! 
+1996	402	34	7b2o$8bo$5bo2bo$2o4b2o$2o! 
+1997	402	40	8b2o$2o6b2o$b2o$bo! 
+1998	402	7	4bo$o3bo$o4bo$2b2obo$2b3o! 
+1999	402	29	3bobo$6bo$5bo$o$o2bo$3o! 
+2000	402	22	2o$2o4$5bob2o$5b3o$6bo! 
+2001	401	39	b2o5b3o$2o$b2o! 
+2002	401	8	b3o$o3bo$2o$3bo$2b2o! 
+2003	401	13	b2o$2o$3b2o$4bo$2b3o! 
+2004	401	14	2o$o4b2o$b2o2b2o$2bo! block + long boat 
+2005	401	21	5bo$bo3bo$2o3bo$obo$bo! 
+2006	401	14	3bo$2bob2o$3bo$3bo$obo$bo! 
+2007	401	7	2o2b2o$2o3bo$5bo$o3bo$o! 
+2008	401	35	bo7b2o$2o7b2o$b2o! 
+2009	401	8	b2o$o2bo$o3bo$5bo$2bobo! 
+2010	401	43	2o$2o2$8bo$7bo$6b3o! 
+2011	400	17	o$3b2o$2o2bo$4o! 
+2012	400	176	bo5bobo$obo3bo2bo$obo5b2o$bo! 
+2013	400	29	bo4bo$obo2bo$2o5bo$5b3o! 
+2014	400	9	b3o$o$2o3bo$2bo$3b3o! 
+2015	400	38	7b2o$7b2o2$2o$o$obo$b2o! 
+2016	399	28	3bob2o$bobo$bo2bo$o2bo$obo$bo! 
+2017	399	97	obo$obo6b2o$3o6b2o! 
+2018	399	10	3bo$2bobo$5bo$o4bo$3ob2o! 
+2019	399	9	2ob2o$o3bo$b3o$bo! 
+2020	399	42	5b3o$4bo2bo$2o2b2obo$2o! 
+2021	399	10	2bob2o$4bo$o3bo$bobo$2bo! 
+2022	399	5	7bobo$6bo2bo$7bobo$2bo$2ob2o$2bo! 
+2023	398	9	3bobo$3bo2bo$2o4bo$3bo2bo$3bobo! 
+2024	398	24	3o$o9b2o$obo7b2o$b2o! 
+2025	398	19	6b2o$bo3bo2bo$3o2bobo$6bo! 
+2026	398	44	2bo$2ob2o4$5b2o$6b2o$5b2o! 
+2027	398	26	5b3o$5bobo$3o2bobo! 
+2028	397	73	2ob2o$o3bo$2bo2bo$3b2o! 
+2029	397	12	o$o4b3o$o2bo$b2o! 
+2030	397	58	3bo$4bo$2ob2o$o2bo$3o! 
+2031	397	10	2bo$b2o$2o2bobo$2bob2o$4bo! 
+2032	397	15	obo$o$2o2bo2$2b3o! 
+2033	397	7	bo$2ob2o$bo2b2o$2bo$4bo! 
+2034	397	11	bo$bo$o3bo$2b3o! 
+2035	396	13	2bo$bobo$o$bob2o$5b2o$6bo$6bo! 
+2036	396	6	2b2o$bo3bo$4bo$o3bo$o2bo$b2o! glider hits loaf and turns into spark 
+2037	395	38	3o$obo$obo$6b3o! 
+2038	395	18	2b2o$o3bo$2o3bo$b2obo! 
+2039	395	7	b3o$ob2o$o3bo$bo2bo$bobo! 
+2040	395	64	2o11bo$2o11b2o$14b2o$14bo! 
+2041	394	55	7bo$6bobo$5bo2bo$6b2o$obo$bo$bo! 
+2042	394	10	7bo$o6b2o$o8bo$o6b2o$7bo! 
+2043	394	11	2b3o$bo2b2o$o3bo2$b3o! 
+2044	394	11	4bo$ob2obo$2o$o! 
+2045	394	75	bo$obo$obo4bo$bo4bobo$6b2o$7bo! 
+2046	393	8	7bo$obo4bo$o2bo2bobo$obo4bo$7bo! 
+2047	393	13	5bo$4bobo$7bo3$5b2o$3ob2o! 
+2048	393	40	b3o$o2bo$2o3$11b2o$11b2o! 
+2049	393	9	bo$o3bo$bob2o$5bo! 
+2050	393	37	2o$2o2$4b2o$4bo$4bo2bo$5b2o! 
+2051	393	12	b2o$o2bo$o4bo$o4bo$bo$2bo! 
+2052	393	4	o$ob2o$bo2bo$3b2o$3bo! 
+2053	392	35	2o4bo$2o3b3o$5bob2o! 
+2054	392	8	b3o$o2bo$2bo$2b2o! 
+2055	392	18	3bob2o$2bo2bo$bo$o3bo$bo! 
+2056	392	33	2bo$b3o$2obo$8b2o$8b2o! 
+2057	392	48	2bo5b2o$3o5b2o$bo! 
+2058	391	11	6b2o$4bo2bo$4bo2bo$2o2bobo$2o! 
+2059	391	18	b2o$o2bo$o7b2o$2o6b2o! 
+2060	390	11	2o4b2o$obo4b2o$bo4b2o! 
+2061	390	202	2o$2o$10b3o$12bo$10b3o! 
+2062	390	8	6bo$bo3bobo$bo3bo2bo$obo3b2o! 
+2063	389	13	6b2o$2bo4b2o$2ob2o3bo$2bo! 
+2064	389	28	2o$2o3$6b2o$6bobo$8bo$6b3o! 
+2065	389	18	3b2o$4b2o$2o2bo$o3bo$bobo! 
+2066	389	18	bo$3o$o3$4b3o! 
+2067	389	39	3o$o$3o4$6b3o! 
+2068	389	20	o$o$o3b2o$b2o2bo$5bo! 
+2069	388	46	8b2o$2bo5b2o$3o$bo! 
+2070	388	14	7b2o$7b2o3$2obo$b3o$2bo! 
+2071	388	18	2bo$bo$2o$b2o2bo$6b2o$6bo! glider hits loaf from front end 
+2072	388	8	4obo$o2bobo$5bo! 
+2073	388	8	4bo$2bo2bo$bo2bo$2obo$b2o! 
+2074	387	17	2b2o$2o2bo$bo3bo$bo2bo! 
+2075	387	26	o3b2o$3o2bo$bo! 
+2076	387	51	2o$2o2$11b2o$10bobo$10bobo$11bo! 
+2077	387	44	b2o$o2b2o$o2bo$b3o! 
+2078	387	222	6b2o$3o2bo2bo$bo3bo2bo$6b2o! 
+2079	387	64	6bobo$3o2bo3bo$6bobo$7bo! 
+2080	387	14	2b2o$2o$o2b2o$3o! 
+2081	386	14	3o2$obo$bo4bo$5b2o$6bo! 
+2082	386	12	b3o$o2bo$o$3b2o$3b2o! 
+2083	386	4	2bo$2ob2o$3bo$3bo2bo$4bobo! 
+2084	386	44	6b2o$6b2o4$o$2o$obo! 
+2085	386	35	5bo$4bob2o$3o2b2o! 
+2086	386	39	2b2o$bo2bo$o5bo$bo4bo$6bo$3b3o! 
+2087	386	6	b4o$o4bo$o4bo$2ob2o! 
+2088	386	18	b2o$2o$b2o6b2o$2bo6b2o! 
+2089	386	4	2bobo$5bo$bo3bo$2obobo! 
+2090	386	25	2b2o5bo$o2bo5bo$o2bo5bo$obo! 
+2091	386	12	3b2o$bobo$3b2o$3o! 
+2092	386	17	b2o$o2bo$o$o$6b2o$6b2o! 
+2093	385	30	b3o$2ob2o2$2ob2o$2bo! 
+2094	385	24	2o$2o$4bo$3bo$3bo2bo$4b3o! 
+2095	385	5	bobo$2o2bo$bo3bo$2bobo$3bo! 
+2096	384	33	3o$o$3o4$5b3o! 
+2097	384	25	7bo$6b3o$2o4bob2o$2o! 
+2098	384	19	5b2o$o3bo2bo$o3b3o$o! 
+2099	384	44	2bo$bobo2b3o$2ob2o! 
+2100	384	36	3o$obo3b3o$obo! 
+2101	384	32	6bo$2bo3bo$bobo2bo$o2bo$bobo$2bo! 
+2102	384	12	5b2o$2o3bobo$2o5b2o! 
+2103	384	23	10b2o$bo8b2o$b2o$2o! 
+2104	383	13	bob2o$o3bo$o2b2o$b2o! 
+2105	383	6	ob3o$bo$2obo$2bo! 
+2106	383	5	4o$o2b2o$o4bo$b2o! 
+2107	382	16	2b2o$o2bo$o2bo4bo$obo5bo$8bo! 
+2108	382	25	2bo$3o3bo$7bo$6b3o! 
+2109	382	32	8bo$7bobo$6bo2bo$7b2o$3o$bo! 
+2110	382	28	2bo$2ob2o$2bo4bo$7bo$6bobo! 
+2111	381	16	6bo$5bobo$5b2o2$obo$o2bo$obo! 
+2112	381	101	3o$obobo$b2ob2o$5bo$3bo! 
+2113	381	12	2o$2o$2o$2bob2o$4bo! 
+2114	381	9	3bo$2b3o$o$o2bo$2o! 
+2115	381	16	3o$o2bo$bo2bo$3o! 
+2116	381	42	5b2o$4bo2bo$4bo$4b2o$2o$2o! 
+2117	380	21	2bo$2b2o$obo$2o4$8b2o$8b2o! 
+2118	380	7	obo$2obo$3b2o$2b2o! 
+2119	379	40	bo$2o$obo$bo$7bo$6bobo$6bobo$7bo! 
+2120	379	23	5bo$2bo3bo$o5bo$5bo$o3bo$b3o! 
+2121	378	48	bo$b2o$2o3$7b2o$7b2o! 
+2122	378	37	8b2o$7b2o$8bo2$2o$2o! 
+2123	378	30	5bo$o$o5b2o$o3bobo$4b2o! 
+2124	378	35	2bo$b2o$2o$b2o3$8b2o$8b2o! 
+2125	378	50	b2o$o2bo$o2bo$bo$2b2obo$4bo! 
+2126	378	14	2b3o$bo3bo$bo3bo$o2bobo! 
+2127	377	8	bo$4o$o3bo$5bo$2b3o! 
+2128	377	12	2b2obo$bo4bo$o4bo$b2o! 
+2129	377	28	2b2o$bobo4b2o$3o5b2o! 
+2130	377	35	6b3o3$obo$3o$bo! 
+2131	377	37	5b3o$5bobo$5bobo3$o$o$o! 
+2132	377	172	2o$2o2$10b3o$12bo$10b3o! 
+2133	377	18	7b2o$7b2o2$b2o$o2bo$3bo$2b2o! 
+2134	377	31	b3o$o4bo$o4bo$4b2o! 
+2135	377	11	2o$b2o2bo$5b2o$5bo! 
+2136	377	18	4bo$4o2bo$4bobo$7bo! wing generation 3 minus 2n cell 
+2137	376	10	6b2o$4bo2bo$2o2bo2bo$2o2bobo! 
+2138	376	22	b2o$o2b2o2bo$b2o3bo$6bo! 
+2139	376	16	2o$2o$7b2o$6bobo$6b2o$6bo! 
+2140	376	18	2b3o$4bo$ob2o$2o! 
+2141	376	51	9bo$8bo2bo$8bo2bo$9bobo3$3o! 
+2142	376	11	2bo$b2o$o5bo$b3o2bo$2bo3bo! 
+2143	375	33	3o$obo2b3o$obo! 
+2144	375	21	3o3b2o$bo3bo2bo$5bo2bo$6b2o! 
+2145	375	82	8b2o$8b2o5$obo$obo$3o! 
+2146	375	53	9b3o$8bo2bo$9b2o5$2o$2o! 
+2147	374	17	4b3o3$2o$ob2o$b2o! 
+2148	374	17	o11bo$3o9bo$obo9bo$2bo! 
+2149	374	21	4bobo$5bo$bobo$o2bo$bobo! 
+2150	373	46	7b3o$9bo$o6b3o$o$o! 
+2151	373	5	2bo$bobobo$o4bo$b2ob2o! 
+2152	373	10	o$3o$obo$2bo$14b2o$14b2o! 
+2153	373	37	6bo$5bobo$4b2ob2o3$o$o$o! 
+2154	373	37	b2o6b2o$2o7b2o$bo! 
+2155	373	41	bo$2o$b2o2b3o! 
+2156	372	17	6b2o$6b2o4$ob2o$o2bo$3o! 
+2157	372	86	o$2o$4bobo$bo3bo$bo3bo$2b2o! 
+2158	372	48	2o6bo$2o5b3o$7bo! 
+2159	372	11	2b2o$bo4bo$o5bo$bo4bo$2b3o! 7+1 octomino 
+2160	372	191	7bo$6b2o$obo3bo$obo$3o! 
+2161	372	10	bo$bo2bo$o4bo$ob2o$b3o! 
+2162	372	22	2b3o$2o2bo$o2bo$b3o! 
+2163	372	15	2bo$bob2o$2o2bo$2bob2o! 
+2164	371	20	2o$b2o2b2o$2o3b2o$o! 
+2165	371	7	b2o$2o3bo$5bo$5bo$5bo$5bo! 
+2166	371	38	9b2o$9b2o2$bo$3o$o! 
+2167	371	105	8b3o$8bobo$8bobo3$2o$2o! 
+2168	370	20	obo8b2o$2o8bo2bo$o10b2o! 
+2169	370	10	2bo$2bo$3o$bo$6bo$5b2o$5bo! 
+2170	370	5	2bo$bo2bo$o3bo$bo3bo$4b3o! 
+2171	370	8	2bo2bo$b2o2bo$bo3bo$o! 
+2172	370	17	4bo$b4o$o4bo$b3o! 
+2173	370	11	b3o$bo2bo$bobo$3o$o! 
+2174	370	13	4bo$3bo$4bo$obob2o$bo3bo! 
+2175	369	22	2o$2o3$7b2o$5bo2bo$5b3o! 
+2176	369	8	3o2$3bo$4b2o$4bo! 
+2177	369	64	obo4b3o$obo$3o! 
+2178	368	7	b2o$o$bob2o$bob2o$2b3o! 
+2179	367	14	6bo$5bo$b3obo$3o! 
+2180	367	9	2bo$b3obo$o4bo$bo3bo$2b2o! 
+2181	367	18	5b2o$o2b2obo$bo2b2o$bo! 
+2182	367	25	2o5b2o$2o5bobo$9bo$8b2o! 
+2183	367	10	b3o$o3bo$3b2o$bob2o! 
+2184	367	13	5o$o3$2bo2bo$4b2o! 
+2185	367	64	o$o$o3$8b2o$7bobo$7b3o$8bo! 
+2186	367	5	4bo$2ob2o$o$o2bo! 
+2187	367	17	2b3o$bo3bo$o5bo$3o2bo! 6+3+1 decomino 
+2188	366	5	obo$o2bo$3bo$2bo2b2o$3b3o$4bo! 
+2189	366	6	3bo$2o3bo$o4bo$o2b2o$b2o! 
+2190	366	14	3o$bo$6b2o$6bobo$8bo$7bo! 
+2191	366	13	2o$o$o3bo$bo2bo$2bobo! 
+2192	366	10	4bo$4b3o$o$2o$o! 
+2193	365	7	bo$o2bo$o$b4o$4bo! 
+2194	365	10	bo$bo$2o5$25bo$23bob2o$22b2obo$24bo! 
+2195	365	14	4b3o$bo4bo$2o$bo4bo$4bo! 
+2196	365	20	3b2o$2bo2bo$5bo$o3bo$ob2o$bo! 
+2197	365	8	2bo$2obob2o$2obobo$4bo! 
+2198	365	36	2o$2o5b2o$6bo2bo$9bo$8b2o! 
+2199	364	4	3b3o$o3bo$ob2o$2o! 
+2200	364	14	o$o5bo$o4bobo$6bo$bo$2o! 
+2201	364	41	2o$2o6b2o$8bo2bo$8bo2bo$9bobo! 
+2202	364	40	6b2o$5bo2bo$6b2o2$b2o$2o$b2o! 
+2203	364	12	bo$3o$o2b2o$2o! 
+2204	364	10	2bo$bob2o$2o$3bobo$4b2o! 
+2205	364	7	b3o$o3b2o$3o$4b2o! 
+2206	363	42	7bo$7b3o$2o6bo$2o! 
+2207	363	7	5bo$bo3bo$2o3bo$bo$2bo! 
+2208	362	45	o$2o$b2o2$6bo$4b2ob2o$6bo! 
+2209	362	43	3o3bobo$6bobo$6b3o! 
+2210	362	13	2b2o$o3b2o$bo2bo$2b3o! 
+2211	362	5	b3o$bo2bo$o3bo$bo2bo$2bo! 
+2212	362	3	bobo$o2b3o$2o$bo! 
+2213	361	15	b3o$o2bo$o$o4bo$bobobo$2bo! 
+2214	361	8	o$o3bo$2obo$2b2o! 
+2215	361	33	7bo$6bob2o$o5bo$2o5bobo$bo6bo! 
+2216	361	17	2bo2b2o$5b2o$bo2bo$2obo$b2o! 
+2217	360	14	bo$obo$2o2$6b2o$5bo2bo2$5b3o! 
+2218	360	20	b2o$2o$bobob2o$2b2ob2o! 
+2219	359	19	3o$2b2ob2o$bo$2bo2bo! 
+2220	359	37	4b3o$6bo$5b2o$4bo$3o! 
+2221	359	43	6bo$6b3o$7bo3$2o$2o! 
+2222	358	8	3bobo$b2ob2o$2obo$b2o! 
+2223	358	93	8b3o$10bo$8b3o3$3o! 
+2224	358	17	6b2o$bo3bo2bo$obo3b2o$2b2o! 
+2225	358	14	9b2o$b3o5b2o2$o2bo$3o! 
+2226	358	7	2b3o2$2o$2ob2o$2bo! 
+2227	358	13	2bo$b2o$obo3$4b3o! 
+2228	357	9	5b2o$b2o3bo$obo3bo$o4bo! 
+2229	357	74	3o$o2bo$ob2o2$6b2o$6b2o! 
+2230	357	17	3bo$b2obo$o3b2o$obo$o! 
+2231	357	26	b3o$o2bo2$3o$6b2o$5b2o! 
+2232	357	15	b2o$2o$bo2$5b2o$4b2o! 
+2233	357	31	8b2o$8b2o$2o$b2o$bo! 
+2234	357	5	o3b2o$b2ob2o$2b2o! 
+2235	357	12	b2o5bo$2o7b2o$b2o5b2o$8bo! 
+2236	356	5	4b2o$2bobo$o3bo$o$bo! 
+2237	356	67	10b2o$obo7b2o$obo$3o! pi hits block at (9,-1) 
+2238	356	21	2o$o2bo3bo$o2bo3bo$bobo3bo! 
+2239	356	2	3bo$bo3bo$bo4bo$o2bob2o$2o! 
+2240	356	12	2o$obo$bo3bo$bo3bo$4b2o! beehive + loaf 
+2241	356	15	o$b2o$bo2bo$5bo$3b2o! 
+2242	356	16	o3bo$o3b2o$o5bo$4bobo$5bo! 
