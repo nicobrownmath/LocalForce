@@ -483,6 +483,7 @@ class SearchParams {
     std::set<StaticSymmetry> possibleSymmetries = {C1};
     bool doDelayedSymmetryInteraction = true;
     bool allCatsCheckRecovery = false;
+    bool allCatsCheckRecoveryAlways = false;
     bool checkRecoveryRequireUnique = false;
 };
 
@@ -585,6 +586,7 @@ class Catalyst {
     bool checkRecovery = false;
     bool checkRecoveryAlways = false;
     bool transparent = false;
+    bool forceTransparent = false;
     bool sacrificial = false;
     unsigned slots = 0;
 
@@ -646,12 +648,21 @@ class Catalyst {
                 catalyst.transparent = true;
                 index++;
             }
+            else if (elems[index] == "forceTransparent") {
+                catalyst.forceTransparent = true;
+                catalyst.transparent = true;
+                index++;
+            }
+            else if (elems[index] == "forceMaxTransparency") {
+                catalyst.forceTransparent = true;
+                index++;
+            }
             else if (elems[index] == "sacrificial") {
                 catalyst.sacrificial = true;
                 index++;
             }
             else if (elems[index] == "check-recovery-always") {
-                catalyst.checkRecovery = true;
+                //catalyst.checkRecovery = true;
                 catalyst.checkRecoveryAlways = true;
                 index++;
             }
@@ -962,6 +973,7 @@ class Catalyst {
             }
             if (!anyRequirementMet) return {false, std::move(failureState)};
         }
+
         LifeState catError = state;
         catError.Move(x, y);
         catError.Copy(testState, ANDNOT);
@@ -1056,8 +1068,9 @@ class SearchData {
     unsigned transformLowerBound;
     unsigned maxCatalysts;
     bool lastAddedWasCatalyst;
+    bool supressOutput = false;
     LifeState startState;
-    LifeState matchState;
+    std::vector<std::pair<LifeState, unsigned>> matchStates; //pairs are (state, gen)
     LifeState currentState;
     LifeState past1Neighbor; //cells which have had exactly 1 neighbor in the pattern in some generation (catalysts impact by having 2 neighbors)
     LifeState past2Neighbors; //cells which have had exactly 2 neighbors in the pattern in some generation (catalysts impact by having 1 neighbor)
@@ -1109,6 +1122,8 @@ class Searcher {
     std::queue<LifeState> newSearchStatesQueue;
     std::set<LifeState> newSearchStatesSet;
     std::mutex newSearchStatesLock;
+
+    unsigned patternIndex = 0;
 
     std::set<LifeState> avoidOscs;
     std::mutex avoidOscContainerLock;
@@ -1196,6 +1211,9 @@ class Searcher {
             }
             if (elems[0] == "allCatsCheckRecovery") {
                 params.allCatsCheckRecovery = (elems[1] == "true");
+            }
+            if (elems[0] == "allCatsCheckRecoveryAlways") {
+                params.allCatsCheckRecoveryAlways = (elems[1] == "true");
             }
             if (elems[0] == "checkRecoveryRequireUnique") {
                 params.checkRecoveryRequireUnique = (elems[1] == "true");
@@ -1297,7 +1315,14 @@ class Searcher {
         //speeds up search a lot but misses some things
         if (params.allCatsCheckRecovery) {
             for (auto &catalyst : catalysts) {
-                catalyst.checkRecovery = true;
+                if (!catalyst.sacrificial)
+                    catalyst.checkRecovery = true;
+            }
+        }
+        if (params.allCatsCheckRecoveryAlways) {
+            for (auto &catalyst : catalysts) {
+                if (!catalyst.sacrificial)
+                    catalyst.checkRecoveryAlways = true;
             }
         }
         for (auto &catalyst : catalysts) {
@@ -1355,7 +1380,7 @@ class Searcher {
             }
         }
         else if (params.usePatternsFromFile) {
-            state = LifeState::Parse(params.patternsFromFile[params.minPatternIndex].c_str(), params.patternX, params.patternY);
+            state = LifeState::Parse(params.patternsFromFile[patternIndex].c_str(), params.patternX, params.patternY);
             state.SymChain(SymmetryChainFromEnum(params.symmetry));
             //Move to symmetric position if possible
             std::vector<SymmetryTransform> checkTransforms = {Rotate180OddBoth, ReflectAcrossX, ReflectAcrossY, ReflectAcrossYeqX, ReflectAcrossYeqNegXP1};
@@ -1377,7 +1402,14 @@ class Searcher {
                     break;
                 }
             }
-            params.minPatternIndex++;
+            //TODO: This could probably just exclude without checking symmetries
+            SearchData output = InitialSearchData(std::move(state));
+            if (patternIndex < params.minPatternIndex) {
+                //only search C1 with no catalysts to exclude things
+                output.maxCatalysts = 0;
+            }
+            patternIndex++;
+            return output;
         }
         else {
             state = LifeState::Parse(params.pattern.c_str(), params.patternX, params.patternY);
@@ -1401,7 +1433,7 @@ class Searcher {
         searchData.lastAddedWasCatalyst = false;
         searchData.symmetry = params.symmetry;
         searchData.startState = state;
-        searchData.matchState = searchData.startState;
+        searchData.matchStates = {{searchData.startState, 0}};
         searchData.currentState = searchData.startState;
         searchData.past1Neighbor = LifeState();
         searchData.past2Neighbors = LifeState();
@@ -1482,7 +1514,7 @@ class Searcher {
         std::chrono::time_point<std::chrono::steady_clock> methodStartTime = std::chrono::steady_clock::now();
         iterations++;
 
-        if ((params.avoidRepeatPatternHistories || searchData.generation == 0 || searchData.symmetry == params.symmetry) && (params.patternRand || (params.usePatternsFromFile && searchData.symmetry == params.symmetry)) && searchData.numCatalysts == 0) {
+        if ((params.avoidRepeatPatternHistories || searchData.generation == 0 || searchData.symmetry == params.symmetry) && (params.patternRand || (params.usePatternsFromFile && searchData.symmetry == params.symmetry)) && (searchData.numCatalysts == 0 && searchData.generation < params.maxFirstCatalystInteractionGeneration && searchData.generation >= params.minInteractionGeneration)) {
             //add pattern-symmetry-history to the already tested
             //if it's contained in prior tests skip it
             std::tuple<LifeState, int, int, SymmetryTransform> standardizedData = searchData.currentState.StandardizedWithTransforms(searchData.symmetry);
@@ -1558,6 +1590,15 @@ class Searcher {
         std::vector<std::pair<StaticSymmetry, SymmetryTransform>> availableSymmetries = GetAvailableSymmetries(searchData.symmetry);
         bool searchSymmetries = !availableSymmetries.empty();
 
+        //TEMPORARY
+        //searchSymmetries = searchSymmetries && !searchData.supressOutput;
+
+        //TODO: Move output supression associated removal to data creation
+        if (searchData.supressOutput && !(searchData.numCatalysts < searchData.maxCatalysts || searchSymmetries)) {
+            iterativeSearchTime += ((std::chrono::duration<double>)(std::chrono::steady_clock::now() - methodStartTime)).count();
+            return;
+        }
+
         unsigned maxGenerationAllowed = std::min(params.maxGeneration, params.maxGenerationAfterLastInteraction + searchData.generation);
 
         //int dontCheckTransparentLastCatalyst = searchData.lastAddedWasCatalyst ? 1 : 0;
@@ -1577,7 +1618,7 @@ class Searcher {
                     //catalyst broken
                     isValid = false;
                     //if we have the checkRecoveryAlways flag //and this is the newest catalyst and generation count is low enough, totally invalid so return
-                    if (catalysts[catalystsEvolution[generationIndex][catID][0]].checkRecoveryAlways /*|| (catID < (int)catalystsEvolution[generationIndex].size() - dontCheckTransparentLastCatalyst)*/) {
+                    if (false && catalysts[catalystsEvolution[generationIndex][catID][0]].checkRecoveryAlways /*|| (catID < (int)catalystsEvolution[generationIndex].size() - dontCheckTransparentLastCatalyst)*/) {
                         iterativeSearchTime += ((std::chrono::duration<double>)(std::chrono::steady_clock::now() - methodStartTime)).count();
                         return;
                     }
@@ -1589,7 +1630,7 @@ class Searcher {
                     catalystsEvolution[generationIndex + 1][catID][3] = catalystsEvolution[generationIndex][catID][3] + 1;
                     if (catalystsEvolution[generationIndex + 1][catID][3] > catalysts[catalystsEvolution[generationIndex][catID][0]].recoveryTime) {
                         //if we have the checkRecoveryAlways flag //and this is the newest catalyst and generation count is low enough, totally invalid so return
-                        if (catalysts[catalystsEvolution[generationIndex][catID][0]].checkRecoveryAlways /*|| (catID < (int)catalystsEvolution[generationIndex].size() - dontCheckTransparentLastCatalyst)*/) {
+                        if (false && catalysts[catalystsEvolution[generationIndex][catID][0]].checkRecoveryAlways /*|| (catID < (int)catalystsEvolution[generationIndex].size() - dontCheckTransparentLastCatalyst)*/) {
                             iterativeSearchTime += ((std::chrono::duration<double>)(std::chrono::steady_clock::now() - methodStartTime)).count();
                             return;
                         }
@@ -1632,68 +1673,73 @@ class Searcher {
 
             //isolate interesting results
             //only run this if we've interacted with the most recent catalyst
-            if ((unsigned)generationIndex > searchData.lastCatGenOffset && params.findPartials) {
+            if (!searchData.supressOutput && (unsigned)generationIndex > searchData.lastCatGenOffset && params.findPartials) {
                 //TODO: Don't run some of these due to redundancy if matchPoints has certain symmetries
                 //TODO: Maybe also require catalyst union under transform to be stable?
                 //TODO: Doesn't seem to find pi heptomino with two or three gourmet turns?
-                LifeState matchStateBorder = searchData.matchState.ZOI();
-                matchStateBorder.Copy(searchData.matchState, ANDNOT);
-                LifeState catalystsState = searchData.startState;
-                catalystsState.Copy(searchData.matchState, ANDNOT);
-                std::vector<std::tuple<unsigned, unsigned, unsigned, SymmetryTransform>> oldMatchPoints = params.ignoreElaboration ? searchData.matchPoints : std::vector<std::tuple<unsigned, unsigned, unsigned, SymmetryTransform>>();
-                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 1, 1, Identity);
-                if (params.findShuttles) {
-                    switch (searchData.symmetry) {
-                        case C1:
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 1, 64, ReflectAcrossX);
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 64, 1, ReflectAcrossY);
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 64, 1, ReflectAcrossYeqX, -1);
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 64, 1, ReflectAcrossYeqNegXP1, 1);
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 64, 64, Rotate90);
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 64, 64, Rotate180OddBoth);
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 64, 64, Rotate270);
-                            break;
-                        case D2AcrossX:
-                        case D2AcrossXEven:
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 64, 1, ReflectAcrossY);
-                            break;
-                        case D2AcrossY:
-                        case D2AcrossYEven:
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 1, 64, ReflectAcrossX);
-                            break;
-                        case D2diagodd:
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 64, 1, ReflectAcrossYeqNegXP1, 1);
-                            break;
-                        case D2negdiagodd:
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 64, 1, ReflectAcrossYeqX, -1);
-                            break;
-                        case C2:
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 1, 1, Rotate90);
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 1, 1, ReflectAcrossX);
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 1, 1, ReflectAcrossYeqX);
-                            break;
-                        case C2even:
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 1, 1, Rotate90Even);
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 1, 1, ReflectAcrossXEven);
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 1, 1, ReflectAcrossYeqX);
-                            break;
-                        case C2verticaleven:
-                        case C4even:
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 1, 1, ReflectAcrossXEven);
-                            break;
-                        case C2horizontaleven:
-                        case C4:
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 1, 1, ReflectAcrossX);
-                            break;
-                        case D4:
-                        case D4diag:
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 1, 1, Rotate90);
-                            break;
-                        case D4even:
-                        case D4diageven:
-                            CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], searchData.matchState, matchStateBorder, catalystsState, generationIndex + 1 + searchData.generation, 1, 1, Rotate90Even);
-                            break;
-                        default: break;
+
+                //TODO: Accurate output sorting with different matching generations
+                for (std::pair<LifeState, unsigned> matchState : searchData.matchStates) {
+                    LifeState matchStateBorder = matchState.first.ZOI();
+                    matchStateBorder.Copy(matchState.first, ANDNOT);
+                    LifeState catalystsState = searchData.startState;
+                    catalystsState.Copy(searchData.matchStates[0].first, ANDNOT);
+                    std::vector<std::tuple<unsigned, unsigned, unsigned, SymmetryTransform>> oldMatchPoints = params.ignoreElaboration ? searchData.matchPoints : std::vector<std::tuple<unsigned, unsigned, unsigned, SymmetryTransform>>();
+                    unsigned matchGeneration = generationIndex + 1 + searchData.generation;
+                    CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 1, 1, Identity);
+                    if (params.findShuttles) {
+                        switch (searchData.symmetry) {
+                            case C1:
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 1, 64, ReflectAcrossX);
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 64, 1, ReflectAcrossY);
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 64, 1, ReflectAcrossYeqX, -1);
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 64, 1, ReflectAcrossYeqNegXP1, 1);
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 64, 64, Rotate90);
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 64, 64, Rotate180OddBoth);
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 64, 64, Rotate270);
+                                break;
+                            case D2AcrossX:
+                            case D2AcrossXEven:
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 64, 1, ReflectAcrossY);
+                                break;
+                            case D2AcrossY:
+                            case D2AcrossYEven:
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 1, 64, ReflectAcrossX);
+                                break;
+                            case D2diagodd:
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 64, 1, ReflectAcrossYeqNegXP1, 1);
+                                break;
+                            case D2negdiagodd:
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 64, 1, ReflectAcrossYeqX, -1);
+                                break;
+                            case C2:
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 1, 1, Rotate90);
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 1, 1, ReflectAcrossX);
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 1, 1, ReflectAcrossYeqX);
+                                break;
+                            case C2even:
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 1, 1, Rotate90Even);
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 1, 1, ReflectAcrossXEven);
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 1, 1, ReflectAcrossYeqX);
+                                break;
+                            case C2verticaleven:
+                            case C4even:
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 1, 1, ReflectAcrossXEven);
+                                break;
+                            case C2horizontaleven:
+                            case C4:
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 1, 1, ReflectAcrossX);
+                                break;
+                            case D4:
+                            case D4diag:
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 1, 1, Rotate90);
+                                break;
+                            case D4even:
+                            case D4diageven:
+                                CheckMatches(&newMatchPoints, oldMatchPoints, stateEvolution[generationIndex + 1], matchState.first, matchStateBorder, catalystsState, matchGeneration, 1, 1, Rotate90Even);
+                                break;
+                            default: break;
+                        }
                     }
                 }
             }
@@ -1725,7 +1771,7 @@ class Searcher {
                                 //these check in reverse order so that recently-added checkRecovery catalysts are evaluated first
                                 if (!catsRestored[catID] && !catalysts[searchData.catalysts[catID][0]].sacrificial) {
                                     //checkRecoveryAlways catalyst failure
-                                    if (catalysts[searchData.catalysts[catID][0]].checkRecoveryAlways /*|| (catID < (int)searchData.catalysts.size() - dontCheckTransparentLastCatalyst)*/) {
+                                    if (false && catalysts[searchData.catalysts[catID][0]].checkRecoveryAlways /*|| (catID < (int)searchData.catalysts.size() - dontCheckTransparentLastCatalyst)*/) {
                                         iterativeSearchTime += ((std::chrono::duration<double>)(std::chrono::steady_clock::now() - methodStartTime)).count();
                                         return;
                                     }
@@ -1749,7 +1795,7 @@ class Searcher {
 
             if (canIterate) {
                 //if patternRand and numCatalysts = 0, add this to the state's possible histories
-                if (params.avoidRepeatPatternHistories && (params.patternRand || (params.usePatternsFromFile && searchData.symmetry == params.symmetry)) && (searchData.numCatalysts == 0 && generation < params.maxFirstCatalystInteractionGeneration)) {
+                if (params.avoidRepeatPatternHistories && (params.patternRand || (params.usePatternsFromFile && searchData.symmetry == params.symmetry)) && (searchData.numCatalysts == 0 && generation < params.maxFirstCatalystInteractionGeneration && generation >= params.minInteractionGeneration)) {
                     std::tuple<LifeState, int, int, SymmetryTransform> standardizedData = stateEvolution[generationIndex + 1].StandardizedWithTransforms(searchData.symmetry);
                     
                     LifeState transformedPast1Neighbor = past1NeighborEvolution[generationIndex + 1];
@@ -1846,9 +1892,10 @@ class Searcher {
                 if (foundDecomposition) break;
             }
         }
-        //TODO: It should be possible to lump all these checks together to minimize the amount of steps
-        for (int catID = 0; catID < (int)searchData.catalysts.size(); catID++) {
-            if (catalysts[searchData.catalysts[catID][0]].checkRecoveryAlways) {
+
+        //For all checkRecoveryAlways catalysts, check to see if the catalyst recovers at some point
+        /*for (int catID = 0; catID < (int)searchData.catalysts.size(); catID++) {
+            if (false && catalysts[searchData.catalysts[catID][0]].checkRecoveryAlways) {
                 LifeState testState = stateEvolution[stateEvolution.size() - 1];
                 int remainingSteps = (int)catalysts[searchData.catalysts[catID][0]].recoveryTime - (int)catalystsEvolution[stateEvolution.size() - 1][catID][3];
                 bool recovered = false;
@@ -1868,65 +1915,21 @@ class Searcher {
                     return;
                 }
             }
-        }
-
-        //TODO: Make this more adjustable
-        //TODO: Also need to test with other checkrecoveryalways catalysts?
-        //TODO: Option to grant extra catalysts if we're interesting?
-        //TODO: Only invalidate if fails up to a certain no. of gens after last cat interaction?
-        /*for (int catID = 0; catID < (int)searchData.catalysts.size(); catID++) {
-            if (!catalysts[searchData.catalysts[catID][0]].sacrificial) {
-                LifeState testState = stateEvolution[stateEvolution.size() - 1];
-                int remainingSteps = (int)catalysts[searchData.catalysts[catID][0]].recoveryTime - (int)catalystsEvolution[stateEvolution.size() - 1][catID][3];
-                bool recovered = false;
-                for (unsigned i = 0; (int)i < remainingSteps; i++) {
-                    testState.Step();
-                    std::pair<bool, LifeState> filtering = catalysts[searchData.catalysts[catID][0]].CheckState(testState, searchData.catalysts[catID][1], searchData.catalysts[catID][2]);
-                    if (!filtering.first) {
-                        break;
-                    }
-                    else if (filtering.second.IsEmpty()) {
-                        recovered = true;
-                        break;
-                    }
-                }
-                if (!recovered) {
-                    if (catID < (int)searchData.catalysts.size() - dontCheckTransparentLastCatalyst) {
-                        iterativeSearchTime += ((std::chrono::duration<double>)(std::chrono::steady_clock::now() - methodStartTime)).count();
-                        return;
-                    }
-                } else {
-                    if (catID >= (int)searchData.catalysts.size() - dontCheckTransparentLastCatalyst) {
-                        bonusCatalystFromTransparentWorking = true;
-                        break;
-                    }
-                }
-            }
-        }*/
-        //oh no
-        //TODO: Make it so that each catalyst can only grant the bonus once
-        /*if ((bonusCatalystFromTransparentWorking || (params.findPartials && !newMatchPoints.empty() && (searchData.numCatalysts > 0 || searchData.symmetry != params.symmetry))) && (searchData.maxCatalysts == params.maxCatalysts || false)) {
-            SearchData newData = searchData;
-            newData.maxCatalysts++;
-            stackLock.lock();
-            searchDataStack.push(std::move(newData));
-            stackLock.unlock();
-            iterativeSearchTime += ((std::chrono::duration<double>)(std::chrono::steady_clock::now() - methodStartTime)).count();
-            return;
         }*/
 
         //if we have an interesting/oscillating/any output, add to categoryContainer/oscillatorCategoryContainer/allOutputsCategoryContainer
         if (searchData.numCatalysts >= params.minCatalysts && searchData.numTransparentCatalysts >= params.minTransparentCatalysts && searchData.numSacrificialCatalysts >= params.minSacrificialCatalysts) {
-            if (isValid && params.outputAll) {
+            if (!searchData.supressOutput && params.outputAll) { //(searchData.symmetry == C1 && !searchData.supressOutput && searchData.catalysts.size() <= 4) {//TEMPORARY//if (isValid && params.outputAll) {
                 //sample corresponeds to what the value would be at maxGeneration
                 int sampleGenerationIndex = maxGenerationAllowed - searchData.generation;
                 if (eventualPeriod > 0) {
                     sampleGenerationIndex = stateEvolution.size() - eventualPeriod + ((maxGenerationAllowed - searchData.generation - stateEvolution.size()) % eventualPeriod);
                 }
+                sampleGenerationIndex = stateEvolution.size() - 1;
                 LifeState diffState = stateEvolution[sampleGenerationIndex];
                 diffState.Copy(searchData.startState, XOR);
                 categoryContainerLock.lock();
-                allOutputsCategoryContainer.Add(searchData.startState, stateEvolution[sampleGenerationIndex], CatContainerKey(diffState, searchData.matchState, 0));
+                allOutputsCategoryContainer.Add(searchData.startState, stateEvolution[sampleGenerationIndex], CatContainerKey(diffState, searchData.matchStates[0].first, 0));
                 categoryContainerLock.unlock();
             }
             if (eventualPeriod > 2) {
@@ -1937,7 +1940,7 @@ class Searcher {
                     diffState.Copy(searchData.startState, XOR);
                     
                     categoryContainerLock.lock();
-                    oscillatorCategoryContainer.Add(searchData.startState, stateEvolution[sampleGenerationIndex], CatContainerKey(diffState, searchData.matchState, eventualPeriod));
+                    oscillatorCategoryContainer.Add(searchData.startState, stateEvolution[sampleGenerationIndex], CatContainerKey(diffState, searchData.matchStates[0].first, eventualPeriod));
                     categoryContainerLock.unlock();
                 }
             }
@@ -1945,6 +1948,7 @@ class Searcher {
                 //TODO: Make it so that 'same but originating earlier' cases are placed the same
                 //Instead it should be based on the actual supposed period
                 for (auto &matchPoint : newMatchPoints) {
+                    if (std::get<0>(matchPoint) - searchData.generation <= 2) continue;
                     bool failure = false;
                     LifeState testState = stateEvolution[std::get<0>(matchPoint) - searchData.generation];
                     std::vector<std::vector<unsigned>> catData = catalystsEvolution[std::get<0>(matchPoint) - searchData.generation];
@@ -1971,11 +1975,12 @@ class Searcher {
                         if (failure) break;
                     }
                     if (!failure) {
-                        LifeState transformedState = searchData.matchState;
+                        //TODO: These things with searchData.matchStates[0] may need proper indices
+                        LifeState transformedState = searchData.matchStates[0].first;
                         transformedState.Transform(std::get<3>(matchPoint));
                         transformedState.Move(std::get<1>(matchPoint), std::get<2>(matchPoint));
                         categoryContainerLock.lock();
-                        categoryContainer.Add(searchData.startState, stateEvolution[std::get<0>(matchPoint) - searchData.generation], CatContainerKey(transformedState, searchData.matchState, (int)std::get<0>(matchPoint)));
+                        categoryContainer.Add(searchData.startState, stateEvolution[std::get<0>(matchPoint) - searchData.generation], CatContainerKey(transformedState, searchData.matchStates[0].first, (int)std::get<0>(matchPoint)));
                         categoryContainerLock.unlock();
                         break;
                     }
@@ -2157,65 +2162,11 @@ class Searcher {
                                             //(Maybe even just forbidden and antirequired)
                                             continue;
                                         }
-                                        //checkRecovery catalysts
-                                        //TODO: Maybe we could also (optionally) exclude catalysts that end up changing nothing?
-                                        if (catalysts[catIndex].checkRecovery) {
-                                            LifeState testState = stateEvolution[generationIndex];
-                                            std::vector<LifeState> perturbation;
-                                            testState.Join(catStateSymChains[0]);
-                                            bool recovered = false;
-                                            //TODO: This may not need to be tested if it goes beyond params.maxGeneration
-                                            for (int extraGen = 0; extraGen < (int)catalysts[catIndex].recoveryTime; extraGen++) {
-                                                testState.Step();
-
-                                                if (params.checkRecoveryRequireUnique) {
-                                                    perturbation.push_back(testState);
-                                                    perturbation[perturbation.size() - 1].Copy(catStateSymChains[(extraGen + 1) % catalysts[catIndex].period], XOR);
-                                                }
-
-                                                std::pair<bool, LifeState> filtering = CatalystCheckState(catIndex, testState, x, y, extraGen + 1);
-                                                if (!filtering.first) {
-                                                    //catalyst breaks
-                                                    break;
-                                                }
-                                                else if (filtering.second.IsEmpty()) {
-                                                    //require cat to no longer be influencing pat evolution to count as recovered
-                                                    //this is stronger than the normal requirement and TODO: should probably be optional
-                                                    unsigned maxCatGen = catalysts[catIndex].isBlinker ? catalysts[catIndex].period : 1;
-                                                    for (unsigned catGen = 0; catGen < maxCatGen; catGen++) {
-                                                        if (testState.Contains(catStateSymChains[(extraGen + 1 + catGen) % catalysts[catIndex].period])) {
-                                                            LifeState testStateCopy = testState;
-                                                            testStateCopy.Step();
-                                                            if (testStateCopy.Contains(catStateSymChains[(extraGen + 2 + catGen) % catalysts[catIndex].period])) {
-                                                                testStateCopy.Copy(catStateSymChains[(extraGen + 2 + catGen) % catalysts[catIndex].period], ANDNOT);
-                                                                LifeState testStateCopyWithoutCat = testState;
-                                                                testStateCopyWithoutCat.Copy(catStateSymChains[(extraGen + 1 + catGen) % catalysts[catIndex].period], ANDNOT);
-                                                                testStateCopyWithoutCat.Step();
-
-                                                                if (testStateCopy == testStateCopyWithoutCat) {
-                                                                    //catalyst recovers in time
-                                                                    recovered = true;
-                                                                    break;
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                    if (recovered) break;
-                                                }
-                                            }
-                                            if (!recovered) continue;
-                                            //having this means we only check one representative of each perturbation
-                                            //Note: This is currently checking the entire perturbation history: For example, eater 1 and eater 2 would be distinct
-                                            if (params.checkRecoveryRequireUnique) {
-                                                //TODO: Make perturbations the same only if their periods are the same?
-                                                if (possiblePerturbations.find(perturbation) != possiblePerturbations.end()) continue;
-                                                possiblePerturbations.insert(std::move(perturbation));
-                                            }
-                                        }
 
                                         //construct new data and add to stack
                                         SearchData newData;
                                         newData.maxCatalysts = searchData.maxCatalysts;
+                                        if (catalysts[catIndex].transparent) newData.maxCatalysts = params.maxSlots; //TEMPORARY
                                         newData.generation = nextUseGenerationIndex + searchData.generation;
                                         newData.numCatalysts = searchData.numCatalysts + 1;
                                         newData.occupiedSlots = searchData.occupiedSlots + catalysts[catIndex].slots;
@@ -2309,6 +2260,261 @@ class Searcher {
                                         }*/
                                         
                                         newData.catalysts.push_back({(unsigned)catalysts[catIndex].evolutionIndices[catStateGenOffset], x, y, 0});
+                                        
+                                        //checkRecovery catalysts
+                                        //TODO: Maybe we could also (optionally) exclude catalysts that end up changing nothing?
+                                        std::vector<unsigned> recoveryCheckingIDs;
+                                        for (unsigned catID = 0; catID < newData.catalysts.size(); catID++) {
+                                            unsigned thisCatIndex = newData.catalysts[catID][0];
+                                            bool catIsNew = catID >= searchData.catalysts.size();
+                                            //TODO: Condition could definitely be tied to input better
+                                            if ((!catIsNew && catalysts[thisCatIndex].checkRecoveryAlways) || (catIsNew && catalysts[thisCatIndex].checkRecovery)) {
+                                                recoveryCheckingIDs.push_back(catID);
+                                            }
+                                        }
+                                        if (!recoveryCheckingIDs.empty()) {
+                                            LifeState testState = stateEvolution[generationIndex];
+                                            testState.Join(catStateSymChains[0]);
+
+                                            std::map<unsigned, std::vector<LifeState>> thisCatStateSymChains;
+                                            std::map<unsigned, bool> checkPositiveRecovery;
+                                            std::map<unsigned, unsigned> catRecoveryTimes;
+
+                                            for (unsigned catID : recoveryCheckingIDs) {
+                                                unsigned thisCatIndex = newData.catalysts[catID][0];
+                                                thisCatStateSymChains[catID] = {};
+                                                for (unsigned gen = 0; gen < catalysts[thisCatIndex].period; gen++) {
+                                                    thisCatStateSymChains[catID].push_back(catalysts[catalysts[thisCatIndex].evolutionIndices[gen]].state.GetSymChain(newData.catalysts[catID][1], newData.catalysts[catID][2], SymmetryChainFromEnum(newData.symmetry)));
+                                                }
+
+                                                bool catIsNew = catID >= searchData.catalysts.size();
+                                                if (!catIsNew) {
+                                                    catRecoveryTimes[catID] = catalystsEvolution[generationIndex][catID][3];
+                                                }
+                                                else {
+                                                    catRecoveryTimes[catID] = 0;
+                                                }
+                                            }
+
+                                            //Three types of catalyst: Positive, neutral, and negative
+                                            //Positive catalysts must all be restored on the same generation
+                                            //Neutral catalysts check to see if they're all restored on a same generation as positive catalysts
+                                            //Negative catalysts must not be restored
+
+                                            bool positiveRecoveryCatsRestored = false;
+                                            bool neutralRecoveryCatsRestored = false;
+                                            bool negativeRecoveryCatsAllFailed = false;
+                                            bool thereAreNegativeRecoveryCats = false;
+                                            bool recoveryInvalid = false;
+                                            bool neutralRecoveryInvalid = false;
+
+                                            unsigned extraGen = 0;
+                                            //This cap value is arbitrary and kind of bad, we should have better loop detection
+                                            while (extraGen < params.maxGeneration - (generationIndex + searchData.generation)) {
+                                                testState.Step();
+
+                                                bool positiveRecoveryThisGen = true;
+                                                bool neutralRecoveryThisGen = true;
+                                                negativeRecoveryCatsAllFailed = true;
+
+                                                for (unsigned catID : recoveryCheckingIDs) {
+                                                    unsigned thisCatIndex = newData.catalysts[catID][0];
+                                                    
+                                                    //TEMPORARY transparent handling
+                                                    bool positiveRecovery = true;//!(catID == 0 && searchData.catalysts.size() == 0 && catalysts[thisCatIndex].transparent);
+
+                                                    //For these catalysts, either outcome is acceptable, but we still need to know which for suppression purposes                                                    
+                                                    //TEMPORARY
+                                                    bool neutralRecovery = catID >= searchData.catalysts.size() && positiveRecovery && catalysts[thisCatIndex].transparent && 
+                                                        (searchSymmetries || (newData.occupiedSlots < params.maxSlots && newData.numCatalysts < newData.maxCatalysts))
+                                                        && catID == 0;
+                                                    //neutralRecovery = catID == searchData.catalysts.size() - 1 &&
+                                                    //    (searchSymmetries || (newData.occupiedSlots < params.maxSlots && newData.numCatalysts < newData.maxCatalysts));
+                                                    //neutralRecovery = newData.catalysts.size() < 4 && catalysts[thisCatIndex].transparent && catID == 0 && searchData.symmetry == C1 && (searchSymmetries || (newData.occupiedSlots < params.maxSlots && newData.numCatalysts < newData.maxCatalysts));
+                                                    //neutralRecovery = false;
+                                                    //neutralRecovery = /*catID + 2 > newData.catalysts.size() &&*/ catalysts[thisCatIndex].transparent && positiveRecoveryThisGen && neutralRecoveryThisGen;
+                                                    neutralRecovery = false;
+
+                                                    if (neutralRecovery) positiveRecovery = false;
+
+                                                    //TEMPORARY
+                                                    //if (neutralRecovery && catID == newData.catalysts.size() - 1) neutralRecovery = false;
+
+                                                    if (!(searchSymmetries || (newData.occupiedSlots < params.maxSlots && newData.numCatalysts < newData.maxCatalysts))) {
+                                                        positiveRecovery = true;
+                                                        neutralRecovery = false;
+                                                    }
+
+                                                    bool thisCatBroken = false;
+                                                    bool thisCatRecovered = false;
+
+                                                    if (catRecoveryTimes[catID] > catalysts[thisCatIndex].recoveryTime) {
+                                                        thisCatBroken = true; //cat is already unrecoverable
+                                                    }
+                                                    else {
+                                                        catRecoveryTimes[catID]++;
+                                                        //update recovery info
+                                                        std::pair<bool, LifeState> filtering = CatalystCheckState(thisCatIndex, testState, newData.catalysts[catID][1], newData.catalysts[catID][2], extraGen + 1 + generationIndex + searchData.generation);
+                                                        if (!filtering.first) {
+                                                            //cat broken
+                                                            catRecoveryTimes[catID] = catalysts[thisCatIndex].recoveryTime + 1;
+                                                        }
+                                                        else if (filtering.second.IsEmpty()) {
+                                                            //cat restored, check if noninterfering
+                                                            unsigned maxCatGen = catalysts[thisCatIndex].isBlinker ? catalysts[thisCatIndex].period : 1;
+                                                            for (unsigned catGen = 0; catGen < maxCatGen; catGen++) {
+                                                                if (testState.Contains(thisCatStateSymChains[catID][(extraGen + 1 + catGen) % catalysts[thisCatIndex].period])) {
+                                                                    LifeState testStateCopy = testState;
+                                                                    testStateCopy.Step();
+                                                                    if (testStateCopy.Contains(thisCatStateSymChains[catID][(extraGen + 2 + catGen) % catalysts[thisCatIndex].period])) {
+                                                                        testStateCopy.Copy(thisCatStateSymChains[catID][(extraGen + 2 + catGen) % catalysts[thisCatIndex].period], ANDNOT);
+                                                                        LifeState testStateCopyWithoutCat = testState;
+                                                                        testStateCopyWithoutCat.Copy(thisCatStateSymChains[catID][(extraGen + 1 + catGen) % catalysts[thisCatIndex].period], ANDNOT);
+                                                                        testStateCopyWithoutCat.Step();
+
+                                                                        if (testStateCopy == testStateCopyWithoutCat) {
+                                                                            //catalyst recovers in time
+                                                                            thisCatRecovered = true;
+                                                                            catRecoveryTimes[catID] = 0;
+                                                                            break;
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        if (catRecoveryTimes[catID] > catalysts[thisCatIndex].recoveryTime) {
+                                                            //cat fails to recover
+                                                            thisCatBroken = true;
+                                                        }
+                                                    }
+
+                                                    if (positiveRecovery) {
+                                                        if (thisCatBroken) {
+                                                            if (!positiveRecoveryCatsRestored) {
+                                                                //cat breaks before restoration, so the whole thing fails
+                                                                recoveryInvalid = true;
+                                                            }
+                                                            else if (!neutralRecoveryCatsRestored) {
+                                                                //cat breaks after restoration, so future neutral recovery is impossible
+                                                                neutralRecoveryInvalid = true;
+                                                            }
+                                                        }
+                                                        if (!thisCatRecovered) {
+                                                            //cat isn't yet recovered
+                                                            positiveRecoveryThisGen = false;
+                                                        }
+                                                    }
+                                                    else if (neutralRecovery) {
+                                                        if (!neutralRecoveryCatsRestored && thisCatBroken) {
+                                                            //cat breaks before restoration, so neutral recovery is impossible
+                                                            neutralRecoveryInvalid = true;
+                                                        }
+                                                        if (!thisCatRecovered) {
+                                                            //cat isn't yet recovered
+                                                            neutralRecoveryThisGen = false;
+                                                        }
+                                                    }
+                                                    else { //negative recovery
+                                                        thereAreNegativeRecoveryCats = true;
+                                                        if (thisCatRecovered) {
+                                                            //cat recovers when it's not supposed to
+                                                            recoveryInvalid = true;
+                                                        }
+                                                        if (!thisCatBroken) {
+                                                            //cat isn't yet broken
+                                                            negativeRecoveryCatsAllFailed = false;
+                                                        }
+                                                    }
+                                                    if (recoveryInvalid) break;
+                                                }
+                                                if (recoveryInvalid) break;
+                                                if (positiveRecoveryThisGen) positiveRecoveryCatsRestored = true;
+                                                if (positiveRecoveryThisGen && neutralRecoveryThisGen && !neutralRecoveryInvalid) neutralRecoveryCatsRestored = true;
+                                                if (positiveRecoveryCatsRestored && (neutralRecoveryCatsRestored || neutralRecoveryInvalid) && negativeRecoveryCatsAllFailed) break;
+                                                
+                                                extraGen++;
+                                            }
+                                            if (recoveryInvalid || !positiveRecoveryCatsRestored) continue;
+                                            newData.supressOutput = !neutralRecoveryCatsRestored || thereAreNegativeRecoveryCats;
+                                        }
+
+                                        //Perturbation uniqueness for new catalysts
+                                        if (params.checkRecoveryRequireUnique) {
+                                            //Honestly this doesn't need to be restricted to checkRecovery catalysts
+                                            //TODO: ForceTransparent shouldn't require cRRU to work
+                                            if (catalysts[catIndex].checkRecovery || catalysts[catIndex].forceTransparent) {
+                                                std::vector<LifeState> perturbation;
+
+                                                LifeState testState = stateEvolution[generationIndex];
+                                                testState.Join(catStateSymChains[0]);
+                                            
+                                                LifeState catTransparency = catStateSymChains[0];
+                                                if (catalysts[catIndex].forceTransparent) {
+                                                    for (unsigned catGen = 1; catGen < catStateSymChains.size(); catGen++) {
+                                                        catTransparency.Copy(catStateSymChains[catGen], AND);
+                                                    }
+                                                    for (auto &requiredState : catalysts[catIndex].required) {
+                                                        catTransparency.Copy(requiredState.GetSymChain(x, y, SymmetryChainFromEnum(searchData.symmetry)), ANDNOT);
+                                                    }
+                                                }
+
+                                                //TODO: This currently checks up until cat recovery, but that's not strictly necessary
+                                                for (int extraGen = 0; extraGen < (int)catalysts[catIndex].recoveryTime; extraGen++) {
+                                                    testState.Step();
+                                                    if (catalysts[catIndex].forceTransparent) catTransparency.Copy(testState, AND);
+
+                                                    perturbation.push_back(testState);
+                                                    perturbation[perturbation.size() - 1].Copy(catStateSymChains[(extraGen + 1) % catalysts[catIndex].period], XOR);
+                      
+                                                    std::pair<bool, LifeState> filtering = CatalystCheckState(catIndex, testState, x, y, extraGen + 1);
+                                                    if (!filtering.first) {
+                                                        //catalyst breaks
+                                                        break;
+                                                    }
+                                                    else if (filtering.second.IsEmpty()) {
+                                                        //require cat to no longer be influencing pat evolution to count as recovered
+                                                        //this is stronger than the normal requirement and TODO: should probably be optional
+                                                        bool recovered = false;
+                                                        unsigned maxCatGen = catalysts[catIndex].isBlinker ? catalysts[catIndex].period : 1;
+                                                        for (unsigned catGen = 0; catGen < maxCatGen; catGen++) {
+                                                            if (testState.Contains(catStateSymChains[(extraGen + 1 + catGen) % catalysts[catIndex].period])) {
+                                                                LifeState testStateCopy = testState;
+                                                                testStateCopy.Step();
+                                                                if (testStateCopy.Contains(catStateSymChains[(extraGen + 2 + catGen) % catalysts[catIndex].period])) {
+                                                                    testStateCopy.Copy(catStateSymChains[(extraGen + 2 + catGen) % catalysts[catIndex].period], ANDNOT);
+                                                                    LifeState testStateCopyWithoutCat = testState;
+                                                                    testStateCopyWithoutCat.Copy(catStateSymChains[(extraGen + 1 + catGen) % catalysts[catIndex].period], ANDNOT);
+                                                                    testStateCopyWithoutCat.Step();
+
+                                                                    if (testStateCopy == testStateCopyWithoutCat) {
+                                                                        //catalyst recovers in time
+                                                                        recovered = true;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        if (recovered) break;
+                                                    }
+                                                }
+
+                                                if (catalysts[catIndex].forceTransparent && !catTransparency.IsEmpty()) continue;
+
+                                                //having this means we only check one representative of each perturbation
+                                                //Note: This is currently checking the entire perturbation history: For example, eater 1 and eater 2 would be distinct
+                                                //TODO: Make perturbations the same only if their periods are the same?
+                                                if (possiblePerturbations.find(perturbation) != possiblePerturbations.end()) continue;
+                                                //add transforms of permutation for currentSymmetry
+                                                for (SymmetryTransform perturbationTransform : currentSymGroup) {
+                                                    std::vector<LifeState> transformedPerturbation;
+                                                    for (LifeState perturbationState : perturbation) {
+                                                        transformedPerturbation.push_back(perturbationState);
+                                                        transformedPerturbation[transformedPerturbation.size() - 1].Transform(perturbationTransform);
+                                                    }
+                                                    possiblePerturbations.insert(std::move(transformedPerturbation));
+                                                }
+                                            }
+                                        }
 
                                         //re-add all still applicable filters
                                         for (auto &filterData : searchData.filters) {
@@ -2331,8 +2537,13 @@ class Searcher {
                                         }
 
                                         if (params.findPartials) {
-                                            //TODO: Params for matchState updating
-                                            newData.matchState = (searchData.numCatalysts == 0 && searchData.symmetry == params.symmetry && (params.patternRand || params.usePatternsFromFile)) ? stateEvolution[nextUseGenerationIndex] : searchData.matchState;                                        
+                                            //newData.matchState = (searchData.numCatalysts == 0 && searchData.symmetry == params.symmetry && (params.patternRand || params.usePatternsFromFile)) ? stateEvolution[nextUseGenerationIndex] : searchData.matchState;                                        
+                                            newData.matchStates = searchData.matchStates;
+                                            if (searchData.numCatalysts == 0) {
+                                                for (unsigned matchGeneration = searchData.generation + 1; matchGeneration <= nextUseGenerationIndex; matchGeneration++) {
+                                                    newData.matchStates.push_back({stateEvolution[matchGeneration - searchData.generation], matchGeneration});
+                                                }
+                                            }
                                             newData.matchPoints = newMatchPoints;
                                             //re-add applicable match points
                                             for (auto &matchPointData : searchData.matchPoints) {
@@ -2481,8 +2692,6 @@ class Searcher {
                             if (noAvailablePositions) continue;
 
                             //don't double-count if the pattern is symmetric
-                            //TODO: This means 'don't double count if the pattern is symmetric in such a way that it would show up twice in the symmetrized output
-                            //  This depends on both current pattern symmetry (currentSymmetry), current search symmetry (searchData.symmetry), and newSymmetry (which itself depends on searchSymmetry and generator)
                             bool sharedXSymmetry = false;
                             bool sharedYSymmetry = false;
                             switch(generator) {
@@ -2816,6 +3025,180 @@ class Searcher {
                                                 newData.catalysts.push_back({catData[0], (unsigned)((int)catData[1] + x + xOffset + 64) % 64, (unsigned)((int)catData[2] + y + yOffset + 64) % 64, catData[3]});
                                             }
 
+                                            //checkRecovery and checkRecoveryAlways catalysts
+                                            std::vector<unsigned> recoveryCheckingIDs;
+                                            for (unsigned catID = 0; catID < newData.catalysts.size(); catID++) {
+                                                unsigned thisCatIndex = newData.catalysts[catID][0];
+                                                bool catIsNew = catID >= searchData.catalysts.size();
+                                                //TODO: Condition could definitely be tied to input better
+                                                if ((!catIsNew && catalysts[thisCatIndex].checkRecoveryAlways) || (catIsNew && catalysts[thisCatIndex].checkRecovery)) {
+                                                    recoveryCheckingIDs.push_back(catID);
+                                                }
+                                            }
+                                            if (!recoveryCheckingIDs.empty()) {
+                                                LifeState testState = stateEvolution[generationIndex].GetSymChain(x, y, generationChain);
+                                                testState.Move(xOffset, yOffset);
+                                                
+                                                std::vector<std::pair<StaticSymmetry, SymmetryTransform>> upcomingAvailableSymmetries = GetAvailableSymmetries(newData.symmetry);
+                                                bool upcomingSearchSymmetries = !upcomingAvailableSymmetries.empty();
+
+
+                                                std::map<unsigned, std::vector<LifeState>> thisCatStateSymChains;
+                                                std::map<unsigned, bool> checkPositiveRecovery;
+                                                std::map<unsigned, unsigned> catRecoveryTimes;
+
+                                                for (unsigned catID : recoveryCheckingIDs) {
+                                                    unsigned thisCatIndex = newData.catalysts[catID][0];
+                                                    thisCatStateSymChains[catID] = {};
+                                                    for (unsigned gen = 0; gen < catalysts[thisCatIndex].period; gen++) {
+                                                        thisCatStateSymChains[catID].push_back(catalysts[catalysts[thisCatIndex].evolutionIndices[gen]].state.GetSymChain(newData.catalysts[catID][1], newData.catalysts[catID][2], SymmetryChainFromEnum(newData.symmetry)));
+                                                    }
+
+                                                    bool catIsNew = catID >= searchData.catalysts.size();
+                                                    if (!catIsNew) {
+                                                        catRecoveryTimes[catID] = catalystsEvolution[generationIndex][catID][3];
+                                                    }
+                                                    else {
+                                                        catRecoveryTimes[catID] = 0;
+                                                    }
+                                                }
+
+                                                //Three types of catalyst: Positive, neutral, and negative
+                                                //Positive catalysts must all be restored on the same generation
+                                                //Neutral catalysts check to see if they're all restored on a same generation as positive catalysts
+                                                //Negative catalysts must not be restored
+
+                                                bool positiveRecoveryCatsRestored = false;
+                                                bool neutralRecoveryCatsRestored = false;
+                                                bool negativeRecoveryCatsAllFailed = false;
+                                                bool thereAreNegativeRecoveryCats = false;
+                                                bool recoveryInvalid = false;
+                                                bool neutralRecoveryInvalid = false;
+
+                                                unsigned extraGen = 0;
+                                                //This cap value is arbitrary and kind of bad, we should have better loop detection
+                                                while (extraGen < params.maxGeneration - (generationIndex + searchData.generation)) {
+                                                    testState.Step();
+
+                                                    bool positiveRecoveryThisGen = true;
+                                                    bool neutralRecoveryThisGen = true;
+                                                    negativeRecoveryCatsAllFailed = true;
+
+                                                    for (unsigned catID : recoveryCheckingIDs) {
+                                                        unsigned thisCatIndex = newData.catalysts[catID][0];
+                                                        
+                                                        //TEMPORARY transparent handling
+                                                        bool positiveRecovery = true;//!(catID == 0 && searchData.catalysts.size() == 0 && catalysts[thisCatIndex].transparent);
+
+                                                        //For these catalysts, either outcome is acceptable, but we still need to know which for suppression purposes                                                    
+                                                        //TEMPORARY
+                                                        bool neutralRecovery = (catID == searchData.catalysts.size() - 1) && positiveRecovery && catalysts[thisCatIndex].transparent && 
+                                                            (upcomingSearchSymmetries);// || (newData.occupiedSlots < params.maxSlots && newData.numCatalysts < newData.maxCatalysts));
+                                                        neutralRecovery = false;
+                                                        //neutralRecovery = catalysts[thisCatIndex].transparent && catID == 0 && (upcomingSearchSymmetries || (newData.occupiedSlots < params.maxSlots && newData.numCatalysts < newData.maxCatalysts));
+                                                        //neutralRecovery = catID + 1 > newData.catalysts.size() && catalysts[thisCatIndex].transparent && positiveRecoveryThisGen && neutralRecoveryThisGen;
+                                                        //neutralRecovery = catalysts[thisCatIndex].transparent && positiveRecoveryThisGen && neutralRecoveryThisGen;
+
+                                                        if (neutralRecovery) positiveRecovery = false;
+
+                                                        if (!(upcomingSearchSymmetries || (newData.occupiedSlots < params.maxSlots && newData.numCatalysts < newData.maxCatalysts))) {
+                                                            positiveRecovery = true;
+                                                            neutralRecovery = false;
+                                                        }
+
+                                                        bool thisCatBroken = false;
+                                                        bool thisCatRecovered = false;
+
+                                                        if (catRecoveryTimes[catID] > catalysts[thisCatIndex].recoveryTime) {
+                                                            thisCatBroken = true; //cat is already unrecoverable
+                                                        }
+                                                        else {
+                                                            catRecoveryTimes[catID]++;
+                                                            //update recovery info
+                                                            std::pair<bool, LifeState> filtering = CatalystCheckState(thisCatIndex, testState, newData.catalysts[catID][1], newData.catalysts[catID][2], extraGen + 1 + generationIndex + searchData.generation);
+                                                            if (!filtering.first) {
+                                                                //cat broken
+                                                                catRecoveryTimes[catID] = catalysts[thisCatIndex].recoveryTime + 1;
+                                                            }
+                                                            else if (filtering.second.IsEmpty()) {
+                                                                //cat restored, check if noninterfering
+                                                                unsigned maxCatGen = catalysts[thisCatIndex].isBlinker ? catalysts[thisCatIndex].period : 1;
+                                                                for (unsigned catGen = 0; catGen < maxCatGen; catGen++) {
+                                                                    if (testState.Contains(thisCatStateSymChains[catID][(extraGen + 1 + catGen) % catalysts[thisCatIndex].period])) {
+                                                                        LifeState testStateCopy = testState;
+                                                                        testStateCopy.Step();
+                                                                        if (testStateCopy.Contains(thisCatStateSymChains[catID][(extraGen + 2 + catGen) % catalysts[thisCatIndex].period])) {
+                                                                            testStateCopy.Copy(thisCatStateSymChains[catID][(extraGen + 2 + catGen) % catalysts[thisCatIndex].period], ANDNOT);
+                                                                            LifeState testStateCopyWithoutCat = testState;
+                                                                            testStateCopyWithoutCat.Copy(thisCatStateSymChains[catID][(extraGen + 1 + catGen) % catalysts[thisCatIndex].period], ANDNOT);
+                                                                            testStateCopyWithoutCat.Step();
+
+                                                                            if (testStateCopy == testStateCopyWithoutCat) {
+                                                                                //catalyst recovers in time
+                                                                                thisCatRecovered = true;
+                                                                                catRecoveryTimes[catID] = 0;
+                                                                                break;
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                            if (catRecoveryTimes[catID] > catalysts[thisCatIndex].recoveryTime) {
+                                                                //cat fails to recover
+                                                                thisCatBroken = true;
+                                                            }
+                                                        }
+
+                                                        if (positiveRecovery) {
+                                                            if (thisCatBroken) {
+                                                                if (!positiveRecoveryCatsRestored) {
+                                                                    //cat breaks before restoration, so the whole thing fails
+                                                                    recoveryInvalid = true;
+                                                                }
+                                                                else if (!neutralRecoveryCatsRestored) {
+                                                                    //cat breaks after restoration, so future neutral recovery is impossible
+                                                                    neutralRecoveryInvalid = true;
+                                                                }
+                                                            }
+                                                            if (!thisCatRecovered) {
+                                                                //cat isn't yet recovered
+                                                                positiveRecoveryThisGen = false;
+                                                            }
+                                                        }
+                                                        else if (neutralRecovery) {
+                                                            if (!neutralRecoveryCatsRestored && thisCatBroken) {
+                                                                //cat breaks before restoration, so neutral recovery is impossible
+                                                                neutralRecoveryInvalid = true;
+                                                            }
+                                                            if (!thisCatRecovered) {
+                                                                //cat isn't yet recovered
+                                                                neutralRecoveryThisGen = false;
+                                                            }
+                                                        }
+                                                        else { //negative recovery
+                                                            thereAreNegativeRecoveryCats = true;
+                                                            if (thisCatRecovered) {
+                                                                //cat recovers when it's not supposed to
+                                                                recoveryInvalid = true;
+                                                            }
+                                                            if (!thisCatBroken) {
+                                                                //cat isn't yet broken
+                                                                negativeRecoveryCatsAllFailed = false;
+                                                            }
+                                                        }
+                                                        if (recoveryInvalid) break;
+                                                    }
+                                                    if (recoveryInvalid) break;
+                                                    if (positiveRecoveryThisGen) positiveRecoveryCatsRestored = true;
+                                                    if (positiveRecoveryThisGen && neutralRecoveryThisGen && !neutralRecoveryInvalid) neutralRecoveryCatsRestored = true;
+                                                    if (positiveRecoveryCatsRestored && (neutralRecoveryCatsRestored || neutralRecoveryInvalid) && negativeRecoveryCatsAllFailed) break;
+                                                    
+                                                    extraGen++;
+                                                }
+                                                if (recoveryInvalid || !positiveRecoveryCatsRestored) continue;
+                                                newData.supressOutput = !neutralRecoveryCatsRestored || thereAreNegativeRecoveryCats;
+                                            }
+
                                             //re-add and move all still applicable stored filters
                                             for (auto &filterData : searchData.filters) {
                                                 if (std::get<1>(filterData) >= newData.generation) {
@@ -2841,9 +3224,20 @@ class Searcher {
 
                                             if (params.findPartials) {
                                                 //TODO: Params for matchState
-                                                newData.matchState = (searchData.numCatalysts == 0 && searchData.symmetry == params.symmetry && (params.patternRand || params.usePatternsFromFile)) ? stateEvolution[nextUseGenerationIndex] : searchData.matchState;                                        
-                                                newData.matchState = newData.matchState.GetSymChain(x, y, generationChain);
-                                                newData.matchState.Move(xOffset, yOffset);
+                                                //newData.matchState = (searchData.numCatalysts == 0 && searchData.symmetry == params.symmetry && (params.patternRand || params.usePatternsFromFile)) ? stateEvolution[nextUseGenerationIndex] : searchData.matchState;                                        
+                                                //newData.matchState = newData.matchState.GetSymChain(x, y, generationChain);
+                                                //newData.matchState.Move(xOffset, yOffset);
+                                                
+                                                newData.matchStates = searchData.matchStates;
+                                                if (searchData.numCatalysts == 0) {
+                                                    for (unsigned matchGeneration = searchData.generation + 1; matchGeneration <= nextUseGenerationIndex; matchGeneration++) {
+                                                        newData.matchStates.push_back({stateEvolution[matchGeneration - searchData.generation], matchGeneration});
+                                                    }
+                                                }
+                                                for (auto &matchState : newData.matchStates) {
+                                                    matchState.first = matchState.first.GetSymChain(x, y, generationChain);
+                                                    matchState.first.Move(xOffset, yOffset);
+                                                }
                                                 //TODO: Non-identity match points that still work
                                                 //re-add applicable match points
                                                 for (auto &matchPointData : searchData.matchPoints) {
@@ -3092,11 +3486,14 @@ class Searcher {
         printf("\nSaving output at %f seconds...\n", timePassed.count());
         printLock.unlock();
 
+        //rule string
+        std::string ruleString = "x = 0, y = 0, rule = B3/S23\n";
+
         categoryContainerLock.lock();
         if (params.outputAll) {
             if (allOutputsCategoryContainer.hasBeenUpdated) {
                 std::ofstream allResultsFile(params.allOutputFile.c_str());
-                allResultsFile << "x = 0, y = 0, rule = B3/S23\n";
+                allResultsFile << ruleString;
                 allResultsFile << allOutputsCategoryContainer.CategoriesRLE();
                 allResultsFile.close();
                 allOutputsCategoryContainer.hasBeenUpdated = false;
@@ -3104,7 +3501,7 @@ class Searcher {
         }
         if (oscillatorCategoryContainer.hasBeenUpdated) {
             std::ofstream oscResultsFile(params.oscOutputFile.c_str());
-            oscResultsFile << "x = 0, y = 0, rule = B3/S23\n";
+            oscResultsFile << ruleString;
             oscResultsFile << oscillatorCategoryContainer.CategoriesRLE();
             oscResultsFile.close();
             oscillatorCategoryContainer.hasBeenUpdated = false;
@@ -3112,7 +3509,7 @@ class Searcher {
         if (params.findPartials) {
             if (categoryContainer.hasBeenUpdated) {
                 std::ofstream resultsFile(params.outputFile.c_str());
-                resultsFile << "x = 0, y = 0, rule = B3/S23\n";
+                resultsFile << ruleString;
                 resultsFile << categoryContainer.CategoriesRLE();
                 resultsFile.close();
                 categoryContainer.hasBeenUpdated = false;
