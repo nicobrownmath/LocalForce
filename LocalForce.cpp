@@ -2266,6 +2266,21 @@ class Searcher {
                                                 //(Maybe even just forbidden and antirequired)
                                                 continue;
                                             }
+
+                                            /*LifeState evolvingStartState = newStartState;
+                                            int catStateGenOffset = ((int)catalysts[catIndex].period - (int)(generationIndex + searchData.generation) % (int)catalysts[catIndex].period) % (int)catalysts[catIndex].period;    
+                                            evolvingStartState.Join(catStateSymChains[catStateGenOffset]);
+                                            
+                                            for (unsigned stateGen = 0; stateGen < (generationIndex + searchData.generation); stateGen++) {
+                                                evolvingStartState.Step();
+                                            }
+                                            if (evolvingStartState != newCurrentState) {
+                                                printLock.lock();
+                                                evolvingStartState.Print();
+                                                newCurrentState.Print();
+                                                printLock.unlock();
+                                                exit(1);
+                                            }*/
                                         }
                                         else {
                                             LifeState newEndCurrentState = stateEvolution[generationIndex];
@@ -2344,17 +2359,59 @@ class Searcher {
                                         //note: in the asymmetric case, this can be done marginally more efficiently with caching
                                         //I mean you could probably also cache in the symmetric case for every possible placement but that would take a lot of memory (~46 MB per catalyst)
                                         unsigned numSymChains = catalysts[catIndex].spaceship ? nextUseGenerationIndex + 1 : catalysts[catIndex].period;
-                                        for (unsigned gen = 0; gen < numSymChains; gen++) {
-                                            LifeState cat1NeighborSymChain = catStateSymChains[gen].OneNeighbor();
-                                            LifeState cat2NeighborsSymChain = catStateSymChains[gen].TwoNeighbors();
-                                            LifeState cat3NeighborsSymChain = catStateSymChains[gen];
-                                            cat3NeighborsSymChain.Step();
-                                            LifeState catZOISymChain = catStateSymChains[gen].ZOI();
+                                        if (!catalysts[catIndex].spaceship) {
+                                            for (unsigned gen = 0; gen < numSymChains; gen++) {
+                                                LifeState cat1NeighborSymChain = catStateSymChains[gen].OneNeighbor();
+                                                LifeState cat2NeighborsSymChain = catStateSymChains[gen].TwoNeighbors();
+                                                LifeState cat3NeighborsSymChain = catStateSymChains[gen];
+                                                cat3NeighborsSymChain.Step();
+                                                LifeState catZOISymChain = catStateSymChains[gen].ZOI();
 
-                                            //TODO: Make sure this is right when spaceship
-                                            for (unsigned periodIndex = gen; periodIndex < catalystPeriodLCM; periodIndex += numSymChains) {
-                                                unsigned actualGenIndex = (periodIndex + searchData.generation + nextUseGenerationIndex) % catalystPeriodLCM;
-                                                if (catalysts[catIndex].spaceship) actualGenIndex = periodIndex % catalystPeriodLCM;
+                                                //TODO: Make sure this is right when spaceship
+                                                for (unsigned periodIndex = gen; periodIndex < catalystPeriodLCM; periodIndex += numSymChains) {
+                                                    unsigned actualGenIndex = (periodIndex + searchData.generation + nextUseGenerationIndex) % catalystPeriodLCM;
+
+                                                    LifeState past1Cat1Temp = newData.past1NeighborWithPeriod[actualGenIndex];
+                                                    past1Cat1Temp.Copy(cat1NeighborSymChain, AND);
+                                                    LifeState past1Cat2Temp = newData.past1NeighborWithPeriod[actualGenIndex];
+                                                    past1Cat2Temp.Copy(cat2NeighborsSymChain, AND);
+                                                    LifeState past2Cat1Temp = newData.past2NeighborsWithPeriod[actualGenIndex];
+                                                    past2Cat1Temp.Copy(cat1NeighborSymChain, AND);
+                                                    
+                                                    newData.past1NeighborWithPeriod[actualGenIndex].Copy(catZOISymChain, ANDNOT);
+                                                    newData.past1NeighborWithPeriod[actualGenIndex].Join(cat1NeighborSymChain);
+
+                                                    newData.past2NeighborsWithPeriod[actualGenIndex].Copy(catZOISymChain, ANDNOT);
+                                                    newData.past2NeighborsWithPeriod[actualGenIndex].Join(std::move(past1Cat1Temp));
+                                                    newData.past2NeighborsWithPeriod[actualGenIndex].Join(cat2NeighborsSymChain);
+                                                    
+                                                    newData.past3NeighborsWithPeriod[actualGenIndex].Copy(catZOISymChain, ANDNOT);
+                                                    newData.past3NeighborsWithPeriod[actualGenIndex].Join(std::move(past1Cat2Temp));
+                                                    newData.past3NeighborsWithPeriod[actualGenIndex].Join(std::move(past2Cat1Temp));
+                                                    newData.past3NeighborsWithPeriod[actualGenIndex].Join(cat3NeighborsSymChain);
+
+                                                    //TODO: These can be recalculated instead of stored
+                                                    newData.past1Neighbor.Join(newData.past1NeighborWithPeriod[actualGenIndex]);
+                                                    newData.past2Neighbors.Join(newData.past2NeighborsWithPeriod[actualGenIndex]);
+                                                    newData.past3Neighbors.Join(newData.past3NeighborsWithPeriod[actualGenIndex]);
+                                                }
+                                            }
+                                        }
+                                        else {
+                                            for (unsigned actualGenIndex = 0; actualGenIndex < catalystPeriodLCM; actualGenIndex++) {
+                                                LifeState cat1NeighborSymChain;
+                                                LifeState cat2NeighborsSymChain;
+                                                LifeState cat3NeighborsSymChain;
+                                                LifeState catZOISymChain;
+
+                                                for (unsigned symChainIndex = actualGenIndex; symChainIndex < numSymChains; symChainIndex += catalystPeriodLCM) {
+                                                    cat1NeighborSymChain |= catStateSymChains[symChainIndex].OneNeighbor();
+                                                    cat2NeighborsSymChain |= catStateSymChains[symChainIndex].TwoNeighbors();
+                                                    LifeState cat3NeighborsSymChainNew = catStateSymChains[symChainIndex];
+                                                    cat3NeighborsSymChainNew.Step();
+                                                    cat3NeighborsSymChain |= cat3NeighborsSymChainNew;
+                                                    catZOISymChain |= catStateSymChains[symChainIndex].ZOI();
+                                                }
 
                                                 LifeState past1Cat1Temp = newData.past1NeighborWithPeriod[actualGenIndex];
                                                 past1Cat1Temp.Copy(cat1NeighborSymChain, AND);
