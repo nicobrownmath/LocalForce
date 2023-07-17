@@ -2523,8 +2523,8 @@ class Searcher {
                                             if (!catalysts[catIndex].spaceship)
                                                 testState.Join(catStateSymChains[0]);
                                             else {
-                                                LifeState endState = catStateSymChains[nextUseGenerationIndex];
-                                                for (unsigned gen = nextUseGenerationIndex; gen <= generationIndex; gen++) {
+                                                LifeState endState = catStateSymChains[searchData.generation + nextUseGenerationIndex];
+                                                for (unsigned gen = nextUseGenerationIndex; gen < generationIndex; gen++) {
                                                     endState.Step();
                                                 }
                                                 testState.Join(endState);
