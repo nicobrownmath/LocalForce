@@ -128,6 +128,12 @@ checkRecoveryRequireUnique true
 
 cat obo$b2o$bo! 0 0 0 + slots 1 sacrificial spaceship 4 1 1
 
+//cat 2bo$bobo$o3bo$bobo$2bo! 100 0 0 . spark 1
+//cat 2bo$bobo$o3bo$bobo$2bo! 100 0 0 . spark 2
+//cat 2bo$bobo$o3bo$bobo$2bo! 100 0 0 . spark 3
+//cat 2bo$bobo$o3bo$bobo$2bo! 100 0 0 . spark 4
+//cat 2bo$bobo$o3bo$bobo$2bo! 100 0 0 . spark 5
+
 # Eater:
 cat 2o$o$b3o$3bo! 15 -2 -2 * slots 1 required bo$o$b3o$3bo! -2 -2 antirequired 2bo$b3o$o$3o! -2 -2 locus 2o3$3bo! -2 -2 forbidden 2o$o$b3ob2o$3bobobo$6bo! -2 -2 forbidden bo$obo$2o2$2o$o$b3o$3bo! -2 -6 forbidden bo$2bo$3o2$3b2o$3bo$4b3o$6bo! -5 -6 forbidden 2bo$obo$b2o2$3b2o$3bo$4b3o$6bo! -5 -6
 # Block:
