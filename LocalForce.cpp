@@ -524,6 +524,7 @@ class CatContainerKey {
 class CategoryContainer {
     public:
     std::map<CatContainerKey, std::vector<LifeState>> categories;
+    std::map<CatContainerKey, unsigned> keySizes;
     std::vector<CatContainerKey> keys;
 
     bool hasBeenUpdated = false;
@@ -531,11 +532,18 @@ class CategoryContainer {
 
     unsigned maxOutputsPerRow;
 
-    bool Add(const LifeState &startState, const LifeState &finalState, const CatContainerKey &key) {
-        if (categories.find(key) == categories.end()) keys.push_back(key);
-        if (categories[key].size() < maxOutputsPerRow * 2)
+    bool Add(const LifeState &startState, const LifeState &finalState, const std::vector<LifeState> &interimStates, const CatContainerKey &key) {
+        if (categories.find(key) == categories.end()) {
+            keys.push_back(key);
+            keySizes[key] = 0;
+        }
+        if (keySizes[key] < maxOutputsPerRow)
         {
+            keySizes[key]++;
             categories[key].push_back(startState);
+            for (auto &state : interimStates) {
+                categories[key].push_back(state);
+            }
             categories[key].push_back(finalState);
             hasBeenUpdated = true;
             size++;
@@ -607,6 +615,10 @@ class Catalyst {
     unsigned xMove = 0;
     unsigned yMove = 0;
 
+    bool spark = false;
+    LifeState sparkStart;
+    unsigned sparkGens = 0;
+
     std::vector<std::pair<LifeState, LifeState>> forbidden;
     std::vector<LifeState> required;
     std::vector<LifeState> antirequired;
@@ -624,6 +636,8 @@ class Catalyst {
         catalyst.locus.Inverse();
 
         catalyst.recoveryTime = stoi(elems[2]) + 1 + 20; //TODO: This could use a parameter?
+        
+        catalyst.sparkStart = catalyst.state;
 
         std::vector<SymmetryTransform> transforms = CharToTransforms(elems[5].at(0));
         
@@ -698,6 +712,16 @@ class Catalyst {
                 catalyst.xMove = stoi(elems[index + 2]);
                 catalyst.yMove = stoi(elems[index + 3]);
                 index += 4;
+            }
+            else if (elems[index] == "spark") {
+                catalyst.spark = true;
+                catalyst.sacrificial = true;
+                catalyst.sparkGens = stoi(elems[index + 1]);
+                //update state
+                for (unsigned gen = 0; gen < catalyst.sparkGens; gen++) {
+                    catalyst.state.Step();
+                }
+                index += 2;
             }
             else {
                 printf("Bad catalyst: Invalid parameter %s\n", elems[index].c_str());
@@ -834,6 +858,7 @@ class Catalyst {
     void Transform(SymmetryTransform transform) {
         state.Transform(transform);
         locus.Transform(transform);
+        sparkStart.Transform(transform);
 
         for (int i = 0; i < (int)forbidden.size(); i++) {
             forbidden[i].first.Transform(transform);
@@ -967,7 +992,7 @@ class Catalyst {
 
         //fill out symmetry exclusions
         //TODO: These need to be the same for each step of the pattern
-        for (unsigned i = 0; i < NUM_SYMMETRIES; i++) {
+        /*for (unsigned i = 0; i < NUM_SYMMETRIES; i++) {
             symmetryExclusions[i] = LifeState();
             for (int x = 0; x < 64; x++) {
                 for (int y = 0; y < 64; y++) {
@@ -985,7 +1010,7 @@ class Catalyst {
                     }
                 }
             }
-        }
+        }*/
     }
 
     std::pair<bool, LifeState> CheckState(const LifeState &testState, const int &x, const int &y) {
@@ -1153,6 +1178,8 @@ class SearchData {
     std::vector<std::tuple<unsigned, unsigned, unsigned, SymmetryTransform>> matchPoints;
     StaticSymmetry symmetry;
     StaticSymmetry maxSymmetry;
+
+    std::vector<LifeState> intermediateForms;
 };
 
 class Searcher {
@@ -2032,7 +2059,7 @@ class Searcher {
                 LifeState diffState = stateEvolution[sampleGenerationIndex];
                 diffState.Copy(searchData.startState, XOR);
                 categoryContainerLock.lock();
-                allOutputsCategoryContainer.Add(searchData.startState, stateEvolution[sampleGenerationIndex], CatContainerKey(diffState, searchData.matchStates[0].first, 0));
+                allOutputsCategoryContainer.Add(searchData.startState, stateEvolution[sampleGenerationIndex], searchData.intermediateForms, CatContainerKey(diffState, searchData.matchStates[0].first, 0));
                 categoryContainerLock.unlock();
             }
             if (eventualPeriod > 2) {
@@ -2043,7 +2070,7 @@ class Searcher {
                     diffState.Copy(searchData.startState, XOR);
                     
                     categoryContainerLock.lock();
-                    oscillatorCategoryContainer.Add(searchData.startState, stateEvolution[sampleGenerationIndex], CatContainerKey(diffState, searchData.matchStates[0].first, eventualPeriod));
+                    oscillatorCategoryContainer.Add(searchData.startState, stateEvolution[sampleGenerationIndex], searchData.intermediateForms, CatContainerKey(diffState, searchData.matchStates[0].first, eventualPeriod));
                     categoryContainerLock.unlock();
                 }
             }
@@ -2083,7 +2110,7 @@ class Searcher {
                         transformedState.Transform(std::get<3>(matchPoint));
                         transformedState.Move(std::get<1>(matchPoint), std::get<2>(matchPoint));
                         categoryContainerLock.lock();
-                        categoryContainer.Add(searchData.startState, stateEvolution[std::get<0>(matchPoint) - searchData.generation], CatContainerKey(transformedState, searchData.signatureState, (int)std::get<0>(matchPoint)));
+                        categoryContainer.Add(searchData.startState, stateEvolution[std::get<0>(matchPoint) - searchData.generation], searchData.intermediateForms, CatContainerKey(transformedState, searchData.signatureState, (int)std::get<0>(matchPoint)));
                         categoryContainerLock.unlock();
                         break;
                     }
@@ -2152,7 +2179,8 @@ class Searcher {
                         //catalyst invalid due to
                         if (
                             //TEMPORARY
-                            (false && catalysts[catIndex].sacrificial && searchData.numCatalysts == searchData.numSacrificialCatalysts) ||
+                            //(!catalysts[catIndex].transparent && searchData.numCatalysts == 0) ||
+                            //(catalysts[catIndex].sacrificial && searchData.numCatalysts == 0) ||
                             //too many transparent
                             (catalysts[catIndex].transparent && searchData.numTransparentCatalysts >= params.maxTransparentCatalysts) || 
                             //too few transparent
@@ -2180,7 +2208,7 @@ class Searcher {
                                 //cat2Neighbors with pat1NeighborPrevGen
                         unsigned interactionGenWithPeriod = (generationIndex + searchData.generation) % catalystPeriodLCM;
                         LifeState catalystPositions;
-                        if (!catalysts[catIndex].spaceship) {
+                        if (!catalysts[catIndex].spaceship && !catalysts[catIndex].spark) {
                             catalystPositions = catalysts[catIndex].locusOneNeighborR180.Convolve(past2NeighborsWithPeriodEvolution[generationIndex + 1][interactionGenWithPeriod]);
                             catalystPositions.Join(catalysts[catIndex].locusTwoNeighborsR180.Convolve(past1NeighborWithPeriodEvolution[generationIndex + 1][interactionGenWithPeriod]));
                             catalystPositions.Join(catalysts[catIndex].locusZoiR180.Convolve(past3NeighborsWithPeriodEvolution[generationIndex + 1][interactionGenWithPeriod]));
@@ -2218,7 +2246,7 @@ class Searcher {
                             catalystPositions |= rSSA.Convolve(fS3);
                         }
 
-                        if (!catalysts[catIndex].spaceship) {
+                        if (!catalysts[catIndex].spaceship && !catalysts[catIndex].spark) {
                             for (unsigned catGen = 0; catGen < catalysts[catIndex].period; catGen++) {
                                 unsigned catGenPeriod = (catGen + generationIndex + searchData.generation) % catalysts[catIndex].period;
                                 
@@ -2278,7 +2306,7 @@ class Searcher {
                             }
                         }
                         else {
-                            LifeState stateRotated = catalysts[catIndex].state;
+                            LifeState stateRotated = catalysts[catIndex].locus;
                             stateRotated.Transform(Rotate180OddBoth);
                             catalystPositions.Copy(stateRotated.Convolve(stateEvolution[generationIndex]), ANDNOT);
                         }
@@ -2301,7 +2329,7 @@ class Searcher {
                                         std::vector<LifeState> catStateSymChains;
                                         LifeState newCurrentState;
                                         LifeState newStartState = searchData.startState;
-                                        if (!catalysts[catIndex].spaceship) {
+                                        if (!catalysts[catIndex].spaceship && !catalysts[catIndex].spark) {
                                             for (unsigned gen = 0; gen < catalysts[catIndex].period; gen++) {
                                                 catStateSymChains.push_back(catalysts[catalysts[catIndex].evolutionIndices[gen]].state.GetSymChain(x, y, SymmetryChainFromEnum(searchData.symmetry)));
                                             }
@@ -2328,6 +2356,35 @@ class Searcher {
                                                 printLock.unlock();
                                                 exit(1);
                                             }*/
+                                        }
+                                        else if (catalysts[catIndex].spark) {
+                                            //SPARK
+                                            LifeState newEndCurrentState = stateEvolution[generationIndex];
+                                            LifeState catCurrentState = catalysts[catIndex].state.GetSymChain(x, y, SymmetryChainFromEnum(searchData.symmetry));
+                                            LifeState catStartState = catalysts[catIndex].sparkStart.GetSymChain(x, y, SymmetryChainFromEnum(searchData.symmetry));
+                                            newEndCurrentState.Join(catCurrentState);
+                                            LifeState evolvingStartState = newStartState;
+                                            bool cantStartInteraction = false;
+                                            for (unsigned stateGen = 0; stateGen < (generationIndex + searchData.generation); stateGen++) {
+                                                if (stateGen == generationIndex + searchData.generation - catalysts[catIndex].sparkGens) {
+                                                    if (!evolvingStartState.AreDisjoint(catStartState)) {
+                                                        cantStartInteraction = true;
+                                                        break;
+                                                    }
+                                                    evolvingStartState.Join(catStartState);
+                                                }
+                                                evolvingStartState.Step();
+                                            }
+                                            if (cantStartInteraction || evolvingStartState != newEndCurrentState) continue;
+
+                                            //update catStateSymChains
+                                            for (unsigned gen = 0; gen < catalysts[catIndex].sparkGens; gen++) {
+                                                catStateSymChains.push_back(catStartState);
+                                                catStartState.Step();
+                                            }
+
+                                            //this doesn't work with filters at all
+                                            newCurrentState = newEndCurrentState;
                                         }
                                         else {
                                             LifeState newEndCurrentState = stateEvolution[generationIndex];
@@ -2403,14 +2460,25 @@ class Searcher {
                                         newData.past3NeighborsWithPeriod = past3NeighborsWithPeriodEvolution[nextUseGenerationIndex];
                 
                                         int catStateGenOffset = ((int)catalysts[catIndex].period - (int)(generationIndex + searchData.generation) % (int)catalysts[catIndex].period) % (int)catalysts[catIndex].period;    
-                                        if (!catalysts[catIndex].spaceship)
+                                        if (!catalysts[catIndex].spaceship && !catalysts[catIndex].spark)
                                             newData.startState.Join(catStateSymChains[catStateGenOffset]);
+
+                                        newData.intermediateForms = searchData.intermediateForms;
+                                        if (catalysts[catIndex].spark) {
+                                            newData.intermediateForms.push_back(newData.currentState);
+                                        }
+                                        else {
+                                            for (unsigned formId = 0; formId < newData.intermediateForms.size(); formId++) {
+                                                newData.intermediateForms[formId].Join(catStateSymChains[0]);
+                                            }
+                                        }
+                                            
                                         
                                         //Update newData with the new catalyst
                                         //note: in the asymmetric case, this can be done marginally more efficiently with caching
                                         //I mean you could probably also cache in the symmetric case for every possible placement but that would take a lot of memory (~46 MB per catalyst)
                                         unsigned numSymChains = catalysts[catIndex].spaceship ? nextUseGenerationIndex + 1 : catalysts[catIndex].period;
-                                        if (!catalysts[catIndex].spaceship) {
+                                        if (!catalysts[catIndex].spaceship && !catalysts[catIndex].spark) {
                                             for (unsigned gen = 0; gen < numSymChains; gen++) {
                                                 LifeState cat1NeighborSymChain = catStateSymChains[gen].OneNeighbor();
                                                 LifeState cat2NeighborsSymChain = catStateSymChains[gen].TwoNeighbors();
@@ -2448,6 +2516,9 @@ class Searcher {
                                                     newData.past3Neighbors.Join(newData.past3NeighborsWithPeriod[actualGenIndex]);
                                                 }
                                             }
+                                        }
+                                        else if (catalysts[catIndex].spark) {
+                                            //SPARK
                                         }
                                         else {
                                             for (unsigned actualGenIndex = 0; actualGenIndex < catalystPeriodLCM; actualGenIndex++) {
@@ -2520,8 +2591,11 @@ class Searcher {
                                         }
                                         if (!recoveryCheckingIDs.empty()) {
                                             LifeState testState = stateEvolution[generationIndex];
-                                            if (!catalysts[catIndex].spaceship)
+                                            if (!catalysts[catIndex].spaceship && !catalysts[catIndex].spark)
                                                 testState.Join(catStateSymChains[0]);
+                                            else if (catalysts[catIndex].spark) {
+                                                //SPARK
+                                            }
                                             else {
                                                 LifeState endState = catStateSymChains[searchData.generation + nextUseGenerationIndex];
                                                 for (unsigned gen = nextUseGenerationIndex; gen < generationIndex; gen++) {
@@ -2593,13 +2667,15 @@ class Searcher {
                                                     //neutralRecovery = catID == searchData.catalysts.size() - 1 &&
                                                     //    (searchSymmetries || (newData.occupiedSlots < params.maxSlots && newData.numCatalysts < newData.maxCatalysts));
                                                     //neutralRecovery = newData.catalysts.size() < 4 && catalysts[thisCatIndex].transparent && catID == 0 && searchData.symmetry == C1 && (searchSymmetries || (newData.occupiedSlots < params.maxSlots && newData.numCatalysts < newData.maxCatalysts));
-                                                    //neutralRecovery = /*catID + 2 > newData.catalysts.size() &&*/ catalysts[thisCatIndex].transparent && positiveRecoveryThisGen && neutralRecoveryThisGen;
+                                                    //neutralRecovery = catID + 2 > newData.catalysts.size() && catalysts[thisCatIndex].transparent && newData.numTransparentCatalysts == 1 && positiveRecoveryThisGen && neutralRecoveryThisGen;
                                                     neutralRecovery = false;
+                                                    //neutralRecovery = catID == 0 && catalysts[thisCatIndex].transparent && positiveRecoveryThisGen && neutralRecoveryThisGen;
 
                                                     if (neutralRecovery) positiveRecovery = false;
 
                                                     //TEMPORARY
                                                     //if (neutralRecovery && catID == newData.catalysts.size() - 1) neutralRecovery = false;
+                                                    if (neutralRecovery) neutralRecovery = false;
 
                                                     if (!(searchSymmetries || (newData.occupiedSlots < params.maxSlots && newData.numCatalysts < newData.maxCatalysts))) {
                                                         positiveRecovery = true;
@@ -3283,6 +3359,12 @@ class Searcher {
                                             newData.past2Neighbors.Move(xOffset, yOffset);
                                             newData.past3Neighbors = past3NeighborsEvolution[nextUseGenerationIndex].GetSymChain(x, y, generationChain);
                                             newData.past3Neighbors.Move(xOffset, yOffset);
+                                            
+                                            newData.intermediateForms = searchData.intermediateForms;
+                                            for (unsigned formId = 0; formId < newData.intermediateForms.size(); formId++) {
+                                                newData.intermediateForms[formId] = newData.intermediateForms[formId].GetSymChain(x, y, generationChain);
+                                                newData.intermediateForms[formId].Move(xOffset, yOffset);
+                                            }
 
                                             for (unsigned gen = 0; gen < catalystPeriodLCM; gen++) {
                                                 newData.past1NeighborWithPeriod.push_back(past1NeighborWithPeriodEvolution[nextUseGenerationIndex][gen].GetSymChain(x, y, generationChain));
@@ -3505,6 +3587,8 @@ class Searcher {
                                                 //newData.matchState.Move(xOffset, yOffset);
                                                 
                                                 newData.matchStates = searchData.matchStates;
+                                                newData.signatureState = searchData.signatureState.GetSymChain(x, y, generationChain);
+                                                newData.signatureState.Move(xOffset, yOffset);
                                                 if (searchData.numCatalysts == 0) {
                                                     for (unsigned matchGeneration = searchData.generation + 1; matchGeneration <= nextUseGenerationIndex; matchGeneration++) {
                                                         newData.matchStates.push_back({stateEvolution[matchGeneration - searchData.generation] & ~newData.noMatchState, matchGeneration});
